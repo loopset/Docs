@@ -1,0 +1,192 @@
+\documentclass[11pt, a4paper, english]{article}
+\usepackage{babel}
+\usepackage{fontspec}
+\usepackage{libertinus}%
+\usepackage{float}
+\usepackage{parskip}
+\usepackage[version=4]{mhchem}
+\usepackage[figuresleft]{rotating}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{slashed}
+\usepackage{fancyhdr} 
+\usepackage[dvipsnames, table]{xcolor}
+\usepackage{wrapfig}
+\usepackage[labelfont=bf, skip=4pt, figureposition=bottom, font=normalsize]{caption}
+\usepackage{siunitx}
+\usepackage{adjustbox}
+\usepackage{booktabs} 
+\usepackage{multirow}
+\usepackage[a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{abstract}
+\usepackage{hyperref} 
+%%adapted to Galician (GZ)
+%\renewcommand{\tableautorefname}{Cadro}
+\usepackage{lipsum}
+
+%% ENUMITEM settings
+%\setlist{itemsep=4pt}
+\setlist[enumerate,1]{
+	label={\bfseries \arabic*.},
+}
+
+%% SIUNITX
+%\sisetup{output-decimal-marker = {,}}
+\sisetup{exponent-product= \cdot}
+\sisetup{separate-uncertainty=false}
+\sisetup{table-parse-only=true}
+\sisetup{inter-unit-product = \ensuremath { { } \cdot { } } }
+\sisetup{detect-all}
+\sisetup{group-digits=integer}
+\sisetup{print-unity-mantissa=false}
+\sisetup{list-final-separator = { e }}
+\sisetup{range-phrase = -}
+\sisetup{range-units = single}
+\sisetup{list-units = single}
+\sisetup{propagate-math-font = true}
+\sisetup{text-series-to-math = true}
+\sisetup{list-final-separator = { e }}
+\sisetup{list-pair-separator = { e }}
+\DeclareSIUnit{\espesor}{\milli\g\per\cm\squared}
+\DeclareSIUnit{\aten}{\cm\squared\per\milli\g}
+\DeclareSIUnit\clight{\text{\ensuremath{c}}}
+\DeclareSIUnit\year{a}
+\DeclareSIUnit{\barn}{b}
+\DeclareSIUnit{\bar}{bar}
+\DeclareSIUnit{\neutrons}{\text{neutróns}}
+\DeclareSIUnit{\deuterons}{\text{deuteróns}}
+\DeclareSIUnit{\counts}{\text{contas}}
+
+%%OTHER COMMANDS
+%% for isotopes
+\newcommand{\iso}[2]{\ce{^{#1}#2}}
+%for vectors
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+%for ann
+\newcommand{\ann}{a_{nn}}
+% figure sizes
+\newcommand*{\fw}{0.6}
+%%for the listing package
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstset{
+	%backgroundcolor=\color{backcolour},
+	basicstyle=\normalsize\ttfamily,
+	language=C++,
+	keepspaces=false,
+	keywordstyle=\bfseries\color{BurntOrange},
+	morekeywords={VCluster, VFilter, TPCData, std, tuple, Point, Vector},
+	stringstyle=\color{Orange},
+	identifierstyle=\color{ProcessBlue},
+	breaklines=false,
+	captionpos=b,
+	% belowskip=-0.85 \baselineskip,
+	%columns=flexible,
+}
+
+\title{\textbf{\textit{ActRoot} manual}}
+\author{Miguel Lozano González\\
+	% \small{Prácticas optativas de Grao $\cdot$ Curso 22-23}\\
+	% \small{Universidade de Santiago de Compostela}
+	}
+\date{\empty}%\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+%\fancyhead[R]{\thepage}
+\fancyhead[R]{\textsc{actroot manual}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.75pt}
+%\renewcommand{\footrulewidth}{0.75pt}
+\setlength{\headheight}{14.5pt}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+%% BIBLIOGRAPHY
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=none
+]{biblatex}
+\addbibresource{./biblio.bib}
+
+%% DOCUMENT
+
+\begin{document}
+\begin{minipage}{0.48\linewidth}
+	\maketitle
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+	\tableofcontents
+\end{minipage}
+
+\noindent\rule{\textwidth}{1pt}
+
+\section{Introduction}
+\textit{ActRoot} aims at being a simple program to convert, process, and obtain the physical data for an ACTAR TPC experiment. The purpose of this manual is to provide a quick insight into the different algorithm settings for the \textit{Clustering} part.
+
+\section{Algorithms}
+Two different types of algorithms to deal with voxels exist in the \textit{Algorithm} folder of \textit{ActRoot}:
+\begin{itemize}
+	\item Inheriting from \lstinline{VCluster}, they perform the basic clustering operation: joining voxels to form sets of voxels, i.e., clusters. Two have been implemented:
+	      \begin{itemize}
+		      \item \textbf{RANSAC}: randomly samples two points from the cloud to form a line. Points close to it by a given distance threshold constitute the cluster. The process is repeated $N$ times and only the \textit{best-ranked} clusters are kept.
+		      \item \textbf{Climb}: clusters points based on the continuity principle: neighbor points \textit{should} belong to the same cluster. It was developed by J. Lois-Fuentes during his PhD \cite{lois23}, thus for more information see his thesis.
+	      \end{itemize}
+	      Both can be configured in the \verb|ransac.conf| or \verb|climb.conf| files, respectively.
+	\item From \lstinline|VFilter|, this set of classes performs the treatment of the clusters, meaning this:
+	      \begin{itemize}
+		      \item Cleaning noise
+		      \item Merging broken clusters
+		      \item Splitting clusters
+		      \item Finding the \textbf{reaction point}
+		      \item Improving the quality of the line fits
+	      \end{itemize}
+	      Two are available now: \lstinline|MultiStep| and \lstinline|MultiRegion|. The former was employed for J. Lois experiment E796, while the latter is an \textit{easier} version.
+
+	      Both leverage common functions that execute particular tasks. It is to this that we are going to explain in detail its workflow.
+\end{itemize}
+
+\subsection{Filtering algorithms}
+Following the \lstinline|VFilter| class, the shared structure for all the filtering classes is:
+\begin{enumerate}
+	\item A pointer to the \lstinline|TPCData| has to be set by \lstinline|void VFilter::SetTPVData(TPCData* data)|
+	\item The algorithm is executed by \lstinline|void VFilter::Run()|. This virtual function (i.e., mandatory to be implemented in any derived class) \textbf{sets the order of the inner functions}.
+	\item Other methods are available depending on the derived class.
+\end{enumerate}
+
+\subsubsection{Common tasks}
+There are a few steps that are usually needed by both classes. Hence, they are implemented in a \textit{global} fashion under \lstinline|ActAlgoFuncs.h,.cxx|.
+
+These are:
+\begin{itemize}
+	\item \textbf{Merging similar clusters}: a cluster might be broken into smaller parts as a result of charge collection inefficacies or damaged pads. Therefore, it is essential to remerge them. This function iterates over the cluster vector and, by pairs, joins clusters if some conditions are met:
+	      \begin{enumerate}
+		      \item The distance between the central points of the two clusters is bellow \lstinline|MergeDistThresh|.
+		      \item Both are quite parallel: their scalar product of fits is above \lstinline|MergeMinParallel| $\in [0, 1]$.
+		      \item If 1 \textbf{and} 2 are met, the combined fit is done.
+		      \item If, and only if, the $\chi^2_{new} \leq \textcolor{ProcessBlue}{\text{MergeChi2Factor}} \cdot \chi^2_{old}$, the larger cluster is merged into the smaller one and deleted. The scaling factor is usually $\sim \num{1.5}$.
+	      \end{enumerate}
+	\item \textbf{Compute a reaction point (RP) in 3D}: In general two lines in 3D do not perfectly intersect. On the contrary, the goal is to find the minimum approach distance and the two points on each line at which this occurs. 
+	
+	This function schematically is defined as:
+	\begin{lstlisting}
+		std::tuple<Point on A, Point on B, double min dist> 
+		ComputeRPIn3D(Point A, Vector A, Point B, Vector B);
+	\end{lstlisting}
+	Specifying the points and the direction vectors of each line, one is given the two points and the distance between them. The RP is afterward calculated as the mean.
+\end{itemize}
+
+
+
+%\nocite{*}
+\printbibliography
+\end{document}
