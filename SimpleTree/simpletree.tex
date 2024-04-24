@@ -1,0 +1,164 @@
+\documentclass[11pt, a4paper, galician]{article}
+\usepackage{babel}
+\usepackage{fontspec}
+\usepackage{libertinus}%
+\usepackage{float}
+\usepackage{parskip}
+\usepackage[version=4]{mhchem}
+\usepackage[figuresleft]{rotating}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{slashed}
+\usepackage{fancyhdr} 
+\usepackage[dvipsnames, table]{xcolor}
+\usepackage{wrapfig}
+\usepackage[labelfont=bf, skip=4pt, figureposition=bottom, font=normalsize]{caption}
+\usepackage{siunitx}
+\usepackage{adjustbox}
+\usepackage{booktabs} 
+\usepackage{multirow}
+\usepackage[a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{abstract}
+\usepackage{hyperref} 
+%%adapted to Galician (GZ)
+%\renewcommand{\tableautorefname}{Cadro}
+\usepackage{lipsum}
+
+%% ENUMITEM settings
+%\setlist{itemsep=4pt}
+\setlist[enumerate,1]{
+	label={\bfseries \arabic*.},
+}
+
+%% SIUNITX
+%\sisetup{output-decimal-marker = {,}}
+\sisetup{exponent-product= \cdot}
+\sisetup{separate-uncertainty=false}
+\sisetup{table-parse-only=true}
+\sisetup{inter-unit-product = \ensuremath { { } \cdot { } } }
+\sisetup{detect-all}
+\sisetup{group-digits=integer}
+\sisetup{print-unity-mantissa=false}
+\sisetup{range-phrase = -}
+\sisetup{range-units = single}
+\sisetup{list-units = single}
+\sisetup{propagate-math-font = true}
+\sisetup{text-series-to-math = true}
+\DeclareSIUnit{\espesor}{\milli\g\per\cm\squared}
+\DeclareSIUnit{\aten}{\cm\squared\per\milli\g}
+\DeclareSIUnit\clight{\text{\ensuremath{c}}}
+\DeclareSIUnit\year{a}
+\DeclareSIUnit{\barn}{b}
+\DeclareSIUnit{\bar}{bar}
+
+%%OTHER COMMANDS
+%% for isotopes
+\newcommand{\iso}[2]{\ce{^{#1}#2}}
+%for vectors
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% figure sizes
+\newcommand*{\fw}{0.6}
+%%for the listing package
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstset{
+	%backgroundcolor=\color{backcolour},
+	basicstyle=\normalsize\ttfamily,
+	language=C++,
+	keepspaces=false,
+	keywordstyle=\bfseries\color{BurntOrange},
+	morekeywords={VCluster, VFilter, TPCData, std, tuple, Point, Vector, 
+    ActRoot, MergerData},
+	stringstyle=\color{Orange},
+	% identifierstyle=\color{ProcessBlue},
+	breaklines=false,
+	captionpos=b,
+	% belowskip=-0.85 \baselineskip,
+	%columns=flexible,
+}
+
+\title{\textbf{Clases de datos}}
+\author{Miguel Lozano González\\
+	}
+\date{\empty}%\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+%\fancyhead[R]{\thepage}
+\fancyhead[R]{\textsc{actroot manual}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.75pt}
+%\renewcommand{\footrulewidth}{0.75pt}
+\setlength{\headheight}{14.5pt}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+% %% BIBLIOGRAPHY
+% \usepackage[
+% backend=biber,
+% style=numeric,
+% sorting=none
+% ]{biblatex}
+% \addbibresource{./biblio.bib}
+
+%% DOCUMENT
+
+\begin{document}
+\begin{minipage}{0.48\linewidth}
+	\maketitle
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+	\tableofcontents
+\end{minipage}
+
+\noindent\rule{\textwidth}{1pt}
+
+\section{\textit{MergerData}}
+Os datos finais están na clase \lstinline{MergerData} de \lstinline{ActRoot}, á cal non se pode acceder sen instalar o código. Porén, o \lstinline{TTree} segue sendo accesíbel. As ramas son:
+\begin{itemize}
+    \item \textit{fRun, fEntry}: run e entry asociados ao \lstinline|TTree| de Thomas.
+    \item \textit{fThetaLight}: ángulo respecto do \textbf{beam} da partícula \textbf{lixeira}. En \textbf{graos}. Coa corrección de Juan.
+    \item \textit{fPhiLight}: da partícula \textbf{lixeira}. En \textbf{graos}. Sendo $\vec{t}$ o vector dirección unitario da traza, calcúlase como:
+    \begin{equation*}
+        \phi = \arctan\left(\frac{t_y}{t_z}\right)
+    \end{equation*}
+    \textcolor{red}{\textbf{Non estou seguro de que estea ben calculado así}}.
+    \item \textit{fSilLayers, fSilEs, fSilNs}: Información dos \textbf{silicios}: \textit{layer} (no caso de que haxa varias), enerxía e número. Para o experimento de Juan hai varias: \lstinline|l0| (á esquerda), \lstinline|f0| (a primeira frontal) e \lstinline|f1| (a segunda frontal). Son \textbf{vectores}: cada \textit{hit} no silicio ten un elemento \textit{layer}, enerxía e índice.
+    \item \textit{fSP}: é o \textbf{punto de impacto no silicio} en \unit{\mm}. Podes acceder por separado ás coordenadas nas ramas \lstinline|fSP.fCoordinates.[fX, fY, fZ]|
+    \item \textit{fRP}: é o \textbf{vértice de reacción} en \unit{\mm}. Mesmo comportamento que o anterior.
+    \item \textit{fQave}: \textbf{Carga promedio} da traza (i.e., dividida pola lonxitude de traza) e \textbf{corrixida} pola dependencia en Z. En unidades arbitrarias \unit{\cdot\per\mm}.
+    \item \textit{fTrackLength}: \textbf{Lonxitude \textcolor{red}{total} da traza}. En \unit{\mm}.
+\end{itemize}
+
+E máis cousas, pero iso é o básico. Algúns comentarios:
+\begin{itemize}
+    \item O código analiza todos os eventos, sexan válidos ou non. Polo tanto, unha grande parte son eventos nulos: as variables anteriores toman valores por defecto.
+    \item Para recuperar os eventos físicos o mellor é facer unha gate nos silicios, considerando só aqueles nos que \lstinline|fSilLayers.size() > 0|.
+    \item Se queres traballar coa capa \textit{f0}, podes gatear da seguinte forma:
+    \begin{lstlisting}
+        if(fSilLayers.size() > 0)// ou == 1
+        {
+            if(std::find(fSilLayers.begin(), fSilLayers.end(), "f0") != fSilLayers.end())
+            {
+                // o evento ten enerxía na capa 0
+                // ...
+            }
+        }
+    \end{lstlisting}
+    \item Como o cálculo de $\phi$ non sei se está ben, sempre se pode recalcular, pois sábese a posición no vértice e no silicio.
+    \item Sen ter o ficheiro \lstinline|#include "ActMergerData.h"| vai haber un error ao ler o \lstinline|TTree|, pero aínda así poderase facer 
+    \begin{lstlisting}
+        float var {};
+        tree->SetBranchAddres("fRP.fCoordinates.fX", &var);// exemplo
+    \end{lstlisting}
+    \item Algunhas variables son gardadas como \lstinline|float| en lugar de \lstinline|double| para aforrar espazo; se hai erro, próbese co outro tipo.
+\end{itemize}
+\end{document}
