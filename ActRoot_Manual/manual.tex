@@ -78,7 +78,8 @@
 	language=C++,
 	keepspaces=false,
 	keywordstyle=\bfseries\color{BurntOrange},
-	morekeywords={VCluster, VFilter, TPCData, std, tuple, Point, Vector},
+	morekeywords={VCluster, VFilter, TPCData, std, tuple, Point, Vector, MEventReduced,
+	SilData, ModularData, MergerData},
 	stringstyle=\color{Orange},
 	identifierstyle=\color{ProcessBlue},
 	breaklines=false,
@@ -131,7 +132,44 @@ sorting=none
 \noindent\rule{\textwidth}{1pt}
 
 \section{Introduction}
-\textit{ActRoot} aims at being a simple program to convert, process, and obtain the physical data for an ACTAR TPC experiment. The purpose of this manual is to provide a quick insight into the different algorithm settings for the \textit{Clustering} part.
+\textit{ActRoot} aims at being a simple program to convert, process, and obtain the physical data for an ACTAR TPC experiment. It follows the structure of \textit{NPTools}\cite{nptools}, creating different \textit{detector} classes that perform custom tasks on each component of the experiment. A range of different data classes stores meaningful information at all stages of the analysis.
+
+The following picture depicts a simplified scheme of the code.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\linewidth]{Figures/ActRoot_schema.pdf}
+	\caption{Actions tree of the analysis code.}
+	\label{fig:scheme}
+\end{figure}
+
+A brief description of each element is presented in the following lines.
+\begin{enumerate}
+	\item \lstinline|MEventReduced|: minimal processed data. It merges the information from the pad plane (the GET 
+	electronics) and the silicons (VXI), appending the external variables such as the scalers or triggers. This is our source data and it is further processed in two separate ways:
+	\begin{itemize}
+		\item \textbf{Cluster}: Handles the TPC data by merging the cloud of 3D points arising from the GET data to 
+		form groups of points (\textit{clusters}) that indeed constitute \textbf{tracks}. 
+		\item \textbf{Calibrate}: In charge of calibrating the silicon data and applying thresholds. It also reads the desired trigger variables.
+	\end{itemize}
+	\item \lstinline|TPCData|: Contains the vector of tracks result of the cluster process. It also stores points not assigned to any cluster. Afterwards:
+	\begin{itemize}
+		\item \textbf{Filter}: Complex action that transforms the vector of clusters to end up with only 2 or 3 that can be subsequently identified with the components of a \textbf{binary reaction}. Depending on the nature of the experiment, several actions might be needed to fulfill this goal: merging broken clusters, splitting artificially merged tracks, erasing noisy clusters (\textbf{contamination}, i.e., delta electrons), etc. 
+	\end{itemize}
+	\item \lstinline|SilData, ModularData|: Just a collection of silicon energies, detector index, and other useful data per event. By \textit{modular} we understand variables such as the \lstinline|GATCONF| (which unambiguously tells the detectors that triggered the acquisition) or the \lstinline|SCA_CFA| (that provides the number of beam particles in the CFA detector). Both classes do not require further processing. 
+	\item \lstinline|MergerData|: Merges the three aforementioned classes to build a physical event. Given a set of conditions, it determines whether the event is good or not (provided the track or silicon multiplicity, the existence of a vertex, \lstinline|GATCONF| value, etc) and saves the following information:
+	\begin{itemize}
+		\item Angles of recoils with respect to the beam. 
+		\item Energy at the silicon and the detector index.
+		\item Average energy loss in the pad plane, which is of paramount importance for the PID.
+		\item Track length. Also key to account for energy losses in the gas.
+		\item The run and entry number, to unequivocally identify the event later.
+		\item Other variables with debug purposes. 
+	\end{itemize}
+\end{enumerate}
+
+
+The goal of this manual is to provide a quick insight into the different algorithm settings for the \textit
+{Filtering} part.
 
 \section{Algorithms}
 Two different types of algorithms to deal with voxels exist in the \textit{Algorithm} folder of \textit{ActRoot}:
@@ -177,12 +215,24 @@ These are:
 	      \end{enumerate}
 	\item \textbf{Compute a reaction point (RP) in 3D}: In general two lines in 3D do not perfectly intersect. On the contrary, the goal is to find the minimum approach distance and the two points on each line at which this occurs. 
 	
-	This function schematically is defined as:
+	This function is schematically defined as:
 	\begin{lstlisting}
 		std::tuple<Point on A, Point on B, double min dist> 
 		ComputeRPIn3D(Point A, Vector A, Point B, Vector B);
 	\end{lstlisting}
 	Specifying the points and the direction vectors of each line, one is given the two points and the distance between them. The RP is afterward calculated as the mean.
+	\item \textbf{Cylinder cleaning} of a cluster: Some tracks may present \textit{transversal} anomalies that worsen the 3D linear fit. To delete them, a cylinder centered around the fit is defined and points outside it are tagged to be erased. This threshold, given by the radius of the cylinder, is known as \lstinline|CleanCylinderR|.
+	
+	Before deleting the voxels, a \textbf{check} is executed to determine whether the cluster will have enough remaining points. If not, it is kept unmodified. This threshold in the number of points is usually linked to the clustering algorithm by the function \lstinline|VCluster::GetMinPoints()|.
+
+	\item \textbf{Separate recoil from beam}: In most reactions, there is a heavy recoil whose angle is so small that it remains undistinguishable from the beam particle. In these cases, the light particle is used to find the RP and, subsequently, this can be used to separate the beam from the secondary track. The procedure is as follows:
+	\begin{enumerate}
+		\item In the vector of clusters, find the \textbf{beam-like}.
+		\item Split its voxels according to the X value: lower or greater than the RP.
+		\item If enough voxels to form a new cluster (\lstinline|VFilter::GetMinPoints()|), erase.
+		\item Refit the remaining cluster (and the new one if it is the case).
+	\end{enumerate}
+	The flag \lstinline|RPKeepSplit == false| allows to \textbf{delete} newly-formed cluster.
 \end{itemize}
 
 
