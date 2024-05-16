@@ -167,11 +167,26 @@ A brief description of each element is presented in the following lines.
 	\end{itemize}
 \end{enumerate}
 
+One of the main goals of the code is to remain versatile: by using configuration files, the actions can be independently modified, permitting the analysis of different experiments without modifying the code. 
+This is achieved by using a wide range of \textit{.conf} file, as follows:
+\begin{itemize}
+	\item \textit{detector.conf}: Configures general settings of the detectors: size of ACTAR pad plane, algorithms to be used, action files, and the merger conditions, so to speak.
+	\item \textit{calibration.conf}: Calibrations to be used in the silicon energy conversion but also the look-up table for the pad plane (channel to <\textit{x}, \textit{y}>) and the gain matching parameters.
+	\item Since there are different algorithms available to perform the \textit{Cluster} and \textit{Filter} actions, each of them reads a separate file:
+	\begin{itemize}
+		\item For the clustering: \textit{ransac.conf} or \textit{climb.conf}. Essentially, they set the minimum number of points to form a track.
+		\item For the filtering: \textit{multiregion.conf} and \textit{multistep.conf}. This step is more complex. An attempt to explain these algorithms is given in \autoref{sec:2}.
+	\end{itemize}
+	The choice of algorithm is done in the \textit{detector.conf} file.
+	\item \textit{data.conf}: Sets the vector of runs to analyze and the paths to read and store the \lstinline|.root| files.
+\end{itemize}
+
+All these files must lay under a \lstinline|configs/| directory in what will be called a \textbf{project} folder: the parent directory for all the analysis. It is in this folder that we can run the executables provided by the code, as noted in \autoref{fig:scheme} (\lstinline|actroot -flag OPTIONS|).
 
 The goal of this manual is to provide a quick insight into the different algorithm settings for the \textit
 {Filtering} part.
 
-\section{Algorithms}
+\section{Algorithms}\label{sec:2}
 Two different types of algorithms to deal with voxels exist in the \textit{Algorithm} folder of \textit{ActRoot}:
 \begin{itemize}
 	\item Inheriting from \lstinline{VCluster}, they perform the basic clustering operation: joining voxels to form sets of voxels, i.e., clusters. Two have been implemented:
