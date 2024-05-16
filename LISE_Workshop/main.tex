@@ -245,44 +245,85 @@ t,%align on top by default
 \end{frame}
 
 \Section{Results}
-\begin{frame}{Elastic $\iso{10}{Be}(\textrm{d}, \textrm{d})\iso{10}{Be}$}
-    Serves as a test of the analysis, allowing us to ascertain the \textbf{normalization} factors $N_t$ and $N_b$.
-    \begin{figure}
-        \begin{minipage}[t]{0.48\linewidth}
-            \centering
-            \begin{tikzpicture}
-                \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/10Be_dd_ex.png}};
-                \begin{scope}[x={(image.south east)},y={(image.north west)}]
-                    % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
-                    \draw[->, very thick, VioletRed] (0.42,0.99) -- (0.42,0.88);
-                \end{scope}
-            \end{tikzpicture}
-        \end{minipage}
-        \hfill
-        \begin{minipage}[t]{0.48\linewidth}
-            \centering
-            \includegraphics[width=\textwidth]{figures/Workshop/10Be_dd_xs.eps}
-        \end{minipage}
-    \end{figure}
-    \begin{columns}
-        \column{0.58\linewidth}
-        {
-            \begin{itemize}
-                \item Modern models (Haixia and DA1p) adjust better to the data.
-                \item Failure at low and high angles.
-                \item Overall agreement in magnitude.
-            \end{itemize}
-        }\hfill
-        \column{0.38\linewidth}
-        {
+\begin{frame}{Elastic: $\iso{10}{Be}(\textrm{d}, \textrm{d})\iso{10}{Be}$}
+    \only<+>{
+        Serves as a test of the analysis, allowing us to ascertain the \textbf{normalization} factors $N_t$ and $N_b$.
+        \begin{figure}
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/10Be_dd_ex.png}};
+                    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                        % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+                        \draw[->, very thick, VioletRed] (0.42,0.99) -- (0.42,0.88);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/Workshop/10Be_dd_xs.eps}
+            \end{minipage}
+        \end{figure}
+        \begin{columns}
+            \column{0.58\linewidth}
+            {
+                \begin{itemize}
+                    \item Modern models (Haixia and DA1p) adjust better to the data.
+                    \item Failure at low and high angles.
+                    \item Overall agreement in magnitude.
+                \end{itemize}
+            }\hfill
+            \column{0.38\linewidth}
+            {
 
-            \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
-                Likely to be a miscalculation in \textbf{efficiency}
-            \end{beamercolorbox}
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
+                    Likely to be a miscalculation in \textbf{efficiency}
+                \end{beamercolorbox}
 
-        }
-    \end{columns}
+            }
+        \end{columns}
+    }
+    \only<+>{
+        Cross-section for the 1st excited state is also achievable.
+        \begin{figure}
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/10Be_dd_ex.png}};
+                    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                        % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+                        \draw[->, very thick, VioletRed] (0.61,0.55) -- (0.61,0.39);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/Workshop/10Be_dd_xs_g1.eps}
+            \end{minipage}
+        \end{figure}
+        \begin{columns}
+            \column{0.58\linewidth}
+            {
+                \begin{itemize}
+                    \item Potential deformed in both Coulomb and nuclear parts
+                    \item Using $B(E2)$ for other experiments.
+                \end{itemize}
+            }\hfill
+            \column{0.38\linewidth}
+            {
+
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
+                    To be further investigated. \\
+                    $\Rightarrow C^2S = \qty{0.270(22)}{}$ with Daehnick
+                \end{beamercolorbox}
+
+            }
+        \end{columns}
+    }
 \end{frame}
+
 \begin{frame}{Neutron removal: $\iso{10}{Be}(\textrm{d}, \textrm{t})\iso{9}{Be}$}
     \only<+>
     {
@@ -321,7 +362,7 @@ t,%align on top by default
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
                     \textbf{Best fit} is $\ell = 1$\\
                     with $j = 3/2$.\\
-                    $\Rightarrow C^2S = \qty{2.21(9)}{}$
+                    $\Rightarrow C^2S = \qty{1.522(44)}{}$
                 \end{beamercolorbox}
 
             }
@@ -331,6 +372,7 @@ t,%align on top by default
     \only<+>
     {
         \addtocounter{framenumber}{1}
+        \alert{Needs reformulation!!}
         In light of those results, two conclusions may be drawn:
 
         \bigskip
@@ -394,6 +436,7 @@ t,%align on top by default
 
     \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.48\linewidth]{boxmyorange}
         A \textbf{second} excited state is observed!\\
+        No longer true (CsI disabled)
     \end{beamercolorbox}
 
 \end{frame}
@@ -416,7 +459,7 @@ t,%align on top by default
             \hfill
             \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyorange}
                 Again $\ell = 1 \implies 3/2^{-}$. \\
-                $C^2S = \qty{3.26(26)}{}$
+                $C^2S = \qty{1.456(93)}{}$
             \end{beamercolorbox}
             \hfill
         }
@@ -460,6 +503,85 @@ t,%align on top by default
             }
         }
     \end{columns}
+\end{frame}
+
+\begin{frame}{Elastic: $\iso{12}{Be}(\textrm{d}, \textrm{d})\iso{12}{Be}$}
+    \only<+>{
+        Yet another validation method of the normalization.
+        \begin{figure}
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/12Be_dd_ex.pdf}};
+                    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                        % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+                        \draw[->, very thick, VioletRed] (0.39,0.99) -- (0.39,0.86);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/Workshop/12Be_dd_xs.eps}
+            \end{minipage}
+        \end{figure}
+        \begin{columns}
+            \column{0.58\linewidth}
+            {
+                \begin{itemize}
+                    \item Modern models (Haixia and DA1p) adjust better to the data.
+                    \item Failure at low and high angles.
+                    \item Overall agreement in magnitude.
+                \end{itemize}
+            }\hfill
+            \column{0.38\linewidth}
+            {
+
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
+                    Likely to be a miscalculation in \textbf{efficiency}
+                \end{beamercolorbox}
+
+            }
+        \end{columns}
+    }
+    \only<+>{
+        Cross-section for the 1st excited state is also achievable.
+        \begin{figure}
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/12Be_dd_ex.pdf}};
+                    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                        % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+                        \draw[->, very thick, VioletRed] (0.61,0.55) -- (0.61,0.39);
+                    \end{scope}
+                \end{tikzpicture}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/Workshop/12Be_dd_xs_g1.eps}
+            \end{minipage}
+        \end{figure}
+        \begin{columns}
+            \column{0.58\linewidth}
+            {
+                \begin{itemize}
+                    \item Potential deformed in both Coulomb and nuclear parts
+                    \item Using $B(E2)$ for other experiments.
+                \end{itemize}
+            }\hfill
+            \column{0.38\linewidth}
+            {
+
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
+                    To be further investigated. \\
+                    $\Rightarrow C^2S = \qty{0.519(30)}{}$ with Daehnick
+                \end{beamercolorbox}
+
+            }
+        \end{columns}
+    }
 \end{frame}
 
 \begin{frame}{Proton removal: $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$}
