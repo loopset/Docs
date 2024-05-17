@@ -18,6 +18,7 @@ t,%align on top by default
 \captionsetup{belowskip=-8pt}
 \usepackage{tikz}
 \usepackage[export]{adjustbox}
+\usepackage{multirow}
 
 %% custom commands
 \newcommand{\notice}[1]{\textbf{\alert{#1}}}
@@ -372,38 +373,26 @@ t,%align on top by default
     \only<+>
     {
         \addtocounter{framenumber}{1}
-        \alert{Needs reformulation!!}
-        In light of those results, two conclusions may be drawn:
+        Another measurement is available in {\small D.L Auton Nucl. Phys. A (1970)}. A reanalysis with \textbf{our model} is executed:
 
-        \bigskip
-        \begin{columns}[c]
-            \column{0.6\linewidth}
-            {
-                \begin{itemize}
-                    \setlength\itemsep{1em}
-                    \item \iso{9}{Be} \textbf{g.s} tagged as $3/2^{-}$ state.
-                    \item $C^2S = \qty{2.21(9)}{} < 4$ could be due to:
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.5\linewidth]{figures/Workshop/auton.eps}
+        \end{figure}
+        \medskip
+        \begin{itemize}
+            \item No errors could be extracted
+            \item Poor quality at large $\theta_{CM}$
+            \item $C^2S = \num{1.951(54)}$
+        \end{itemize}
+        % \begin{center}
 
-                          \bigskip
-                          \begin{itemize}
-                              \setlength\itemsep{1em}
-                              \item[$\Rightarrow$] Strength shared with other excited states.
-
-                                  %\item $p_{3/2}$ not fully occupied.
-                          \end{itemize}
-                    \item Excellent agreement with {\small D. L. Auton et al. Nucl. Phys. A 1 (1970)}:
-                          $$C^2S = \qty{2.19(48)}{}$$
-                \end{itemize}
-            }\hfill
-            \column{0.38\linewidth}
-            {
-                \begin{figure}
-                    \centering
-                    \includegraphics[width=0.8\linewidth]{figures/neutron_shell_model_9Be.pdf}
-                    \caption{Neutron shells of \iso{10}{Be}.}
-                \end{figure}
-            }
-        \end{columns}
+        %         \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
+        %             \textbf{Best fit} is $\ell = 1$\\
+        %             with $j = 3/2$.\\
+        %             $\Rightarrow C^2S = \qty{1.522(44)}{}$
+        %         \end{beamercolorbox}
+        % \end{center}
     }
 \end{frame}
 
@@ -434,75 +423,109 @@ t,%align on top by default
         }
     \end{columns}
 
-    \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.48\linewidth]{boxmyorange}
-        A \textbf{second} excited state is observed!\\
-        No longer true (CsI disabled)
-    \end{beamercolorbox}
+    % \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.48\linewidth]{boxmyorange}
+    %     A \textbf{second} excited state is observed!\\
+    %     No longer true (CsI disabled)
+    % \end{beamercolorbox}
 
 \end{frame}
 
 \begin{frame}{Proton removal: $\iso{10}{Be}(\textrm{d}, \iso{3}{He})\iso{9}{Li}$}
-    Angular distributions for the \textbf{ground state} are extracted:
-    \vspace{-\medskipamount}
-    \begin{columns}[t]
-        \column{0.48\linewidth}
-        {
-            \begin{figure}
-                \captionsetup{belowskip=-8pt}
-                % \centering
-                % \includegraphics[width=\linewidth]{figures/ex.pdf}
-                \caption{Our experiment, $\theta_{\textrm{CM}} \in \left[6, 14\right]\unit{\degree}$}
-                \includegraphics[width=\linewidth, cfbox=myorange 1pt 0pt 0pt]{figures/Workshop/10Be_d3He_xs.eps}
-            \end{figure}
-
-            \medskip
-            \hfill
-            \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyorange}
-                Again $\ell = 1 \implies 3/2^{-}$. \\
-                $C^2S = \qty{1.456(93)}{}$
-            \end{beamercolorbox}
-            \hfill
-        }
-        \hfill
-        \column{0.48\linewidth}
-        {
-            \only<1>
+    \only<1,2>{
+        Angular distributions for the \textbf{ground state} are extracted:
+        \vspace{-\medskipamount}
+        \begin{columns}[t]
+            \column{0.48\linewidth}
             {
                 \begin{figure}
-                    \centering
-                    \captionsetup{belowskip=3.5pt}
-                    \caption{Acculinna one, $\theta_{\textrm{CM}} \in \left[3, 13\right]\unit{\degree}$}
-                    \includegraphics[width=0.8\linewidth, cfbox=Mulberry 1pt 0pt 0pt]{figures/acculina_xs.png}%
-                \end{figure}
-
-                \medskip
-                \hfill
-                \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyviolet}
-                    Original publication:\\
-                    $C^2S = \qty{1.74}{}$
-                \end{beamercolorbox}
-                \hfill
-            }
-            \only<2>
-            {
-                \begin{figure}
-                    \centering
                     \captionsetup{belowskip=-8pt}
-                    \caption{Reanalyis of Acculinna's data}
-                    \includegraphics[width=\linewidth, cfbox=Mulberry 1pt 0pt 0pt]{figures/acculina.eps}%
-                    %\caption{Recently published: NIMPR B 541 (2023)}
+                    % \centering
+                    % \includegraphics[width=\linewidth]{figures/ex.pdf}
+                    \caption{Our experiment, $\theta_{\textrm{CM}} \in \left[6, 14\right]\unit{\degree}$}
+                    \includegraphics[width=\linewidth, cfbox=myorange 1pt 0pt 0pt]{figures/Workshop/10Be_d3He_xs.eps}
                 \end{figure}
 
                 \medskip
                 \hfill
-                \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyviolet}
-                    $\ell = 1 \implies C^2S = \qty{3.13(6)}{}$\\
-                    Different \textbf{input parameters} in the models!
+                \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyorange}
+                    Again $\ell = 1 \implies 3/2^{-}$. \\
+                    $C^2S = \qty{1.80(11)}{}$
                 \end{beamercolorbox}
                 \hfill
             }
-        }
-    \end{columns}
+            \hfill
+            \column{0.48\linewidth}
+            {
+                \only<1>
+                {
+                    \begin{figure}
+                        \centering
+                        \captionsetup{belowskip=3.5pt}
+                        \caption{Acculinna one, $\theta_{\textrm{CM}} \in \left[3, 13\right]\unit{\degree}$}
+                        \includegraphics[width=0.8\linewidth, cfbox=Mulberry 1pt 0pt 0pt]{figures/acculina_xs.png}%
+                    \end{figure}
+
+                    \medskip
+                    \hfill
+                    \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyviolet}
+                        Original publication:\\
+                        $C^2S = \qty{1.74}{}$
+                    \end{beamercolorbox}
+                    \hfill
+                }
+                \only<2>
+                {
+                    \begin{figure}
+                        \centering
+                        \captionsetup{belowskip=-8pt}
+                        \caption{Reanalyis of Acculinna's data}
+                        \includegraphics[width=\linewidth, cfbox=Mulberry 1pt 0pt 0pt]{figures/acculina.eps}%
+                        %\caption{Recently published: NIMPR B 541 (2023)}
+                    \end{figure}
+
+                    \medskip
+                    \hfill
+                    \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyviolet}
+                        $\ell = 1 \implies C^2S = \qty{3.13(6)}{}$\\
+                        Different \textbf{input parameters} in the models!
+                    \end{beamercolorbox}
+                    \hfill
+                }
+            }
+        \end{columns}
+    }
+    \only<3>{
+        A first excited state is also accesible.
+        \begin{columns}[t]
+            \column{0.48\linewidth}
+            {
+                \begin{figure}
+                    \centering
+                    \begin{tikzpicture}
+                        \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/10Be_d3He_ex.pdf}};
+                        \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                            % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+                            \draw[->, very thick, VioletRed] (0.60,0.45) -- (0.60,0.25);
+                        \end{scope}
+                    \end{tikzpicture}
+                \end{figure}
+            }
+            \hfill
+            \column{0.48\linewidth}
+            {
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=\textwidth]{figures/Workshop/10Be_d3He_xs_1.eps}
+                \end{figure}
+            }
+        \end{columns}
+
+        \begin{itemize}
+            \item \textbf{Best fit} is $\ell = 1$
+            \item Assuming $j = 1/2$
+            \item Spectroscopic factor: \num{0.185(36)}
+        \end{itemize}
+    }
 \end{frame}
 
 \begin{frame}{Elastic: $\iso{12}{Be}(\textrm{d}, \textrm{d})\iso{12}{Be}$}
@@ -553,7 +576,7 @@ t,%align on top by default
                     \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/12Be_dd_ex.pdf}};
                     \begin{scope}[x={(image.south east)},y={(image.north west)}]
                         % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
-                        \draw[->, very thick, VioletRed] (0.61,0.55) -- (0.61,0.39);
+                        \draw[->, very thick, VioletRed] (0.50,0.84) -- (0.50,0.65);
                     \end{scope}
                 \end{tikzpicture}
             \end{minipage}
@@ -584,72 +607,138 @@ t,%align on top by default
     }
 \end{frame}
 
-\begin{frame}{Proton removal: $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$}
-    \textbf{Two} states are populated despite low stats. Angular distribution for \textbf{g.s} in $\theta_{\textrm{CM}} \in \left[10, 20\right]\unit{\degree}$
-
-    \only<+>
-    {
+\begin{frame}{Challenging channels: $\iso{12}{Be}(\textrm{d}, \textrm{t} | \iso{3}{He})\iso{11}{Be|Li}$}
+    \begin{figure}
         \begin{minipage}[t]{0.48\linewidth}
             \centering
-            \begin{tikzpicture}
-                \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/ex11Li.pdf}};
-                \begin{scope}[x={(image.south east)},y={(image.north west)}]
-                    %\draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
-                    \draw[->, very thick, VioletRed] (0.34,0.99) -- (0.34,0.75);
-                \end{scope}
-            \end{tikzpicture}
-        \end{minipage}%
+            \only<1>{
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/12Be_dt_ex.pdf}};
+                    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+                        % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+                        % \draw[->, very thick, VioletRed] (0.50,0.84) -- (0.50,0.65);
+                    \end{scope}
+                \end{tikzpicture}
+            }
+            \only<2>
+            {
+                \includegraphics[width=\textwidth]{figures/Workshop/12Be_d3He_xs.eps}
+            }
+        \end{minipage}
         \hfill
         \begin{minipage}[t]{0.48\linewidth}
             \centering
-            \includegraphics[width=\textwidth]{figures/dxdo11Li0.eps}
+            \only<1, 2>{
+                \includegraphics[width=\textwidth]{figures/Workshop/12Be_d3He_ex.pdf}}
         \end{minipage}
-
-        \begin{itemize}
-            \item \textbf{Further} developments are needed, but a tentative $\ell = 1$ shape is recognized for the \textbf{g.s} $\implies 3/2^{-}$.
-            \item $J^{\pi}$ not known for state at $\qty{2.3}{\MeV} \implies$ feasible in the future?
-        \end{itemize}
-    }
+        \captionsetup{aboveskip=-8pt}
+        \only<1>{
+            \caption{Left: (d,t); Right: (d, \iso{3}{He})}}
+        \only<2>{\caption{(d, \iso{3}{He})}}
+    \end{figure}
+    \begin{columns}
+        \column{0.48\linewidth}
+        {
+            \only<1>{
+                \begin{itemize}
+                    \item Strong \textbf{inhibition} of g.s
+                \end{itemize}}
+            \only<2>{
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyviolet}
+                    $\Rightarrow C^2S = \qty{0.510(85)}{}$ with Daehnick
+                \end{beamercolorbox}
+            }
+        }%
+        \column{0.48\linewidth}
+        {
+            \begin{itemize}
+                \item Low cross-section $\implies$ low counting
+                \item Subject to \textbf{contamination}: hard to disentangle $A = 3$
+            \end{itemize}
+        }
+    \end{columns}
 \end{frame}
+
+% \begin{frame}{Proton removal: $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$}
+%     \textbf{Two} states are populated despite low stats. Angular distribution for \textbf{g.s} in $\theta_{\textrm{CM}} \in \left[10, 20\right]\unit{\degree}$
+
+%     \only<+>
+%     {
+%         \begin{minipage}[t]{0.48\linewidth}
+%             \centering
+%             \begin{tikzpicture}
+%                 \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/ex11Li.pdf}};
+%                 \begin{scope}[x={(image.south east)},y={(image.north west)}]
+%                     %\draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
+%                     \draw[->, very thick, VioletRed] (0.34,0.99) -- (0.34,0.75);
+%                 \end{scope}
+%             \end{tikzpicture}
+%         \end{minipage}%
+%         \hfill
+%         \begin{minipage}[t]{0.48\linewidth}
+%             \centering
+%             \includegraphics[width=\textwidth]{figures/dxdo11Li0.eps}
+%         \end{minipage}
+
+%         \begin{itemize}
+%             \item \textbf{Further} developments are needed, but a tentative $\ell = 1$ shape is recognized for the \textbf{g.s} $\implies 3/2^{-}$.
+%             \item $J^{\pi}$ not known for state at $\qty{2.3}{\MeV} \implies$ feasible in the future?
+%         \end{itemize}
+%     }
+% \end{frame}
 
 \Section{Outlook}
 \begin{frame}{Conclusions and outlook }
     We investigated several proton and neutron pick-up reactions on \iso{10,12}{Be}:
-    \begin{itemize}
-        \item $\iso{10}{Be}(\textrm{d}, \textrm{t})\iso{9}{Be}$ shows a clear $p_{3/2}$ orbital with $C^2S = \qty{2.21(9)}{}$.
-        \item In $\iso{10}{Be}(\textrm{d}, \iso{3}{He})\iso{9}{Li}$ three states are present and g.s. tagged as $p_{3/2}$.
-        \item In $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$ a \textit{tentative} $p_{3/2}$ could be assigned to the g.s.
-    \end{itemize}
-
+    % \begin{itemize}
+    %     \item $\iso{10}{Be}(\textrm{d}, \textrm{t})\iso{9}{Be}$ shows a clear $p_{3/2}$ orbital with $C^2S = \qty{2.21(9)}{}$.
+    %     \item In $\iso{10}{Be}(\textrm{d}, \iso{3}{He})\iso{9}{Li}$ three states are present and g.s. tagged as $p_{3/2}$.
+    %     \item In $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$ a \textit{tentative} $p_{3/2}$ could be assigned to the g.s.
+    % \end{itemize}
+    \begin{table}[]
+        \centering
+        \begin{tabular}{@{}ccccc@{}}
+            \toprule
+                                  & Channel  & Status & Pending & \\ \midrule
+            \multirow{3}{*}{10Be} & (d,d)    &        &         & \\
+                                  & (d,t)    &        &         & \\
+                                  & (d, 3He) &        &         & \\ \midrule
+            \multirow{3}{*}{12Be} & (d,d)    &        &         & \\
+                                  & (d,t)    &        &         & \\
+                                  & (d,3He)  &        &         & \\ \bottomrule
+        \end{tabular}
+        % \caption{}
+        % \label{tab:my-table}
+    \end{table}
     \bigskip
     \begin{center}
         \textbf{Future prospects}
     \end{center}
 
-    \bigskip
-    \begin{columns}[c]
-        \column{0.3\linewidth}
-        {
-            \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
-                Extract $\frac{\textrm{d}\sigma}{\textrm{d}\Omega}$ for \textbf{excited} states.
-            \end{beamercolorbox}
-        }
-        \hfill
-        \column{0.3\linewidth}
-        {
-            \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
-                In-detail study of $\iso{12}{Be}(\textrm{d}, \textrm{t})\iso{11}{Be}$.
-            \end{beamercolorbox}
-        }
-        \hfill
-        \column{0.3\linewidth}
-        {
-            \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
-                Comprehensive analysis of the employed \textbf{reaction model}.
-            \end{beamercolorbox}
-        }
-        \hfill
-    \end{columns}
+    % \bigskip
+    % \begin{columns}[c]
+    %     \column{0.3\linewidth}
+    %     {
+    %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
+    %             Extract $\frac{\textrm{d}\sigma}{\textrm{d}\Omega}$ for \textbf{excited} states.
+    %         \end{beamercolorbox}
+    %     }
+    %     \hfill
+    %     \column{0.3\linewidth}
+    %     {
+    %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
+    %             In-detail study of $\iso{12}{Be}(\textrm{d}, \textrm{t})\iso{11}{Be}$.
+    %         \end{beamercolorbox}
+    %     }
+    %     \hfill
+    %     \column{0.3\linewidth}
+    %     {
+    %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
+    %             Comprehensive analysis of the employed \textbf{reaction model}.
+    %         \end{beamercolorbox}
+    %     }
+    %     \hfill
+    % \end{columns}
 
 \end{frame}
 
