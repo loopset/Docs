@@ -270,8 +270,8 @@ t,%align on top by default
             \column{0.58\linewidth}
             {
                 \begin{itemize}
-                    \item Modern models (Haixia and DA1p) adjust better to the data.
-                    \item Failure at low and high angles.
+                    \item Modern models (Haixia and DA1p) adjust better the minimum.
+                          % \item Failure at low and high angles.
                     \item Overall agreement in magnitude.
                 \end{itemize}
             }\hfill
@@ -279,7 +279,10 @@ t,%align on top by default
             {
 
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
-                    Likely to be a miscalculation in \textbf{efficiency}
+                    Error in \textbf{efficiency} \\
+                    \medskip
+                    Proton \textbf{contamination} at low $E$
+                    % Likely to be a miscalculation in \textbf{efficiency}
                 \end{beamercolorbox}
 
             }
@@ -308,8 +311,9 @@ t,%align on top by default
             \column{0.58\linewidth}
             {
                 \begin{itemize}
-                    \item Potential deformed in both Coulomb and nuclear parts
-                    \item Using $B(E2)$ for other experiments.
+                    \item DWBA: potential deformed in both Coulomb and nuclear parts
+                    \item Using $B(E2)$ from other experiments
+                    \item \notice{Same} error as before?
                 \end{itemize}
             }\hfill
             \column{0.38\linewidth}
@@ -347,22 +351,22 @@ t,%align on top by default
             \end{minipage}
         \end{figure}
         \medskip
-        \begin{columns}
+        \begin{columns}[c]
             \column{0.6\linewidth}
             {
-                \notice{Theoretical calculations} with \textbf{DWBA}:
                 \begin{itemize}
-                    \item \textsc{Daehnick} + \textsc{Pang} OMPs.
-                    \item Only single-particle overlaps.
-                    \item Finite range calculation.
+                    \item \textbf{DWBA} with \textsc{Daehnick} (d) and \textsc{Pang} (t) OMPs
+                          % \item Only single-particle overlaps.
+                          % \item Finite range calculation.
+                    \item \textbf{Best fit} is $\ell = 1$ with $j = 3/2$
                 \end{itemize}
             }\hfill
             \column{0.38\linewidth}
             {
 
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
-                    \textbf{Best fit} is $\ell = 1$\\
-                    with $j = 3/2$.\\
+                    % \textbf{Best fit} is $\ell = 1$\\
+                    % with $j = 3/2$.\\
                     $\Rightarrow C^2S = \qty{1.522(44)}{}$
                 \end{beamercolorbox}
 
@@ -380,19 +384,24 @@ t,%align on top by default
             \includegraphics[width=0.5\linewidth]{figures/Workshop/auton.eps}
         \end{figure}
         \medskip
-        \begin{itemize}
-            \item No errors could be extracted
-            \item Poor quality at large $\theta_{CM}$
-            \item $C^2S = \num{1.951(54)}$
-        \end{itemize}
-        % \begin{center}
+        \begin{columns}[c]
+            \column{0.48\linewidth}
+            {
+                \begin{itemize}
+                    \item No errors could be extracted from paper
+                    \item Poor quality at large $\theta_{CM}$
+                    \item $C^2S = \num{1.951(54)}$
+                \end{itemize}
 
-        %         \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
-        %             \textbf{Best fit} is $\ell = 1$\\
-        %             with $j = 3/2$.\\
-        %             $\Rightarrow C^2S = \qty{1.522(44)}{}$
-        %         \end{beamercolorbox}
-        % \end{center}
+            }
+            \hfill
+            \column{0.48\linewidth}
+            {
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
+                    Agreement with our results
+                \end{beamercolorbox}
+            }
+        \end{columns}
     }
 \end{frame}
 
@@ -479,15 +488,15 @@ t,%align on top by default
                         \centering
                         \captionsetup{belowskip=-8pt}
                         \caption{Reanalyis of Acculinna's data}
-                        \includegraphics[width=\linewidth, cfbox=Mulberry 1pt 0pt 0pt]{figures/acculina.eps}%
+                        \includegraphics[width=\linewidth, cfbox=Mulberry 1pt 0pt 0pt]{figures/Workshop/acculina.eps}%
                         %\caption{Recently published: NIMPR B 541 (2023)}
                     \end{figure}
 
                     \medskip
                     \hfill
                     \begin{beamercolorbox}[sep=1ex,center, rounded=true, wd=0.95\linewidth]{boxmyviolet}
-                        $\ell = 1 \implies C^2S = \qty{3.13(6)}{}$\\
-                        Different \textbf{input parameters} in the models!
+                        $\ell = 1 \implies C^2S = \qty{2.679(45)}{}$\\
+                        Investigate \textbf{input parameters} in the models!
                     \end{beamercolorbox}
                     \hfill
                 }
@@ -552,16 +561,14 @@ t,%align on top by default
             \column{0.58\linewidth}
             {
                 \begin{itemize}
-                    \item Modern models (Haixia and DA1p) adjust better to the data.
-                    \item Failure at low and high angles.
-                    \item Overall agreement in magnitude.
+                    \item Same behaviour as for \iso{10}{Be}
+                    \item Normalization fine for this beam also
                 \end{itemize}
             }\hfill
             \column{0.38\linewidth}
             {
-
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
-                    Likely to be a miscalculation in \textbf{efficiency}
+                    Clearly the same \textit{systematic} error
                 \end{beamercolorbox}
 
             }
@@ -590,8 +597,7 @@ t,%align on top by default
             \column{0.58\linewidth}
             {
                 \begin{itemize}
-                    \item Potential deformed in both Coulomb and nuclear parts
-                    \item Using $B(E2)$ for other experiments.
+                    \item Same procedure as before
                 \end{itemize}
             }\hfill
             \column{0.38\linewidth}
@@ -607,139 +613,113 @@ t,%align on top by default
     }
 \end{frame}
 
-\begin{frame}{Challenging channels: $\iso{12}{Be}(\textrm{d}, \textrm{t} | \iso{3}{He})\iso{11}{Be|Li}$}
+\begin{frame}{Challenging channels: $\iso{12}{Be}(\textrm{d}, \textrm{t})\iso{11}{Be}$}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.6\linewidth]{figures/Workshop/12Be_dt_ex.pdf}
+    \end{figure}
+    \medskip
+    \begin{itemize}
+        \item Strong \textbf{inhibition} of the ground state
+        \item Why? Related to parity inversion in \iso{11}{Be}?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Challenging channels: $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$}
     \begin{figure}
         \begin{minipage}[t]{0.48\linewidth}
-            \centering
-            \only<1>{
-                \begin{tikzpicture}
-                    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/Workshop/12Be_dt_ex.pdf}};
-                    \begin{scope}[x={(image.south east)},y={(image.north west)}]
-                        % \draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
-                        % \draw[->, very thick, VioletRed] (0.50,0.84) -- (0.50,0.65);
-                    \end{scope}
-                \end{tikzpicture}
-            }
-            \only<2>
-            {
-                \includegraphics[width=\textwidth]{figures/Workshop/12Be_d3He_xs.eps}
-            }
+            \includegraphics[width=\textwidth]{figures/Workshop/12Be_d3He_ex.pdf}
         \end{minipage}
         \hfill
         \begin{minipage}[t]{0.48\linewidth}
             \centering
-            \only<1, 2>{
-                \includegraphics[width=\textwidth]{figures/Workshop/12Be_d3He_ex.pdf}}
+
+            \includegraphics[width=\textwidth]{figures/Workshop/12Be_d3He_xs.eps}
         \end{minipage}
-        \captionsetup{aboveskip=-8pt}
-        \only<1>{
-            \caption{Left: (d,t); Right: (d, \iso{3}{He})}}
-        \only<2>{\caption{(d, \iso{3}{He})}}
     \end{figure}
-    \begin{columns}
-        \column{0.48\linewidth}
-        {
-            \only<1>{
-                \begin{itemize}
-                    \item Strong \textbf{inhibition} of g.s
-                \end{itemize}}
-            \only<2>{
-                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyviolet}
-                    $\Rightarrow C^2S = \qty{0.510(85)}{}$ with Daehnick
-                \end{beamercolorbox}
-            }
-        }%
+    \bigskip
+    \begin{columns}[c]
         \column{0.48\linewidth}
         {
             \begin{itemize}
-                \item Low cross-section $\implies$ low counting
+                \item Low cross-section
                 \item Subject to \textbf{contamination}: hard to disentangle $A = 3$
             \end{itemize}
+        }\hfill
+        \column{0.48\linewidth}
+        {
+            \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyviolet}
+                $\Rightarrow C^2S = \qty{0.510(85)}{}$ with Daehnick
+            \end{beamercolorbox}
         }
     \end{columns}
 \end{frame}
 
-% \begin{frame}{Proton removal: $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$}
-%     \textbf{Two} states are populated despite low stats. Angular distribution for \textbf{g.s} in $\theta_{\textrm{CM}} \in \left[10, 20\right]\unit{\degree}$
-
-%     \only<+>
-%     {
-%         \begin{minipage}[t]{0.48\linewidth}
-%             \centering
-%             \begin{tikzpicture}
-%                 \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{figures/ex11Li.pdf}};
-%                 \begin{scope}[x={(image.south east)},y={(image.north west)}]
-%                     %\draw[step=0.05,gray,very thin] (0,0) grid (1, 1);
-%                     \draw[->, very thick, VioletRed] (0.34,0.99) -- (0.34,0.75);
-%                 \end{scope}
-%             \end{tikzpicture}
-%         \end{minipage}%
-%         \hfill
-%         \begin{minipage}[t]{0.48\linewidth}
-%             \centering
-%             \includegraphics[width=\textwidth]{figures/dxdo11Li0.eps}
-%         \end{minipage}
-
-%         \begin{itemize}
-%             \item \textbf{Further} developments are needed, but a tentative $\ell = 1$ shape is recognized for the \textbf{g.s} $\implies 3/2^{-}$.
-%             \item $J^{\pi}$ not known for state at $\qty{2.3}{\MeV} \implies$ feasible in the future?
-%         \end{itemize}
-%     }
-% \end{frame}
-
 \Section{Outlook}
-\begin{frame}{Conclusions and outlook }
-    We investigated several proton and neutron pick-up reactions on \iso{10,12}{Be}:
-    % \begin{itemize}
-    %     \item $\iso{10}{Be}(\textrm{d}, \textrm{t})\iso{9}{Be}$ shows a clear $p_{3/2}$ orbital with $C^2S = \qty{2.21(9)}{}$.
-    %     \item In $\iso{10}{Be}(\textrm{d}, \iso{3}{He})\iso{9}{Li}$ three states are present and g.s. tagged as $p_{3/2}$.
-    %     \item In $\iso{12}{Be}(\textrm{d}, \iso{3}{He})\iso{11}{Li}$ a \textit{tentative} $p_{3/2}$ could be assigned to the g.s.
-    % \end{itemize}
-    \begin{table}[]
-        \centering
-        \begin{tabular}{@{}ccccc@{}}
-            \toprule
-                                  & Channel  & Status & Pending & \\ \midrule
-            \multirow{3}{*}{10Be} & (d,d)    &        &         & \\
-                                  & (d,t)    &        &         & \\
-                                  & (d, 3He) &        &         & \\ \midrule
-            \multirow{3}{*}{12Be} & (d,d)    &        &         & \\
-                                  & (d,t)    &        &         & \\
-                                  & (d,3He)  &        &         & \\ \bottomrule
-        \end{tabular}
-        % \caption{}
-        % \label{tab:my-table}
-    \end{table}
-    \bigskip
-    \begin{center}
-        \textbf{Future prospects}
-    \end{center}
+\begin{frame}[c]{Conclusions and outlook}
+    \only<+>{
+        We investigated several proton and neutron pick-up reactions on \iso{10,12}{Be}:
+        \bigskip
+        \begin{table}
+            \centering
+            \begin{tabular}{@{}ccccc@{}}
+                \toprule
+                                      & Channel  & Status           & Pending                        & \\ \midrule
+                \multirow{3}{*}{10Be} & (d,d)    & Normalization OK & Requires study                 & \\
+                                      & (d,t)    & Completed        & $C^2S$ matches other measures. & \\
+                                      & (d, 3He) & Completed        & Two new $C^2S$                 & \\ \midrule
+                \multirow{3}{*}{12Be} & (d,d)    & Normalization OK & Same as \iso{10}{Be}           & \\
+                                      & (d,t)    & Puzzled          & ?                              & \\
+                                      & (d,3He)  & Needs clean      & New $C^2S$                     & \\ \bottomrule
+            \end{tabular}
+            % \caption{}
+            % \label{tab:my-table}
+        \end{table}
+    }
+    \only<+>{
+        \begin{center}
+            \textbf{Future prospects}
+            
+            ~
+            \bigskip
+            \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=0.7\linewidth]{boxgreenish}
+                Solve discrepancies in \textbf{elastic} channels
+            \end{beamercolorbox}
+            \bigskip
+            \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=0.7\linewidth]{boxpinky}
+                Reduce contamination in \iso{3}{He} PID
+            \end{beamercolorbox}
+            \bigskip
+            \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=0.7\linewidth]{boxmyorange}
+                Compare with \textbf{shell model} calculations
+            \end{beamercolorbox}
 
-    % \bigskip
-    % \begin{columns}[c]
-    %     \column{0.3\linewidth}
-    %     {
-    %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
-    %             Extract $\frac{\textrm{d}\sigma}{\textrm{d}\Omega}$ for \textbf{excited} states.
-    %         \end{beamercolorbox}
-    %     }
-    %     \hfill
-    %     \column{0.3\linewidth}
-    %     {
-    %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
-    %             In-detail study of $\iso{12}{Be}(\textrm{d}, \textrm{t})\iso{11}{Be}$.
-    %         \end{beamercolorbox}
-    %     }
-    %     \hfill
-    %     \column{0.3\linewidth}
-    %     {
-    %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
-    %             Comprehensive analysis of the employed \textbf{reaction model}.
-    %         \end{beamercolorbox}
-    %     }
-    %     \hfill
-    % \end{columns}
 
+            % \begin{columns}[c]
+            %     \column{0.3\linewidth}
+            %     {
+            %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
+            %             Extract $\frac{\textrm{d}\sigma}{\textrm{d}\Omega}$ for \textbf{excited} states.
+            %         \end{beamercolorbox}
+            %     }
+            %     \hfill
+            %     \column{0.3\linewidth}
+            %     {
+            %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
+            %             In-detail study of $\iso{12}{Be}(\textrm{d}, \textrm{t})\iso{11}{Be}$.
+            %         \end{beamercolorbox}
+            %     }
+            %     \hfill
+            %     \column{0.3\linewidth}
+            %     {
+            %         \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=\linewidth]{boxgreenish}
+            %             Comprehensive analysis of the employed \textbf{reaction model}.
+            %         \end{beamercolorbox}
+            %     }
+            %     \hfill
+            % \end{columns}
+        \end{center}
+    }
 \end{frame}
 
 \End
