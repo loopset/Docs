@@ -19,6 +19,7 @@ t,%align on top by default
 \usepackage{tikz}
 \usepackage[export]{adjustbox}
 \usepackage{multirow}
+\usepackage{unicode-math}
 
 %% custom commands
 \newcommand{\notice}[1]{\textbf{\alert{#1}}}
@@ -137,7 +138,7 @@ t,%align on top by default
 
 \Section{Methodology}
 \begin{frame}{Reactions to be studied}
-    \textbf{E748} at GANIL during the MUST2@LISE campaign. Neutron and proton removal reactions from \iso{10,12}{Be} beams have been performed to probe key nuclei:
+    \textbf{E748} at GANIL during the MUST2@LISE campaign. Neutron and proton removal reactions from \iso{10,12}{Be} beams have been performed to probe key orbitals:
 
     \bigskip
     % \begin{columns}
@@ -180,7 +181,7 @@ t,%align on top by default
     % \end{columns}
     \begin{figure}
         \centering
-        \includegraphics[width=0.7\linewidth]{figures/Workshop/shell_model_all.pdf}
+        \includegraphics[width=0.75\linewidth]{figures/Workshop/shell_model_all.pdf}
         \caption{Shell model for \iso{10,12}{Be}}
     \end{figure}
 \end{frame}
@@ -533,12 +534,23 @@ t,%align on top by default
                 \end{figure}
             }
         \end{columns}
-
-        \begin{itemize}
-            \item \textbf{Best fit} is $\ell = 1$
-            \item Assuming $j = 1/2$
-            \item Spectroscopic factor: \num{0.185(36)}
-        \end{itemize}
+        \medskip
+        \begin{columns}[c]
+            \column{0.48\linewidth}
+            {
+                \begin{itemize}
+                    \item \textbf{Best fit} is $\ell = 1$
+                    \item Assuming $j = 1/2$
+                    \item Spectroscopic factor: \num{0.185(36)}
+                \end{itemize}
+            }\hfill
+            \column{0.48\linewidth}
+            {
+                \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxgreenish}
+                    New $C^2S$ value!
+                \end{beamercolorbox}
+            }
+        \end{columns}
     }
 \end{frame}
 
@@ -567,7 +579,7 @@ t,%align on top by default
             {
                 \begin{itemize}
                     \item Same behaviour as for \iso{10}{Be}
-                    \item Normalization fine for this beam also
+                    \item \textbf{Normalization} is also \textbf{fine}
                 \end{itemize}
             }\hfill
             \column{0.38\linewidth}
@@ -675,7 +687,7 @@ t,%align on top by default
                                       & (d, 3He) & Completed        & Two new $C^2S$                 & \\ \midrule
                 \multirow{3}{*}{12Be} & (d,d)    & Normalization OK & Same as \iso{10}{Be}           & \\
                                       & (d,t)    & Puzzled          & ?                              & \\
-                                      & (d,3He)  & Needs clean      & New $C^2S$                     & \\ \bottomrule
+                                      & (d,3He)  & Needs cleaning   & New $C^2S$                     & \\ \bottomrule
             \end{tabular}
             % \caption{}
             % \label{tab:my-table}
@@ -684,7 +696,7 @@ t,%align on top by default
     \only<+>{
         \begin{center}
             \textbf{Future prospects}
-            
+
             ~
             \bigskip
             \begin{beamercolorbox}[sep=1.25ex,center, rounded=true, wd=0.7\linewidth]{boxgreenish}
