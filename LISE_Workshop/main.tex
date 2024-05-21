@@ -666,7 +666,8 @@ t,%align on top by default
         \column{0.48\linewidth}
         {
             \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyviolet}
-                $\Rightarrow C^2S = \qty{0.510(85)}{}$ with Daehnick
+                \textbf{Best fit} $\ell = 1$ \\
+                $\Rightarrow C^2S = \qty{0.510(85)}{}$ with Daehnick + Pang
             \end{beamercolorbox}
         }
     \end{columns}
@@ -751,21 +752,48 @@ t,%align on top by default
     \textbf{Not part of the talk!}
 \end{frame}
 
-\begin{frame}[c]{CsI on or off?}
-    So far, studied excited states are \textit{compressed} in the DSSD layer:
+\begin{frame}[c]{Proton contamination}
+    \only<+>
+    {
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.05\linewidth]{figures/Workshop/proton_contamination.png}
+        \end{figure}
+    }
+    \only<+>
+    {
+        And regarding the masses:
+        \begin{figure}
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/Workshop/ex_mass_all.png}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[t]{0.48\linewidth}
+                \centering
+                \includegraphics[width=0.7\textwidth]{figures/Workshop/ex_mass_d.png}
+            \end{minipage}
+            \caption{Left: All data in ToF spectrum. Right: Gate on $d$}
+        \end{figure}
 
-    \begin{minipage}[t]{0.48\linewidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/with_without_csi_9Be.pdf}
-        \captionof{figure}{For \iso{10}{Be}(d, t)\iso{9}{Be}}
-    \end{minipage}%
-    \hfill
-    \begin{minipage}[t]{0.48\linewidth}
-        \centering
-        \includegraphics[width=\textwidth]{figures/with_without_csi_9Li.pdf}
-        \captionof{figure}{For \iso{10}{Be}(d, \iso{3}{He})\iso{9}{Li}}
-    \end{minipage}
+    }
 \end{frame}
+
+% \begin{frame}[c]{CsI on or off?}
+%     So far, studied excited states are \textit{compressed} in the DSSD layer:
+
+%     \begin{minipage}[t]{0.48\linewidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/with_without_csi_9Be.pdf}
+%         \captionof{figure}{For \iso{10}{Be}(d, t)\iso{9}{Be}}
+%     \end{minipage}%
+%     \hfill
+%     \begin{minipage}[t]{0.48\linewidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{figures/with_without_csi_9Li.pdf}
+%         \captionof{figure}{For \iso{10}{Be}(d, \iso{3}{He})\iso{9}{Li}}
+%     \end{minipage}
+% \end{frame}
 
 \begin{frame}[t]{Beam ID}
     Using Caviar to CATS1 TOF and energy loss in IC
