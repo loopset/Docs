@@ -314,20 +314,20 @@ t,%align on top by default
             \end{minipage}
         \end{figure}
         \begin{columns}
-            \column{0.58\linewidth}
+            \column{0.48\linewidth}
             {
                 \begin{itemize}
-                    \item DWBA: potential deformed in both Coulomb and nuclear parts
-                    \item Using $B(E2)$ from other experiments
-                    \item \notice{Same} error as before?
+                    % \item DWBA: potential deformed in both Coulomb and nuclear parts
+                    % \item Using $B(E2)$ from other experiments
+                    \item \notice{Same} errors as before
                 \end{itemize}
             }\hfill
-            \column{0.38\linewidth}
+            \column{0.48\linewidth}
             {
 
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
                     To be further investigated. \\
-                    $\Rightarrow C^2S = \qty{0.270(22)}{}$ with Daehnick
+                    % $\Rightarrow C^2S = \qty{0.270(22)}{}$ with Daehnick
                 \end{beamercolorbox}
 
             }
@@ -373,7 +373,7 @@ t,%align on top by default
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
                     % \textbf{Best fit} is $\ell = 1$\\
                     % with $j = 3/2$.\\
-                    $\Rightarrow C^2S = \qty{1.522(44)}{}$
+                    $C^2S = \qty{1.522(44)}{}$
                 \end{beamercolorbox}
 
             }
@@ -513,8 +513,8 @@ t,%align on top by default
             \column{0.68\linewidth}
             {
                 \begin{itemize}
-                    \item \textbf{Pang} : $C^{2}S = 1.80(10)$ vs $2.679(45)$
-                    \item \textbf{HT1p} : $C^{2}S = 1.232(77)$ vs $1.848(33)$
+                    \item \textbf{Pang} : $C^{2}S = \textcolor{orange}{1.80(11)}$ vs \textcolor{Mulberry}{$2.679(45)$}
+                    \item \textbf{HT1p} : $C^{2}S = \textcolor{orange}{1.232(77)}$ vs \textcolor{Mulberry}{$1.848(33)$}
                 \end{itemize}
             }
             \hfill
@@ -632,18 +632,18 @@ t,%align on top by default
             \end{minipage}
         \end{figure}
         \begin{columns}
-            \column{0.58\linewidth}
+            \column{0.48\linewidth}
             {
                 \begin{itemize}
-                    \item Same procedure as before
+                    \item Same discrepancies as before
                 \end{itemize}
             }\hfill
-            \column{0.38\linewidth}
+            \column{0.48\linewidth}
             {
 
                 \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyorange}
-                    To be further investigated. \\
-                    $\Rightarrow C^2S = \qty{0.519(30)}{}$ with Daehnick
+                    To be further studied \\
+                    % $\Rightarrow C^2S = \qty{0.519(30)}{}$ with Daehnick
                 \end{beamercolorbox}
 
             }
@@ -689,7 +689,7 @@ t,%align on top by default
         {
             \begin{beamercolorbox}[sep=1ex, center, rounded=true]{boxmyviolet}
                 Fullfils proposal expectations: \\
-                  $\frac{1}{4} \cdot \frac{d\sigma}{d\Omega}$ reduction
+                $\frac{1}{4} \cdot \frac{d\sigma}{d\Omega}$ reduction
             \end{beamercolorbox}
         }
     \end{columns}
@@ -697,25 +697,6 @@ t,%align on top by default
 
 \Section{Outlook}
 \begin{frame}[c]{Conclusions and outlook}
-    \only<+>{
-        We investigated several proton and neutron pick-up reactions on \iso{10,12}{Be}:
-        \bigskip
-        \begin{table}
-            \centering
-            \begin{tabular}{@{}ccccc@{}}
-                \toprule
-                                      & Channel  & Status           & Pending                        & \\ \midrule
-                \multirow{3}{*}{10Be} & (d,d)    & Normalization OK & Requires study                 & \\
-                                      & (d,t)    & Completed        & $C^2S$ matches other measures. & \\
-                                      & (d, 3He) & Completed        & Two new $C^2S$                 & \\ \midrule
-                \multirow{3}{*}{12Be} & (d,d)    & Normalization OK & Same as \iso{10}{Be}           & \\
-                                      & (d,t)    & Puzzled          & ?                              & \\
-                                      & (d,3He)  & Needs cleaning   & New $C^2S$                     & \\ \bottomrule
-            \end{tabular}
-            % \caption{}
-            % \label{tab:my-table}
-        \end{table}
-    }
     \only<+>{
         \begin{center}
             \textbf{Future prospects}
@@ -734,6 +715,25 @@ t,%align on top by default
                 Compare with \textbf{shell model} calculations
             \end{beamercolorbox}
         \end{center}
+    }
+    \only<+>{
+        We investigated several proton and neutron pick-up reactions on \iso{10,12}{Be}:
+        \bigskip
+        \begin{table}
+            \centering
+            \begin{tabular}{@{}ccccc@{}}
+                \toprule
+                                      & Channel  & Status           & Pending                        & \\ \midrule
+                \multirow{3}{*}{10Be} & (d,d)    & Normalization OK & Requires study                 & \\
+                                      & (d,t)    & Completed        & $C^2S$ matches other measures. & \\
+                                      & (d, 3He) & Completed        & Two new $C^2S$                 & \\ \midrule
+                \multirow{3}{*}{12Be} & (d,d)    & Normalization OK & Same as \iso{10}{Be}           & \\
+                                      & (d,t)    & Puzzling          & ?                              & \\
+                                      & (d,3He)  & Needs cleaning   & New $C^2S$                     & \\ \bottomrule
+            \end{tabular}
+            % \caption{}
+            % \label{tab:my-table}
+        \end{table}
     }
 \end{frame}
 
