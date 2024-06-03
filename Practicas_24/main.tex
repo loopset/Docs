@@ -95,7 +95,7 @@ belowskip=-0.85 \baselineskip,
 
 \title{\textbf{Guión das prácticas no IGFAE}}
 \author{%Miguel Lozano González\\
-\small{Prácticas optativas de Grao $\cdot$ Curso 22-23}\\
+\small{Prácticas optativas de Grao $\cdot$ Curso 23-24}\\
 \small{Universidade de Santiago de Compostela}}
 \date{\empty}%\date{\today}
 
@@ -154,14 +154,14 @@ Abarcaremos varias áreas:
 Iremos adaptando o guión das prácticas en función das necesidades e do tempo dispoñíbel. Gran parte do código computacional está xa listo, e o que se requerirá será facer uso del en programas máis simples.
 
 \subsection{Motivación}
-En 2025 levarase a cabo un experimento coa reacción $\iso{11}{Li}(d, p)\iso{12}{Li}$ para estudar a estrutura nuclear do \iso{12}{Li}. En particular, este tipo de reaccións de transferencia dun nucleón permiten acceder de forma pormenorizada á información espectroscópica do núcleo resultante; neste caso, co obxectivo principal de estudar o estado fundamental do \iso{12}{Li}.
+En 2025 levarase a cabo un experimento coa reacción $\iso{11}{Li}(d, t)\iso{10}{Li}$ para estudar a estrutura nuclear do \iso{10}{Li}. En particular, este tipo de reaccións de transferencia dun nucleón permiten acceder de forma pormenorizada á información espectroscópica do núcleo resultante; neste caso, co obxectivo principal de estudar o estado fundamental do \iso{10}{Li}.
 
 Para lograr este obxectivo, necesitamos varias compoñentes:
 \begin{itemize}
     \item \textbf{Detector}: O gas que encherá ACTAR TPC será unha mestura de \ce{D_2} e \ce{iC4H10} (\qty{95}{\percent} e \qty{5}{\percent}, respectivamente) a unha presión de \qty{900}{\milli\bar}. Será o \ce{D_2} o que provea os $d$ da reacción.
     \item \textbf{Reacción}: A xa mencionada:
           \begin{equation*}
-              \iso{11}{Li} + \iso{2}{H} \longrightarrow \iso{1}{H} + \iso{12}{Li}
+              \iso{11}{Li} + \iso{2}{H} \longrightarrow \iso{3}{H} + \iso{10}{Li}
           \end{equation*}
     \item \textbf{Feixe}: O \iso{11}{Li} terá unha enerxía de \qty{7.5}{A\MeV} (é dicir, \qty{82.5}{\MeV}).
 \end{itemize}
@@ -194,6 +194,7 @@ Para a simulación vamos necesitar poñerlle números ao detector:
     \item O tamaño da zona de detección (\autoref{fig:actar}) é de \qtyproduct[product-units=power]{256 x 256 x 255}{\mm}.
     \item O criterio de dimensións é que o beam vai no eixo X, e a dimensión vertical é Z.
     \item Os detectores auxiliares poden poñerse arredor desta zona nos diferentes lados. Nós usaremos algo parecido ao da figura, cun detector de Si (como os \textcolor{blue}{azuis}) cara adiante.
+    \item Situaremos un só detector de Si, cun tamaño de \qtyproduct[product-units=power]{80 x 50 x 1.5}{\mm} a unha distancia de \qty{10}{\cm} do \textit{pad plane}.
 \end{itemize}
 
 \subsection{Perdas de enerxía na materia}
@@ -291,179 +292,4 @@ A proposta é a seguinte:
     \item \textbf{Quinta semana}: Posibilidade de engardir máis cousas á simulación (en función da evolución) ou comezo da memoria.
 \end{itemize}
 
-% En decembro de 2022 probamos ACTAR TPC (máis ben o prototipo, a versión \textit{mini}) por primeira vez cun feixe de neutróns, para ver se era viábel utilizar este detector con este tipo de partículas e, idealmente, caracterizar o fluxo de neutróns incidente.
-
-% \begin{itemize}
-%     \item \textbf{Detector:} Utilizouse \textit{proto}ACTAR con isobutano como gas a \qty{140}{\milli\bar} de presión, e xunto a isto, dúas paredes de detectores de silicio. Estes miden a enerxía residual das partículas ao saír do gas, tal e como se amosa na \autoref{fig:layout}.
-
-%           \begin{figure}[!ht]
-%               \centering
-%               \includegraphics[width=0.5\linewidth]{figures/SiliconLayout.png}
-%               \caption{Disposición experimental dos detectores}
-%               \label{fig:layout}
-%           \end{figure}
-%     \item \textbf{Reacción:} A máis sinxela, a dispersión elástica
-%           \begin{equation*}
-%               n + p \longrightarrow n + p
-%           \end{equation*}
-%           Como o gas tamén ten carbono, algunha reacción extra con este núcleo é esperábel.
-
-%     \item \textbf{\textit{Beam:}} Neutróns cun espectro continuo entre \qtyrange{10}{30}{\MeV}. Coñecemos o fluxo teórico, pero o ideal sería verificalo con este experimento. Sen unha medida complementaria, a priori non coñecemos a enerxía do neutrón que reaccionou!
-
-%     \item \textbf{Análise:} Nun detector gaseoso a reacción ten lugar dentro do gas ao tempo que as partículas, ao propagarse por este medio, ionízano e deixan unha \textit{traza} (electróns que se desprazan grazas a un campo eléctrico que aplicamos nós), que recolle a electrónica do detector en forma de \textit{puntos 3D}. É o noso labor unilos para reconstruír a traza e obter así os ingredientes básicos da análise: ángulo e enerxía no vértice.
-
-%           Aplicando as ecuacións de cinemática, podemos obter a enerxía que non sabíamos, a do feixe, e estimar posteriormente o fluxo! Pero reconstruír as trazas non é nada sinxelo... Por sorte nestas prácticas non imos facer isto, pero que saibas que constitúe unha das partes esenciais do traballo con estes detectores.
-
-%     \item \textbf{Simulacións:} Sempre é necesario reproducir computacionalmente un experimento para verificar que todos os aparellos están funcionando ben, e tamén para complementar a análise (hai partes desta que só se poden facer con datos extraídos de simulacións). É nesta parte na que nos centraremos nestas prácticas, realizando unha simulación moi sinxela, aínda que completa, dos contidos expostos na anterior Sección.
-% \end{itemize}
-
-% \section{Para comezar}
-% O primeiro é configurar o entorno de traballo. Para iso imos necesitar un entorno con GNU/Linux e unha versión de \verb|ROOT| (\url{https://root.cern.ch/}) recente. Estas dúas presentacións mostran conceptos básicos de programación que che axudarán:
-% \begin{itemize}
-%     \item \verb|C++|. A sección 2 desta presentación (\textit{Language basics}) cubre os conceptos básicos necesarios: tipos, referencias, \textit{pointers}, \textit{scopes} e estruturas de control. \url{https://raw.githubusercontent.com/hsf-training/cpluspluscourse/download/talk/C%2B%2BCourse_essentials.pdf}
-
-%     \item \verb|ROOT|. Podes ver a seguinte presentación para ver as potencialidades de ROOT. Céntrate nos histogramas e nos gráficos, o resto non o imos necesitar. Practicaremos o código xa coa simulación. \url{https://docs.google.com/presentation/d/1XUpgJ1IRNO-nIF7M9TErrMcyisLqhhZLB0L-M0AkwUo/edit#slide=id.g13ec28bae0e_0_63}
-%     \item Titoriais de ROOT: \url{https://root.cern/tutorials/}
-% \end{itemize}
-
-% \section{Simulación}
-% \subsection{Xeometría}
-% Como vimos na \autoref{fig:layout}, a nosa simulación fai ter que representar fidedignamente a diposición real dos detectores. As trazas que simulemos dentro do gas terán que ser propagadas no espazo para ver se intersecan cos detectores de silicio. Desta forma determinaremos algo tan importante como a \textbf{eficiencia xeométrica}.
-
-% A xeometría está xa implementada, nunha clase coñecida como \lstinline{SimGeometry}, que fai realizar a única tarefa que necesitaremos: propagar unha traza desde un \textit{vértice} ata unha capa de silicios, seguindo unha \textbf{dirección} de traza. Isto faise co método
-% \begin{lstlisting}[caption=Interface á function de propagación de traza, label={lst:geometry}]
-%     SimGeometry::PropagateTrackToSiliconArray(const XYZPoint& initPoint,
-%                                       const XYZVector& direction,
-%                                       int assemblyIndex,
-%                                       bool& isMirror,
-%                                       double& distance,
-%                                       int& silType,
-%                                       int& silIndex,
-%                                       XYZPoint& newPoint,
-%                                       bool debug = false);
-% \end{lstlisting}
-% Configurando o índice do plano de silicios aos que queremos ir (para nós será sempre 0), esta función devólvenos:
-% \begin{itemize}
-%     \item Se está \textit{espellado}: é dicir, se foi á \textit{layer} esquerda (\textit{false}) ou á dereita (\textit{true}).
-%     \item A distancia (\textit{distance}) do vértice ao punto de impacto no silicio (\textit{newPoint}); é dicir, a \textbf{lonxitude de traza}.
-%     \item O número de silicio impactado, seguindo o código da \autoref{fig:layout}. Se non houbo ningún impacto, devólvese o valor \num{-1}.
-%     \item A opción \textit{debug} permite, se se activa, amosar o funcionamento interno da función.
-% \end{itemize}
-
-% \begin{figure}[!ht]
-%     \centering
-%     \includegraphics[width=0.7\linewidth]{figures/geo0.pdf}
-%     \caption{Visualización 3D da xeometría implementada no código}
-%     \label{fig:geo0}
-% \end{figure}
-
-% \subsection{Cinemática}
-% Aínda que a reacción a implementar aquí é a máis sinxela posíbel, imos resolver o caso máis xeral dunha reacción a dous corpos, asumindo que a partícula pesada final pode ter unha \textbf{enerxía de excitación}:
-% \begin{equation*}
-%     m_{4} \longrightarrow m_{4} + E_{x}
-% \end{equation*}
-% $\implies$ Aplica as leis de conservación de enerxía e momento para obter a enerxía $E_{3}$ e ángulo $\theta_{3}$ da partícula saínte lixeira en función das variables no \textbf{CM}, como son a enerxía total $E_{CM}$, $m_{3,4}$ e $\theta_{CM}$.
-
-% Esta variable $\theta_{CM}$ é o único \textit{grao de liberdade} que temos, e que fisicamente está constrinxido pola \textbf{sección eficaz} da reacción, que determina a distribución angular dos produtos de reacción. Comezaremos cunha distribución uniforme no intervalo $\left[-\pi, \pi\right]$, pero máis tarde veremos como extraer a distribución angular real a partir da sección eficaz diferencial para a reacción de \textit{scattering np}, na \autoref{fig:example_xs}.
-
-% \begin{figure}[!ht]
-%     \centering
-%     \includegraphics[width=0.7\linewidth]{figures/example_xs.pdf}
-%     \caption{Exemplo real de sección eficaz diferencial para a dispersión np. Actúa como unha distribución de probabilidade dos valores de $\cos{\theta}$.}
-%     \label{fig:example_xs}
-% \end{figure}
-
-% \subsection{Perdas de enerxía (SRIM) e resolución}
-% As partículas ao propagarse a través do gas interaccionarán co campo de Coulomb dos átomos deste, perdendo enerxía e liberando electróns. Esta perda de enerxía en cada interacción é moi pequena, pero como é moi elevado o número de átomos no gas, chega a ser moi importante. Nunha aproximación continua, está dada pola ecuación de Bethe-Bloch:
-% \begin{equation*}\label{eq:stopping}
-%     - \frac{dE}{dx} \cong \frac{4 \pi e^4}{m_e} \left(\rho \frac{N_A}{M}\right)\frac{z^2 Z}{v^2} \ln{\frac{2m_e v^2}{I}}
-% \end{equation*}
-% E depende esencialmente da partícula a considerar ($Z$ e $A$) e do gas (esencialmente a través de $\rho$). É interesante definir:
-% \begin{itemize}
-%     \item Rango ($R$): É o camiño percorrido por unha partícula ata que \textit{case} se detén. É función da enerxía inicial e do material a atravesar. Existe unha \textbf{relación unívoca} $E \Longleftrightarrow R$ que imos utilizar para estimar a perda da enerxía en función da distancia percorrida pola partícula (obtida coa xeometría!). Toda esta información aparece recollida no programa \textbf{SRIM} en forma de táboas.
-%     \item \textit{Straggling}: Como a perda de enerxía é un \textbf{proceso estatístico}, dúas partículas coa mesma enerxía inicial non van depositar a mesma $\Delta E$. O \textit{straggling} mide, dalgunha forma, a $\sigma$ desta distribución. SRIM daranos o \textit{straggling} en rango, polo que o deberemos converter a enerxético co seguinte algoritmo:
-%           \begin{enumerate}
-%               \item Calculamos $R_{ini}$ coa enerxía inicial, xunto co seu \textit{straggling}.
-%               \item Sabendo que a partícula percorre unha distancia $d$ o rango nese punto será $R_{L} = R_{Ini} - d$. Avaliamos o \textit{stragg.} para este valor.
-%               \item O \textit{straggling} na distancia estará \textbf{correlacionado con ambos}, e sabendo que $u^2(R_{Ini}) = u^2(R_{Left}) + u^2(d)$, despexamos $u(d)$.
-%               \item Aleatorizamos o valor de $d$ cunha gaussiana centrada no seu valor e de $\sigma = u(d)$. Recalculamos o valor de $R_{Left} \longrightarrow R_{Left}^{\prime}$ coa nova $d \longrightarrow d\prime$.
-%               \item Con este novo rango calculamos a enerxía final, efectivamente implementando o \textit{straggling}!
-%           \end{enumerate}
-% \end{itemize}
-% Unha última consideración a ter en conta é a \textbf{resolución dos detectores de Si}, definida como a súa capacidade para \textit{resolver} enerxías depositadas distintas, froito tamén do proceso estocástico de perda de enerxía: $R = \textrm{FWHM} / E$. Sabendo que esta resolución está tabulada en \qty{50}{\keV} a \qty{5.5}{\MeV} podemos extrapolar ao resto de enerxías coa función:
-% \begin{equation*}
-%     R = \frac{2.35 \sigma}{E} = \frac{K}{\sqrt{E}} \quad \implies \quad \sigma = \frac{K}{2.35}\sqrt{E} = \frac{\qty{0.0213}{\MeV}}{2.35} \sqrt{E}
-% \end{equation*}
-% A perda de enerxía $\Delta E$ que calcules nos Si deberala aleatorizar cunha gaussiana de $\sigma$ obtida coa anterior fórmula.
-
-% \section{Algoritmo}
-% De momento imos seleccionar unha única configuración para simular:
-% \begin{itemize}
-%     \item Enerxía do feixe: $T_{n} = \qty{15}{\MeV}$.
-%     \item Presión do gas: $p = \qty{150}{\milli\bar}$.
-%     \item Gas: \qty{100}{\percent} de \ce{iC4H10}.
-% \end{itemize}
-% Unha síntese dos pasos para realizar a simulación de $N$ eventos é a seguinte:
-% \begin{enumerate}
-%     \item Xerar o \textbf{vértice} de reacción. Para iso, asumiremos unha distribución gaussiana en yz, de raio ($\sigma$) o do beam, de \qty{2}{\cm}. A compoñente x será uniforme ao longo de toda a lonxitude da cámara. A variable será de tipo \lstinline{auto vertex = XYZPoint(x, y, z)}.
-%     \item Samplear os ángulos no CM: $\theta_{CM}$ e $\phi_{CM}$ para a partícula 3. $\phi_{CM}$ seguirá unha distribución uniforme entre $[0, 2\pi]$ e $\theta_{CM}$ xerarase a partir doutra uniforme en $\cos{\theta_{CM}} \in [-1,1]$.
-%     \item Calcúlase a cinemática no LAB usando o valor de $\theta_{CM}$ obtido. Con $\theta_{Lab}$ e $\phi_{Lab} = \phi_{CM}$ (xa que se define nunha dirección perpendicular ao \textit{boost}) creamos o vector \textbf{dirección da partícula}:
-%           \begin{lstlisting}
-%         auto direction = XYZVector(TMath::Cos(theta), 
-%                         TMath::Sin(theta) * TMath::Sin(phi), 
-%                         TMath::Sin(theta) * TMath::Cos(phi));
-%     \end{lstlisting}
-%     \item Inicializa as variables que pasas como referencia na \autoref{lst:geometry} e pásaas a dita función, recordando que o \textit{assembyIndex} vai ser sempre 0. Se a partícula \textbf{non impactou} ningún silicion (\lstinline{silIndex = -1}), ignoramos este evento.
-%     \item Se a traza impactou un silicio, é o momento de aplicar as \textbf{perdas de enerxía} usando SRIM, pois o protón terá que atraversar a cantidade de gas (\textit{distance}) ata chegar ao outro detector. Obtén a enerxía do protón ás portas do silicio.
-%     \item Se esta enerxía é 0, esquivamos o evento, pois non o poderemos detectar (dado que requerimos que \textit{impacte} no silicio).
-%     \item Se non, aplicamos SRIM nos Si coñecendo o seu \textbf{espesor}, de \qty{500}{\micro\m}, obtendo $\Delta E$ e a enerxía á saída.
-%     \item Crearemos unha bandeira en cada evento para determinar se o protón se parou no Si ou se aínda ten enerxía após el. É o que se coñece como \textit{\textbf{punchthrough}}.
-% \end{enumerate}
-
-% Todo isto farase creando un \lstinline{TTree} e gardando nun ficheiro as variables máis interesantes para a representación gráfica posterior:
-% \begin{itemize}
-%     \item Os ángulos $\theta_{CM}$ e $\theta_{Lab}$
-%     \item As enerxías no vértice, ao chegar ao silicio e a $\Delta E$ neste.
-%     \item A distancia ao Si, o seu índice e se é \textit{left} ou \textit{right} (\lstinline{std::string side = "left" ou "right";}).
-%     \item As \textit{flags}: se impacta ou non no silicio, se chega a este ou se para no gas e se se detén no Si ou aínda posúe enerxía despois. Para isto dáte conta de que debes gardar todos os teus eventos, aínda que non superen os cortes! É útil que en cada iteracción re-inicialices todas as variables ao 0. Pode serche útil o tipo \lstinline{bool flag1 = true; bool flag2 = false;}.
-% \end{itemize}
-% Os histogramas a facer nun segundo programa de análise da simulación serán:
-% \begin{enumerate}
-%     \item Unidimensionais:
-%           \begin{itemize}
-%               \item Os ángulos $\theta$ \textbf{antes} dos cortes (as \textit{flags}).
-%               \item Os ángulos $\theta$ só dos eventos que se \textbf{deteñen} no silicio. Para iso, podes \textit{cortar} nun \lstinline{RDataFrame} sabendo que:
-%                     \begin{lstlisting}
-% //Partindo dun RDataFrame df
-% auto hThetaCMCut = df.Filter("impactaSil == true && chegaAoSil == true 
-%                               && paraseNoSil == true")
-%                         .Histo1D("nome da columna");
-%         \end{lstlisting}
-%                     O importante é que representes só os eventos que se paran no Si (pero que chega a el, claro).
-%               \item A \textbf{eficiencia} angular no CM, sabendo que é o cociente entre os dous histogramas anteriores. Podes facelo como:
-%                     \begin{lstlisting}
-%             //Sexa hThetaCM os ángulos xerados e hThetaCMCut o mesmo 
-%             //pero tras superar os cortes
-%             auto* hThetaCMEff {(TH1D*)hThetaCM->Clone("hThetaCMEff")};
-%             hThetaCMClone->Divide(hThetaCMCut);
-%             //Clonamos = copiamos o primeiro histograma para evitar modificalo e 
-%             //ter un histograma co mesmo binning
-%         \end{lstlisting}
-
-%               \item O número de silicio impactado (idealmente dous histogramas, un para a dereita e outro para a esquerda).
-%           \end{itemize}
-%     \item Bidimensionais:
-%           \begin{itemize}
-%               \item Os planos cinemáticos dos eventos que medimos tanto no CM como no Lab: $E_3$ vs $\theta_{CM}$ e $\theta_{Lab}$. Representa tamén $\theta_{Lab}$ vs $\theta_{CM}$.
-%           \end{itemize}
-
-% \end{enumerate}
-
-%\newpage
-% %\nocite{*}
-% \fancypagestyle{plain}{}
-% \printbibliography[
-% heading=bibintoc,
-% title={Bibliografía}
-% ]
 \end{document}
