@@ -292,4 +292,32 @@ A proposta é a seguinte:
     \item \textbf{Quinta semana}: Posibilidade de engardir máis cousas á simulación (en función da evolución) ou comezo da memoria.
 \end{itemize}
 
+\subsection{Primeira semana}
+Os obxectivos son os seguintes:
+
+\subsubsection*{Cinemática}
+Resolverás as ecuacións de cinemática para obter as enerxías cinéticas e ángulos no LAB das dúas partículas finais, aínda que presentando máis atención á pesada. Faino de forma xeral, tal e como está escrito na Sección correspondente. O criterio de números é o seguinte: $1 + 2 \longrightarrow 3 + 4$.
+
+Na simulación, as variables que teremos que introducir nas fórmulas serán as masas, a enerxía do feixe e o ángulo $\theta_{CM}$ (que será aleatorio, como veremos).
+
+\subsubsection*{Macros iniciais}
+Quero que fagas dous macros onde me representes as seguintes cousas, usando a axuda do repositorio de Github:
+\begin{enumerate}
+    \item Representacións \textbf{cinemáticas}: Creas un \lstinline|TCanvas| con 3 \textit{pads} e representas a cinemática para estas tres reaccións distintas: $\iso{11}{Li}(d, p)\iso{12}{Li}$, $\iso{11}{Li}(d, d)\iso{11}{Li}$ e $\iso{11}{Li}(d, t)\iso{10}{Li}$. Usa a mesma enerxía do feixe para todas de \qty{7.5}{A\MeV}.
+    
+    A clase que vai facer iso é \lstinline|ActPhysics::Kinematics|. O criterio que debes usar para chamar ao constructor é o seguinte: \lstinline|("feixe", "target", "lixeira", "pesada", Tbeam)|, que configura a equivalencia coas fórmulas matemáticas do seguinte xeito: $$1 (\text{feixe}) + 2 (\text{target}) \longrightarrow 3 (\text{lixeira}) + 4 (\text{pesada})$$
+    Ademais, \lstinline|GetKinematicLine3()| darache a representación $T_3$ vs $\theta_{Lab, 3}$ (polo tanto, da partícula marcada como \textit{lixeira}) e \lstinline|GetKinematicLine4()| o mesmo pero da 4, a pesada. Representa ambas no mesmo \textit{pad}.
+
+    Vas ver como as formas son moi diferentes, o que forza a deseñar experimentos moi distintos en función da reacción a medir (ou un que sexa capaz de medir todas as canles de reacción).
+    
+    \item \textbf{Sampleado} de variables: Para a simulación vamos necesitar samplear variables gaussianas e uniformes. Crea un macro con 3 histogramas (que vas representar en 3 \textit{pads}) distintos nos que samplees as seguintes distribucións (podes xogar cos parámetros como queiras);
+    \begin{itemize}
+        \item Gaussiana: \lstinline|gRandom->Gaus(mean, sigma)|
+        \item Uniforme: \lstinline|gRandom->Uniform(x0, x1)|
+        \item O ángulo polar $\theta$ é especial se queres obter unha \href{https://mathworld.wolfram.com/SpherePointPicking.html}{distribución uniforme}:
+        $$\theta = \arccos\left(\texttt{gRandom->Uniform(-1, 1)}\right)$$
+    \end{itemize}
+    Nota que este ángulo vai estar en radiáns. Para converter a graos, debes multiplicar polo factor de conversión correspondente. Se non o queres escribir, podes usar \lstinline|TMath::RadToDeg()| (a inversa é \lstinline|TMath::DegToRad()|) de ROOT.
+\end{enumerate}
+
 \end{document}
