@@ -320,4 +320,58 @@ Quero que fagas dous macros onde me representes as seguintes cousas, usando a ax
     Nota que este ángulo vai estar en radiáns. Para converter a graos, debes multiplicar polo factor de conversión correspondente. Se non o queres escribir, podes usar \lstinline|TMath::RadToDeg()| (a inversa é \lstinline|TMath::DegToRad()|) de ROOT.
 \end{enumerate}
 
+\subsection{Segunda semana}
+\subsubsection*{Representación gráfica da perda de enerxía}
+Na carpeta \lstinline|SRIM| do repositorio tes táboas de perda de enerxía calculadas con SRIM. Se abres unha vas ver toda a información que conteñen: 
+\begin{itemize}
+    \item Información do material no que se calculou a perda.
+    \item O mesmo sobre a partícula que o vai atraversar.
+    \item Múltiples columnas coa $E$, o rango, o \textit{straggling} en rango e o $dE/dx$.
+\end{itemize}
+Para ler e traballar con esta clase vas utilizar a clase \lstinline|ActPhysics::SRIM|, tal e como tes no macro de exemplo (\lstinline|Macros/srim.cxx|). As funcións básicas que necesitas son estas:
+\begin{itemize}
+    \item \lstinline|EvalDirect()|: obtén o rango para unha enerxía dada.
+    \item \lstinline|EvalInverse()|: enerxía para un rango dado.
+    \item \lstinline|Slow()|: para unha enerxía inicial, calcula a enerxía final tras atravesar un espesor de material a especificar. Tamén lle podes dar un ángulo, de xeito que a lonxitude efectiva é: $l_{\text{eff} = l / \cos{\theta}}$. O ángulo debe especificarse en radiáns.
+    \item \lstinline|EvalInitialEnergy()|: cos mesmos argumentos que a anterior función, fai o proceso inverso: calcula a enerxía inicial dada unha enerxía final, lonxitude e opcionalmente ángulo.
+\end{itemize}
+En todas as funcións o primeiro argumento é unha \textit{string} que especifica a táboa a usar, anteriormente lida con \lstinline|ReadTable()|.
+
+O que quero que fagas é que plotees a perda de enerxía no gas en función da distancia. Para iso, escolle unha táboa (por exemplo, \iso{11}{Li} no gas) e asume unha enerxía inicial. Calcula o rango da partícula a esa enerxía.
+
+Despois, discretiza esa distancia nun intervalo suficientemente pequeno e nun bucle \textit{for}, utilizando a función \lstinline|Slow|, calculas a perda de enerxía (como a diferenza entre as iteracións). Representa iso en dous  \lstinline|TGraph|s: un de perda de enerxía vs distancia e outro de perda de enerxía vs enerxía.
+
+Vas ver unha característica moi importante no gráfico: a medida que a partícula se para, a perda de enerxía aumenta: é o que se coñece como \textbf{pico de Bragg}. Estas dúas características (o perfil de perda de carga e o pico de Bragg) permiten identificar as partículas nun detector, xa que son unha pegada única de cada partícula!
+
+\subsubsection*{Valicación da cinemática}
+Crea un macro sinxelo no que definas as funcións necesarias para calcular a cinemática. Mira o exemplo \lstinline|Macros/funcs.cxx| para ver como podes devolver varios parámetros nunha función e escolle a forma que máis che guste.
+
+Unha vez fagas isto, no propio macro vas validar que todo funcione ben. Escolle a reacción $\iso{11}{Li}(d, t)\iso{10}{Li}$ a \qty{7.5}{A\MeV} e segue os seguintes pasos:
+\begin{itemize}
+    \item Crea un \lstinline|TGraph|.
+    \item Nun bucle for, vas percorrer unha variable $\theta_{CM} \in [0, 180]\unit{\degree}$.
+    \item Utiliza as túas funcións para calcular $T_{4}, \theta_{Lab, 4}$.
+    \item Enche o gráfico.
+\end{itemize}
+Representa isto nun \lstinline|TCanvas| e \textbf{superimpón} a cinemática de \lstinline|ActPhysis::Kinematics::GetKinematicLine4()|, tal e como aprendiches a facer na anterior semana. Debería quedar exactamente igual!
+
+\subsubsection*{Simulación}
+Unha vez feito isto, vamos comezar co macro de simulación. O primeiro é adaptar o que acabas de aprender de sampleado:
+\begin{itemize}
+    \item Define o tamaño de ACTAR ao comezo do macro en \unit{\mm}. En cada iteración, nunha variable tipo \lstinline|XYZPoint| garda:
+    \begin{itemize}
+        \item X: uniforme na dirección do feixe.
+        \item Y e Z: gaussianas de media o centro do detector e de \sigma uns \qty{5}{\mm}. Os feixes de partículas creados nos aceleradores non son perfectos e teñen unha determinada anchura espacial. De momento, asumimos un caso sinxelo de dispersión gaussiana dun feixe ben centrado no detector.
+    \end{itemize}
+\end{itemize}
+
+Valida que todo vai ben: crea dous histogramas 2D para representar isto:
+\begin{enumerate}
+    \item Un onde representes Y vs X.
+    \item Outro no que representes Z vs Y.
+\end{enumerate}
+
+Fai o mesmo para os ángulos: samplea e crea histogramas para representalos. Vamos utilizalos cando acabes isto.
+
+
 \end{document}
