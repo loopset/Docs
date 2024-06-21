@@ -1,0 +1,183 @@
+\documentclass[11pt, a4paper, galician]{article}
+\usepackage{babel}
+\usepackage{fontspec}
+\usepackage{libertinus}%
+\usepackage{float}
+\usepackage{parskip}
+\usepackage[version=4]{mhchem}
+\usepackage[figuresleft]{rotating}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{slashed}
+\usepackage{fancyhdr} 
+\usepackage[dvipsnames, table]{xcolor}
+\usepackage{wrapfig}
+\usepackage[labelfont=bf, skip=4pt, figureposition=bottom, font=normalsize]{caption}
+\usepackage{siunitx}
+\usepackage{adjustbox}
+\usepackage{booktabs} 
+\usepackage{multirow}
+\usepackage[a4paper,left=2cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{abstract}
+\usepackage{hyperref} 
+%%adapted to Galician (GZ)
+%\renewcommand{\tableautorefname}{Cadro}
+\usepackage{lipsum}
+
+%% ENUMITEM settings
+%\setlist{itemsep=4pt}
+\setlist[enumerate,1]{
+	label={\bfseries \arabic*.},
+}
+
+%% SIUNITX
+%\sisetup{output-decimal-marker = {,}}
+\sisetup{exponent-product= \cdot}
+\sisetup{separate-uncertainty=false}
+\sisetup{table-parse-only=true}
+\sisetup{inter-unit-product = \ensuremath { { } \cdot { } } }
+\sisetup{detect-all}
+\sisetup{group-digits=integer}
+\sisetup{print-unity-mantissa=false}
+\sisetup{range-phrase = -}
+\sisetup{range-units = single}
+\sisetup{list-units = single}
+\sisetup{propagate-math-font = true}
+\sisetup{text-series-to-math = true}
+\DeclareSIUnit{\espesor}{\milli\g\per\cm\squared}
+\DeclareSIUnit{\aten}{\cm\squared\per\milli\g}
+\DeclareSIUnit\clight{\text{\ensuremath{c}}}
+\DeclareSIUnit\year{a}
+\DeclareSIUnit{\barn}{b}
+\DeclareSIUnit{\bar}{bar}
+
+%%OTHER COMMANDS
+%% for isotopes
+\newcommand{\iso}[2]{\ce{^{#1}#2}}
+%for vectors
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+% figure sizes
+\newcommand*{\fw}{0.6}
+%%for the listing package
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstset{
+	%backgroundcolor=\color{backcolour},
+	basicstyle=\normalsize\ttfamily,
+	language=C++,
+	keepspaces=false,
+	keywordstyle=\bfseries\color{BurntOrange},
+	morekeywords={VCluster, VFilter, TPCData, std, tuple, Point, Vector, 
+    ActRoot, MergerData},
+	stringstyle=\color{Orange},
+	% identifierstyle=\color{ProcessBlue},
+	breaklines=false,
+	captionpos=b,
+	% belowskip=-0.85 \baselineskip,
+	%columns=flexible,
+}
+
+\title{A quick guide to the analysis}
+\author{Miguel Lozano González\\
+	}
+\date{\empty}%\date{\today}
+
+\pagestyle{fancy}
+\fancyhf{}
+%\fancyhead[R]{\thepage}
+\fancyhead[R]{\textsc{e864 guide}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.75pt}
+%\renewcommand{\footrulewidth}{0.75pt}
+\setlength{\headheight}{14.5pt}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+% %% BIBLIOGRAPHY
+% \usepackage[
+% backend=biber,
+% style=numeric,
+% sorting=none
+% ]{biblatex}
+% \addbibresource{./biblio.bib}
+
+%% DOCUMENT
+
+\begin{document}
+\begin{minipage}{0.48\linewidth}
+	\maketitle
+\end{minipage}\hfill
+\begin{minipage}{0.48\linewidth}
+	\tableofcontents
+\end{minipage}
+
+\noindent\rule{\textwidth}{1pt}
+
+\section{\textit{ActRoot} code}
+The \textit{ActRoot} code can be found and installed following the instructions \href{https://github.com/loopset/ActRootV2}{here}. Once done, the next step is to create a directory in your home folder with the following contents:
+\begin{itemize}
+    \item \lstinline|configs/| directory: stores the configuration files of \lstinline|actroot|
+    \item \lstinline|Actar/|: contains the gain matching file and the look-up table (equivalence channel to pad coordinates)
+    \item \lstinline|Calibrations/|: includes the silicon calibrations; one file per layer (one for USC and another for Catania)
+    \item \lstinline|SRIM/|: energy loss tables to be used in the analysis
+    \item \lstinline|PostAnalysis/|: stores the macros used after the initial treatment with \lstinline|actroot|
+    \item \lstinline|RootFiles|: holds the root files processed at each step of the analysis
+\end{itemize}
+\subsection{Converting to \textit{ActRoot} trees}
+Some simplifications in Thomas' trees have to be done to extract the physical data:
+\subsubsection*{TPC: \lstinline|actroot -r tpc|}
+Extracts the voxel (3D points) information by applying the look-up table and the pad alignment. It also clusterizes the cloud at second instance.
+For this to work, make sure that in the \textit{calibrations.conf} file the \lstinline|[Actar]| header containts the correct paths to the \lstinline|LookUp| and \lstinline|PadAlign| files.
+\subsection*{Silicons and others: \lstinline|actroot -r sil|}
+Reads the VXI data as specified in the action file. In the \textit{detector.conf} file, make sure that:
+\begin{itemize}
+    \item In both \lstinline|[Silicons]| and \lstinline|[Modular]| headers you specify the right action file
+    \item On the silicon side, you must set the name of the layers to be used from the action file. As an example, under the label \lstinline|fc| all the \lstinline|SI_MGP_| silicons will be grouped.
+    \item On the modular part, you must specify which parameters you want to read: \lstinline|GATCONF, SCA_CFA, ...|
+\end{itemize}
+\subsection*{Filtering the tracks: \lstinline|actroot -f|}
+This step involves several operations to process the preliminary clusters:
+\begin{itemize}
+    \item Separating tracks into beam and not beam
+    \item Merging broken tracks 
+    \item Finding the reaction point of binary-like events
+    \item Cleaning $\delta$-electrons and other noise
+\end{itemize}
+In this experiment, the configuration file for this part lies at \textit{multiregion.conf}
+\subsection*{Physical data: \lstinline|actroot -m|}
+Last step in which extract the physical information by joining together the TPC and the silicon information.
+
+Once the event is validated using the \lstinline|GATCONF| value, the track multiplicty and the silicon multiplicity, a range of variables are defined:
+\begin{itemize}
+    \item Angles of the light and heavy recoild
+    \item Angle of the beam
+    \item Track length and averaged charge of particle that hit the silicons
+    \item Silicon energies, silicon numbers and silicon layers
+    \item Charge profiles along the track and along X
+\end{itemize}
+
+The configuration of this step resides in the \lstinline|[Merger]| header of the \textit{detector.conf}.
+
+\subsection*{Visual inspection: \lstinline|actplot -v|}
+Shows the raw data before and after filtering and merging. The terminal output is of paramount importance to tune all the parameters of the different algorithms (that require a deeper explanation).
+
+Changes might be done to different configuration files and their effects can be immediately seen by clicking the \textit{Redo} button.
+
+\subsection*{Data flows}
+All data flows are managed in the \textit{data.conf} file. Make sure that the directories exist before running any command. 
+
+\section{PostAnalysis}
+Uses the trees from the last step of \lstinline|actroot -m| to extract the physical results. Its main program is the \lstinline|Runner.cxx|, which takes one int parameter associated to one operation with the configuration at the beginnin of the macro (setting the right particles to treat):
+\begin{enumerate}
+    \item Plot the \textit{Qave} vs \textit{Esil} to perform the traditional PID with the energy loss in the gas and the residual energy in the silicons. Applies a \lstinline|TCutG| which the chosen particle in the \lstinline|Runner| and saves the gated events in a new tree
+    \item Reading the PID tree, computes the excitation energy and the CM energy using the kinematics. Different SRIM tables are used to account for energy losses of the beam and the recoiling particle.
+\end{enumerate}
+\end{document}
