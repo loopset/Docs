@@ -84,7 +84,7 @@ keywordstyle=\bfseries\color{Purple},
 morekeywords={TSpectrum, TH1, TH1I, TH1D,
 Double_t, Int_t, TGraph, TGraphErrors, TMinuit, TF1, TSpline3, G4NistManager,
 QGSP_BIC_HP,
-SimGeometry},
+SimGeometry, ROOT, Math, XYZPoint, XYZVector, SRIM},
 stringstyle=\color{Orange},
 identifierstyle=\color{ForestGreen},
 breaklines=false,
@@ -174,19 +174,19 @@ Pero é máis: pódese engadir a terceira coordenada coñecendo o tempo que lle 
 
 Finalmente, o principio de \textit{active target} engade a vantaxe de ser o gas o propio albo da reacción: este actúa como medio de reacción e de detección. O seguinte esquema ilustra este modo de funcionamento.
 \begin{figure}[!ht]
-\begin{minipage}[b]{.45\textwidth}
-\centering
-\includegraphics[width=1\textwidth]{figures/tpc.png}
-\caption{Esquema de funcionamento dunha TPC.}
-\label{fig:tpc}
-\end{minipage}
-\hfill
-\begin{minipage}[b]{.45\textwidth}
-\centering
-\includegraphics[width=1\textwidth]{figures/actar.png}
-\caption{Deseño do detector ACTAR TPC. A rexión de detección é a parte negra interna.}
-\label{fig:actar}
-\end{minipage}
+    \begin{minipage}[b]{.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figures/tpc.png}
+        \caption{Esquema de funcionamento dunha TPC.}
+        \label{fig:tpc}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{figures/actar.png}
+        \caption{Deseño do detector ACTAR TPC. A rexión de detección é a parte negra interna.}
+        \label{fig:actar}
+    \end{minipage}
 \end{figure}
 
 Para a simulación vamos necesitar poñerlle números ao detector:
@@ -304,25 +304,25 @@ Na simulación, as variables que teremos que introducir nas fórmulas serán as 
 Quero que fagas dous macros onde me representes as seguintes cousas, usando a axuda do repositorio de Github:
 \begin{enumerate}
     \item Representacións \textbf{cinemáticas}: Creas un \lstinline|TCanvas| con 3 \textit{pads} e representas a cinemática para estas tres reaccións distintas: $\iso{11}{Li}(d, p)\iso{12}{Li}$, $\iso{11}{Li}(d, d)\iso{11}{Li}$ e $\iso{11}{Li}(d, t)\iso{10}{Li}$. Usa a mesma enerxía do feixe para todas de \qty{7.5}{A\MeV}.
-    
-    A clase que vai facer iso é \lstinline|ActPhysics::Kinematics|. O criterio que debes usar para chamar ao constructor é o seguinte: \lstinline|("feixe", "target", "lixeira", "pesada", Tbeam)|, que configura a equivalencia coas fórmulas matemáticas do seguinte xeito: $$1 (\text{feixe}) + 2 (\text{target}) \longrightarrow 3 (\text{lixeira}) + 4 (\text{pesada})$$
-    Ademais, \lstinline|GetKinematicLine3()| darache a representación $T_3$ vs $\theta_{Lab, 3}$ (polo tanto, da partícula marcada como \textit{lixeira}) e \lstinline|GetKinematicLine4()| o mesmo pero da 4, a pesada. Representa ambas no mesmo \textit{pad}.
 
-    Vas ver como as formas son moi diferentes, o que forza a deseñar experimentos moi distintos en función da reacción a medir (ou un que sexa capaz de medir todas as canles de reacción).
-    
+          A clase que vai facer iso é \lstinline|ActPhysics::Kinematics|. O criterio que debes usar para chamar ao constructor é o seguinte: \lstinline|("feixe", "target", "lixeira", "pesada", Tbeam)|, que configura a equivalencia coas fórmulas matemáticas do seguinte xeito: $$1 (\text{feixe}) + 2 (\text{target}) \longrightarrow 3 (\text{lixeira}) + 4 (\text{pesada})$$
+          Ademais, \lstinline|GetKinematicLine3()| darache a representación $T_3$ vs $\theta_{Lab, 3}$ (polo tanto, da partícula marcada como \textit{lixeira}) e \lstinline|GetKinematicLine4()| o mesmo pero da 4, a pesada. Representa ambas no mesmo \textit{pad}.
+
+          Vas ver como as formas son moi diferentes, o que forza a deseñar experimentos moi distintos en función da reacción a medir (ou un que sexa capaz de medir todas as canles de reacción).
+
     \item \textbf{Sampleado} de variables: Para a simulación vamos necesitar samplear variables gaussianas e uniformes. Crea un macro con 3 histogramas (que vas representar en 3 \textit{pads}) distintos nos que samplees as seguintes distribucións (podes xogar cos parámetros como queiras);
-    \begin{itemize}
-        \item Gaussiana: \lstinline|gRandom->Gaus(mean, sigma)|
-        \item Uniforme: \lstinline|gRandom->Uniform(x0, x1)|
-        \item O ángulo polar $\theta$ é especial se queres obter unha \href{https://mathworld.wolfram.com/SpherePointPicking.html}{distribución uniforme}:
-        $$\theta = \arccos\left(\texttt{gRandom->Uniform(-1, 1)}\right)$$
-    \end{itemize}
-    Nota que este ángulo vai estar en radiáns. Para converter a graos, debes multiplicar polo factor de conversión correspondente. Se non o queres escribir, podes usar \lstinline|TMath::RadToDeg()| (a inversa é \lstinline|TMath::DegToRad()|) de ROOT.
+          \begin{itemize}
+              \item Gaussiana: \lstinline|gRandom->Gaus(mean, sigma)|
+              \item Uniforme: \lstinline|gRandom->Uniform(x0, x1)|
+              \item O ángulo polar $\theta$ é especial se queres obter unha \href{https://mathworld.wolfram.com/SpherePointPicking.html}{distribución uniforme}:
+                    $$\theta = \arccos\left(\texttt{gRandom->Uniform(-1, 1)}\right)$$
+          \end{itemize}
+          Nota que este ángulo vai estar en radiáns. Para converter a graos, debes multiplicar polo factor de conversión correspondente. Se non o queres escribir, podes usar \lstinline|TMath::RadToDeg()| (a inversa é \lstinline|TMath::DegToRad()|) de ROOT.
 \end{enumerate}
 
 \subsection{Segunda semana}
 \subsubsection*{Representación gráfica da perda de enerxía}
-Na carpeta \lstinline|SRIM| do repositorio tes táboas de perda de enerxía calculadas con SRIM. Se abres unha vas ver toda a información que conteñen: 
+Na carpeta \lstinline|SRIM| do repositorio tes táboas de perda de enerxía calculadas con SRIM. Se abres unha vas ver toda a información que conteñen:
 \begin{itemize}
     \item Información do material no que se calculou a perda.
     \item O mesmo sobre a partícula que o vai atraversar.
@@ -355,23 +355,70 @@ Unha vez fagas isto, no propio macro vas validar que todo funcione ben. Escolle 
 \end{itemize}
 Representa isto nun \lstinline|TCanvas| e \textbf{superimpón} a cinemática de \lstinline|ActPhysis::Kinematics::GetKinematicLine4()|, tal e como aprendiches a facer na anterior semana. Debería quedar exactamente igual!
 
-\subsubsection*{Simulación}
-Unha vez feito isto, vamos comezar co macro de simulación. O primeiro é adaptar o que acabas de aprender de sampleado:
-\begin{itemize}
-    \item Define o tamaño de ACTAR ao comezo do macro en \unit{\mm}. En cada iteración, nunha variable tipo \lstinline|XYZPoint| garda:
-    \begin{itemize}
-        \item X: uniforme na dirección do feixe.
-        \item Y e Z: gaussianas de media o centro do detector e de \sigma uns \qty{5}{\mm}. Os feixes de partículas creados nos aceleradores non son perfectos e teñen unha determinada anchura espacial. De momento, asumimos un caso sinxelo de dispersión gaussiana dun feixe ben centrado no detector.
-    \end{itemize}
-\end{itemize}
-
-Valida que todo vai ben: crea dous histogramas 2D para representar isto:
+\subsection{Terceira semana}
+\subsubsection*{Comezo da simulación}
+Unha vez aprendido o básico, vamos comezar co macro de simulación. O primeiro é adaptar o que acabas de aprender de sampleado:
 \begin{enumerate}
-    \item Un onde representes Y vs X.
-    \item Outro no que representes Z vs Y.
-\end{enumerate}
+    \item Define o tamaño de ACTAR ao comezo do macro en \unit{\mm}. Tes os tamaños ao principio deste guión. En cada iteración, nunha variable tipo \lstinline|XYZPoint| garda:
+          \begin{itemize}
+              \item X: uniforme na dirección do feixe.
+              \item Y e Z: gaussianas de media o centro do detector e de $\sigma$ uns \qty{5}{\mm}. Os feixes de partículas creados nos aceleradores non son perfectos e teñen unha determinada anchura espacial. De momento, asumimos un caso sinxelo de dispersión gaussiana dun feixe ben centrado no detector.
+          \end{itemize}
+          Podes crear puntos e vectores no espazo coas clases definidas en \lstinline|#include "Math/Point3D.h| e \lstinline|#include "Math/Vector3D.h"|. Podes acceder a elas como \lstinline|ROOT::Math::XYZPoint| ou \lstinline|ROOT::Math::XYZVector|.
 
-Fai o mesmo para os ángulos: samplea e crea histogramas para representalos. Vamos utilizalos cando acabes isto.
+          Valida que todo vai ben: crea dous histogramas 2D para representar isto:
+          \begin{itemize}
+              \item Un onde representes Y vs X.
+              \item Outro no que representes Z vs Y.
+          \end{itemize}
+          \item  Fai o mesmo para os ángulos no CM: samplea e crea histogramas para representalos.
 
+          \item   O seguinte será usar a clase de \textbf{cinemática} que creaches para obter as variables da partícula pesada. Cos ángulos sampleados e coa enerxía do feixe, calcula $T_4$ e $\theta_{4}$.
+          
+          Representa nun histograma 2D que todo vai ben: nun plot de enerxía fronte a ángulo deberías reproducir a cinemática teórica.
 
+          \item  A continuación, vamos implementar a xeometría do silicio que vai medir esta partícula pesada. Na variable de tipo \lstinline|ActSim::Geometry| está implementada a xeometría do detector, tal e como se ve na seguinte \autoref{fig:geo}. 
+
+          \begin{figure}[!htb]
+              \centering
+              \includegraphics[width=0.5\linewidth]{figures/geo.pdf}
+              \caption{Esquema da xeometría: en azul, a TPC; en vermello, o silicio.}
+              \label{fig:geo}
+          \end{figure}
+
+          Esta clase contén todos os tamaños necesarios para simular a xeometría, cos seguintes valores
+          \begin{itemize}
+              \item Os tamaños da TPC normal
+              \item Os do Si, de \qtyproduct[product-units=power]{80 x 50 x 1.5}{\mm}
+              \item Unha distancia de \qty{10.4}{\cm}
+          \end{itemize}
+
+          A función que imos utilizar é \lstinline|PropagateTrackToSiliconArray()|. Os argumentos que necesitas son uns cantos:
+          \begin{itemize}
+              \item O \textbf{vértice}, tal e como sampleaches.
+              \item A \textbf{dirección} da partícula. Debes definila do seguinte xeito:
+                    \begin{lstlisting}
+        ROOT::Math::XYZVector direction {TMath::Cos(theta4), TMath::Sin(theta4) * TMath::Sin(phi4),
+                                         TMath::Sin(theta4) * TMath::Cos(phi4)};
+
+    \end{lstlisting}
+              \item O índice do muro de silicions, xa que pode haber varios. Como só hai un, pasa un 0.
+              \item Os seguintes argumentos van \textbf{devolver} o resultado da operación, e deberás pasar as variables obrigatoriamente:
+                    \begin{itemize}
+                        \item Un \lstinline|bool| co lado. Ignoraremos isto de momento.
+                        \item A distancia dende o vertice ao punto de impacto, en \textbf{\unit{\cm}}. Debes convertela a \unit{\mm}. É a variable máis importante.
+                        \item O tipo de silicio. Só hai un, así que ignorarémolo.
+                        \item O índice do silicio. Moi importante tamén: se a partícula non chega ao silicon, vale -1.
+                        \item Un \lstinline|XYZPoint| co punto de impacto. Ignorarémolo.
+                    \end{itemize}
+          \end{itemize}
+
+          Deste xeito, só os eventos que cheguen xeometricamente ao silicio terán un valor de \lstinline|silIndex != -1|, e o máis importante, terás a distancia que teñen que viaxar para chegar alí.
+
+          A primeira vez que necesites usar a xeometría debes creala. Hai un macro na carpeta \textit{Geo/Build.cxx} que tes que executar só unha vez. Isto vai crear un ficheiro \textit{.root} cos parámetros necesarios que despois lerás como: \lstinline|geo.ReadGeometry("./Geo/", "simple");|
+
+          \item Finalmente, para os eventos que chegan, representa a enerxía $T_4$ na entrada do silicio: é dicir, usa a variable de tipo \lstinline|SRIM| para reducir a perda de enerxía no gas. Represéntaa respecto do ángulo nun histograma 2D.
+
+          Para iso, terás que usar a táboa de enerxía correspondente. O que che recomendo é ler a táboa do \iso{12}{Li} e que a chames \textit{heavy}, para non evitar malentendidos despois, posto que usaremos as táboas de varias partículas.
+\end{enumerate} 
 \end{document}
