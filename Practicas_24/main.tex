@@ -197,7 +197,7 @@ Para a simulación vamos necesitar poñerlle números ao detector:
     \item Situaremos un só detector de Si, cun tamaño de \qtyproduct[product-units=power]{80 x 50 x 1.5}{\mm} a unha distancia de \qty{10}{\cm} do \textit{pad plane}.
 \end{itemize}
 
-\subsection{Perdas de enerxía na materia}
+\subsection{Perdas de enerxía na materia}\label{sec:de}
 As partículas ao propagarse a través do gas interaccionarán co campo de Coulomb dos átomos deste, perdendo enerxía e liberando electróns. Esta perda de enerxía en cada interacción é moi pequena, pero como é moi elevado o número de colisións no gas (é, polo tanto, un proceso estocástico), chega a ser moi importante. Nunha aproximación continua, está dada pola \textbf{ecuación de Bethe-Bloch}:
 \begin{equation*}\label{eq:stopping}
     - \frac{dE}{dx} \cong \frac{4 \pi e^4}{m_e} \left(\rho \frac{N_A}{M}\right)\frac{z^2 Z}{v^2} \ln{\frac{2m_e v^2}{I}}
@@ -218,7 +218,7 @@ Unha pequena apreciación: SRIM vainos dar o \textit{straggling} en posición, m
     \item Con este novo rango calculamos a enerxía final, efectivamente implementando o \textit{straggling}!
 \end{enumerate}
 
-\subsection{Resolución en enerxía}
+\subsection{Resolución en enerxía}\label{sec:res}
 Complementariamente acostuman situarse detectores de Si que nos van permitir medir a enerxía das partículas á súa saída do \textit{pad plane} (seguindo os mesmos principios que na anterior Sección). Un parámetro importante destes é a \textbf{resolución en enerxía}, definida como a capacidade para \textit{resolver} enerxías depositadas distintas: $R = \textrm{FWHM} / E$.
 
 Para o noso experimento, esta resolución está tabulada en \qty{50}{\keV} a \qty{5.5}{\MeV} e podemos extrapolala ao resto de enerxías coa función:
@@ -364,7 +364,7 @@ Unha vez aprendido o básico, vamos comezar co macro de simulación. O primeiro 
               \item X: uniforme na dirección do feixe.
               \item Y e Z: gaussianas de media o centro do detector e de $\sigma$ uns \qty{5}{\mm}. Os feixes de partículas creados nos aceleradores non son perfectos e teñen unha determinada anchura espacial. De momento, asumimos un caso sinxelo de dispersión gaussiana dun feixe ben centrado no detector.
           \end{itemize}
-          Podes crear puntos e vectores no espazo coas clases definidas en \lstinline|#include "Math/Point3D.h| e \lstinline|#include "Math/Vector3D.h"|. Podes acceder a elas como \lstinline|ROOT::Math::XYZPoint| ou \lstinline|ROOT::Math::XYZVector|.
+          Podes crear puntos e vectores no espazo coas clases definidas en \lstinline|#include "Math/Point3D.h| e \\ \lstinline|#include "Math/Vector3D.h"|. Podes acceder a elas como \lstinline|ROOT::Math::XYZPoint| ou \\ \lstinline|ROOT::Math::XYZVector|.
 
           Valida que todo vai ben: crea dous histogramas 2D para representar isto:
           \begin{itemize}
@@ -420,5 +420,16 @@ Unha vez aprendido o básico, vamos comezar co macro de simulación. O primeiro 
           \item Finalmente, para os eventos que chegan, representa a enerxía $T_4$ na entrada do silicio: é dicir, usa a variable de tipo \lstinline|SRIM| para reducir a perda de enerxía no gas. Represéntaa respecto do ángulo nun histograma 2D.
 
           Para iso, terás que usar a táboa de enerxía correspondente. O que che recomendo é ler a táboa do \iso{12}{Li} e que a chames \textit{heavy}, para non evitar malentendidos despois, posto que usaremos as táboas de varias partículas.
+          \item Remata calculando a $\Delta E$ da partícula nos silicios. Deberás ter en conta o ángulo coa normal ao chamar a función \lstinline|SRIM::Slow|. Para iso, computa o $\theta$ entre o vector dirección anteriormente calculado e a normal \lstinline|ROOT::Math::XYZVector normal {1, 0, 0}|.
+
+          Deberás usar unha táboa de enerxía distinta! A correspondente da partícula no silicio. Recoméndoche que a chames \textit{heavySil} para diferenciala da \textit{heavy} no gas.
 \end{enumerate} 
+\subsubsection*{Implementación dos defectos experimentais}
+Froito das incertezas estatísticas do proceso de perda de enerxía e das limitacións de contrución e electrónicas do detector, as liñas cinemáticas non son unha \textit{liña} senón unha distribución de valores.
+
+O obxetivo da simulación é ver como, en función da configuración do detector, se dispersas estas liñas e como iso nos afecta na extracción de resultados. Dúas son as que imos implementar:
+\begin{enumerate}
+    \item \textbf{\textit{Straggling} en enerxía:} Segue o exposto na \autoref{sec:de} para implementalo. Deberás crear unha función que substitúa á \lstinline|SRIM::Slow|, de forma que pasándolle o obxecto \lstinline|SRIM|, unha enerxía inicial $T_{ini}$ e unha distacia $d$ devolva o valor reducido e aleatorizado convenientemente.
+    \item \textbf{Resolución dos Si:} como viches na \autoref{sec:res}, os silicios teñen unha incerteza na determinación da enerxía. Dispersa o valor de $\Delta E$ obtido neles creando unha función que aplique a fórmula. 
+\end{enumerate}
 \end{document}
