@@ -18,11 +18,22 @@
 % Command to make title page
 \def\maketitle{
     {
-        \setbeamertemplate{footline}{}%
+            \setbeamertemplate{footline}{}%
             \begin{frame}[noframenumbering]%
                 \titlepage%
             \end{frame}%
-    }
+        }
+}
+
+% Command to add color box
+\newcommand{\mycolorbox}[2]{
+    \leavevmode
+    \hfill{}
+    \begin{beamercolorbox}[sep=0.5em, center, wd=0.75\linewidth,rounded=true]{#1}
+        #2
+    \end{beamercolorbox}%
+    \hfill{}
+    \vspace{0.5em}
 }
 
 \mode<all>
