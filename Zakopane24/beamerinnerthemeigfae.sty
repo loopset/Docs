@@ -1,0 +1,50 @@
+\RequirePackage{calc}
+
+\mode<presentation>
+
+% Define some margins
+\newlength{\my@beamer@lm}\setlength{\my@beamer@lm}{0.06\paperwidth}
+\newlength{\my@beamer@rm}\setlength{\my@beamer@rm}{\my@beamer@lm}
+\newlength{\my@beamer@tw}\setlength{\my@beamer@tw}{\paperwidth - \my@beamer@lm - \my@beamer@rm}
+\newlength{\my@beamer@fh}\setlength{\my@beamer@fh}{0.06\paperheight}
+
+% frame title
+\defbeamertemplate*{frametitle}{igfae}{
+    \vspace*{0.25em}
+    \begin{beamercolorbox}[wd=.95\paperwidth, dp=1ex]{frame title}
+        {\usebeamerfont{frame title}\insertframetitle}\par
+        {\usebeamerfont{frame subtitle}\insertframesubtitle}
+    \end{beamercolorbox}
+}
+
+% frame footline
+\defbeamertemplate*{footline}{igfae}{%
+    \leavevmode
+    \begin{beamercolorbox}[sep=0pt, wd=\my@beamer@lm, ht=\my@beamer@fh, dp=1ex]{footline}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[sep=0pt, wd=\my@beamer@tw, ht=\my@beamer@fh, dp=1ex]{footline}
+        \parbox{\linewidth}%
+        % Don't ask me why I had to insert a space/character after \usebeamercolor
+        % for it to have an effect on \hrule. Same goes for \color{white} \hrule
+        { \usebeamercolor[fg]{normal text}\ \hrule }
+        \leavevmode%
+        \vbox to\my@beamer@fh{%
+            \vfil%
+            \insertshorttitle{} $~|~$ %
+            \ifx\insertsubtitle\@empty%
+            \else%
+                \insertshortsubtitle{} $~|~$ %
+            \fi%
+            \insertshortauthor{}
+            \hfill Page \insertframenumber / \inserttotalframenumber%
+            \par\vfil\vfil
+        }
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[sep=0pt, wd=\my@beamer@rm, ht=\my@beamer@fh,dp=1ex]{footline}
+    \end{beamercolorbox}%  
+}
+
+% Caption
+\setbeamertemplate{caption}{\insertcaption}
+
+\mode<all>

@@ -1,0 +1,28 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+\RequirePackage{xcolor}
+
+%Colour
+\definecolor{aublue}{HTML}{0A1439}
+
+% Settings
+\useinnertheme{igfae}
+\useoutertheme{igfae}
+\usecolortheme{igfae}
+\usefonttheme{igfae}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% Command to make title page
+\def\maketitle{
+    {
+        \setbeamertemplate{footline}{}%
+            \begin{frame}[noframenumbering]%
+                \titlepage%
+            \end{frame}%
+    }
+}
+
+\mode<all>
