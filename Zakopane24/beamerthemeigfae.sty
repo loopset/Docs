@@ -2,7 +2,10 @@
 
 % Requirement
 \RequirePackage{tikz}
+\usetikzlibrary{positioning,fit, datavisualization, datavisualization.formats.functions}
 \RequirePackage{xcolor}
+\RequirePackage{xstring}
+\RequirePackage{xparse}
 
 %Colour
 \definecolor{aublue}{HTML}{0A1439}
@@ -26,14 +29,26 @@
 }
 
 % Command to add color box
-\newcommand{\mycolorbox}[2]{
+\NewDocumentCommand{\mycolorbox}{O{0.85} m m}{
     \leavevmode
     \hfill{}
-    \begin{beamercolorbox}[sep=0.5em, center, wd=0.75\linewidth,rounded=true]{#1}
-        #2
+    \begin{beamercolorbox}[sep=0.1em, center, wd=#1\linewidth,rounded=true]{#2}
+        #3
     \end{beamercolorbox}%
     \hfill{}
     \vspace{0.5em}
+}
+
+\NewDocumentCommand{\myscope}{O{false} m O{image}}{
+    \begin{scope}[x={(#3.south east)},y={(#3.north west)}]
+        #2
+        \IfEqCase{#1}{{true}{
+                    \draw[help lines,xstep=.05,ystep=.05] (0,0) grid (1,1);
+                    \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {\small 0.\x}; }
+                    \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10) {\small 0.\y}; }
+                }
+                {false}{}}[\PackageError{\myscope}{Undefined boolean arg : #1}{}]
+    \end{scope}
 }
 
 \mode<all>
