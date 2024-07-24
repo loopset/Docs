@@ -15,7 +15,7 @@
             \end{beamercolorbox}%
         }
         % author etc
-        \put(5,-20){%
+        \put(5,-25){%
             \begin{beamercolorbox}[sep=0ex, wd=0.95\paperwidth, left]{frametitle}
                 \ifx\insertauthor\empty\else
                     \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor%
@@ -31,7 +31,17 @@
             \end{beamercolorbox}
         }
         % Other logos
-        \put(0, -50){\includegraphics[width=1\textwidth]{logos/other_bw.png}}
+        \put(0, -45){
+            \begin{minipage}[t]{0.15\linewidth}
+                \includegraphics[width=1\linewidth]{logos/usc.png}
+            \end{minipage}%
+            \hspace{0.07\linewidth}%
+            \begin{minipage}[t]{0.65\linewidth}
+                \vspace{-2.75em}
+                \includegraphics[width=1\linewidth]{logos/mdm.png}
+            \end{minipage}
+        }
+        \put(0, -55){\includegraphics[width=1\textwidth]{logos/other_bw.png}}
     \end{picture}
 }
 

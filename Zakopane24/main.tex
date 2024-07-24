@@ -1,4 +1,4 @@
-\documentclass[aspectratio=43]{beamer}
+\documentclass[aspectratio=43, dvipsnames]{beamer}
 \usepackage[version=4]{mhchem}
 \usepackage[aboveskip=1pt, belowskip=1pt]{caption}
 \usepackage{amsmath}
@@ -6,13 +6,19 @@
 
 % Command to display isotopes
 \newcommand{\iso}[2]{\ce{^{#1}#2}}
+% Command to write overlap
+\newcommand{\overlap}[2]{\left\langle#1\middle\vert#2\right\rangle}
+% Command to draw enumitems outside the environment
+\newcommand{\enumitem}[1]{%
+\setcounter{enumi}{#1}\usebeamertemplate{enumerate item}% 
+}
 % Set caption package options
 \captionsetup{labelformat=empty}
 
 \title[SF quenching]{Quenching of spectroscopic factors in \\ \texorpdfstring{\iso{10,12}{Be}(d, \iso{3}{He})}{10,12Be(d,3He)} reactions}
 \date{Zakopane 2024 Conference}
-\author[M. Lozano et al.]{M. Lozano-González, A. Matta, B. Fernández-Domínguez}
-\institute{IGFAE and LPC-Caen}
+\author[M. Lozano et al.]{M. Lozano-González, A. Matta, B. Fernández-Domínguez,\texorpdfstring{\newline}{} F. Delaunay, J. Lois-Fuentes}
+\institute{USC-IGFAE, LPC-Caen and FRIB}
 
 \usetheme{igfae}
 
@@ -24,7 +30,10 @@
 \begin{frame}{A recap on spectroscopic factors}
     \textbf{Spectroscopic factors} shed light on the occupancy of single-particle states:
     \begin{equation*}
-        \left.\frac{d\sigma}{d\Omega}\right\vert_{exp} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{s.p}, \quad C^{2}S = (2j + 1) \text{ or } 1 \text{ in IPSM}
+        \left.\frac{d\sigma}{d\Omega}\right\vert_{exp} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{s.p}, \quad C^{2}S =\begin{cases}
+            (2j + 1)\; \text{removing}     \\
+            1\qquad\quad\,\, \text{adding} \\
+        \end{cases} \text{ in IPSM}
     \end{equation*}
     \begin{columns}[T]
         \begin{column}{0.48\linewidth}
@@ -34,11 +43,12 @@
             \end{beamercolorbox}%
             \hfill{}
             \begin{itemize}
-                \item \textbf{Long-range} correlations: vibrations, giant resonances,...
                 \item \textbf{Short-range}: tensor forces,...
+                \item \textbf{Long-range} correlations: vibrations, giant resonances,...
             \end{itemize}
         \end{column}
         \begin{column}{0.48\linewidth}
+            \vspace{-1em}
             \begin{figure}
                 \includegraphics[width=0.9\linewidth]{figures/SF_aumann_review.png}
                 \caption{L. Lapikás, Nuclear Phys. A 553 (1993)}
@@ -78,8 +88,9 @@
                     \includegraphics[width=0.75\linewidth]{figures/empty_shell_model.pdf}
                 };
                 \myscope[false]{
-                \node[rectangle, draw, thick, magenta, fit={(0.0, 0.7)(0.4,0.5)},
-                label={[align=center]west:{\small This\\ \small region}}] at (0.2, 0.55) {};
+                \node[rectangle, draw, thick, magenta,
+                minimum width=1.8cm, minimum height=1.25cm,
+                label={[align=center, mainBlue]west:{\small Explored\\ \small region}}] at (0.22, 0.35) {};
                 }
             \end{tikzpicture}
         }%
@@ -90,9 +101,8 @@
                         \includegraphics[width=0.75\linewidth]{figures/matta_Rs_Li_He.png}
                     };
                     \myscope[false]{
-                    \node[rectangle, draw, very thick, magenta, fit={(0.9, 0.1)(0.8, 0.2)},pin={
-                    [pin distance=7mm,
-                            pin edge={<-, very thick, black}]75:{\small \color{red} Unbound!}}
+                    \node[rectangle, draw, very thick, magenta, fit={(0.9, 0.1)(0.8, 0.2)},pin={[mainBlue, pin distance=7mm,
+                            pin edge={<-, very thick, black}]75:{\small Unbound!}}
                     ] at (0.9, 0.1) {};
                     }
                 \end{tikzpicture}
@@ -103,28 +113,14 @@
     Several challenges in this region:
     \begin{columns}[T]
         \begin{column}{0.48\linewidth}
-            \begin{itemize}
-                \item Dealing with \textbf{unbound} nuclei (\iso{10}{Be})
-            \end{itemize}
+            \mycolorbox[0.95]{box3}{
+                \enumitem{1} Dealing with \textbf{unbound} nuclei (\iso{10}{He})}
         \end{column}
         \begin{column}{0.48\linewidth}
-            \begin{itemize}
-                \item Impact of core exitations (completar algo +)
-            \end{itemize}
+            \mycolorbox[0.95]{box2}{
+                \enumitem{2} Impact of core exitations (completar algo +)}
         \end{column}
-        % \column{0.28\linewidth}{
-        % \mycolorbox{box3}{
-        % $R_{s} \equiv \frac{C^2S_{\text{exp}}}{C^{2}S_{\text{theo}}}$
-        % }
-        % }
-        % \column{0.68\linewidth}{
-        %     \begin{itemize}
-        %         \item Unbound nuclei (\iso{10}{He}) $\Rightarrow$ move to the Li chain: \iso{11}{Li} is weakly bound.
-        %         \item Other physics beyond quenching: \textbf{geometrical} mismatch factor
-        %     \end{itemize}
-        % }
     \end{columns}
-
 \end{frame}
 
 \begin{frame}[t]{Importance of GMF}
@@ -201,7 +197,7 @@
                     \includegraphics[width=0.6\linewidth]{figures/Be_proton_shell_model.pdf}
                 };
                 \myscope[false]{
-                \node[pin={[pin distance=8mm, pin edge={<-, very thick, magenta}]-95:{\footnotesize This strength}}] at (0.3, 0.7) {};
+                \node[pin={[pin distance=4mm, pin edge={<-, very thick, magenta}]-90:{\footnotesize This strength}}] at (0.75, 0.7) {};
                 }
             \end{tikzpicture}
             }
@@ -215,25 +211,20 @@
                 \end{itemize}
                 \begin{tikzpicture}[scale=0.8]
                     \datavisualization [
-                        scientific axes,
-                        visualize as line/.list={be,li},
-                        be={pin in data={text=Be, when=x is 1.5, pin length=2ex}},
-                        li={pin in data={text=Li, when=x is 1.5, pin length=2ex}},
-                        % li={label in legend={text=Li}},
-                        style sheet=strong colors,
-                        x axis={include value=-1, include value=2,
+                        scientific axes={inner ticks},
+                        visualize as line=gmf,
+                        gmf={style={mark=o}},
+                        x axis={length=0.8\linewidth, include value=0, include value=2,
                                 ticks={major at={
-                                                0 as $\langle\iso{10}{Be}\vert\iso{9}{Li}\rangle$,
-                                                1 as $\langle\iso{12}{Be}\vert\iso{11}{Li}\rangle$
+                                                0 as $\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
+                                                1 as [style=magenta] $\overlap{\iso{10}{Be}}{\iso{9}{Li}}$,
+                                                2 as [style=magenta] $\overlap{\iso{12}{Be}}{\iso{11}{Li}}$
                                             }}},
-                        y axis={label={$S_{n}$ [MeV]}, include value=0, include value=8}]
-                    data [set=be,format=TeX code]{
-                            \pgfkeys{/data point/.cd,x=0, y=6.8} \pgfdatapoint
-                            \pgfkeys{/data point/.cd,x=1, y=3.2} \pgfdatapoint
-                        }
-                    data [set=li,format=TeX code]{
-                            \pgfkeys{/data point/.cd,x=0, y=4.1} \pgfdatapoint
-                            \pgfkeys{/data point/.cd,x=1, y=0.4} \pgfdatapoint
+                        y axis={label={GMF}, include value=0, include value=1}]
+                    data [format=TeX code]{
+                            \pgfkeys{/data point/.cd,x=0, y=0.25} \pgfdatapoint
+                            \pgfkeys{/data point/.cd,x=1, y=1} \pgfdatapoint
+                            \pgfkeys{/data point/.cd,x=2, y=0.5} \pgfdatapoint
                         };
                 \end{tikzpicture}
             }
@@ -246,5 +237,177 @@
     Tradional solid target experiment @ LISE
     \vspace{1.5em}
     \includegraphics[width=1\linewidth]{figures/setup.pdf}
+\end{frame}
+
+\begin{frame}[t]{A glance at the analysis}
+    \begin{columns}[T]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox{box4}{
+                \enumitem{1} \textbf{Heavy} ID at \qty{0}{\degree}
+            }
+            \begin{tikzpicture}
+                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
+                    \includegraphics[width=1\linewidth]{figures/heavy.png}
+                };
+                \myscope[false]{
+                \node[pin={
+                [pin distance=5mm,
+                        pin edge={<-, very thick, ForestGreen}]0:{Be}}
+                ] at (0.60, 0.42) {};
+                \node[pin={
+                [pin distance=5mm,
+                        pin edge={<-, very thick, color=ForestGreen}]0:{Li}}
+                ] at (0.60, 0.28) {};
+                }
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox{box2}{
+                \enumitem{2} \textbf{Light} PID in DSSD
+            }
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0pt] (image) at(0,0){
+                    \includegraphics[width=1\linewidth]{figures/light.png}
+                };
+                \myscope[false]{
+                    \node[pin={[pin distance=16mm, pin edge={<-, line width = 1.5pt, orange}]-87:A = 1}] at (0.2, 0.65) {};
+                    \node[pin={[pin distance = 10mm, pin edge={<-, line width=1.5pt, orange}]-80:A = 2}] at (0.25, 0.65) {};
+                    \node[pin={[pin distance=8mm, pin edge={<-, line width=1.5pt, orange}]-70:A = 3}] at (0.4, 0.7) {};
+                    \node[pin={[pin distance=4mm, pin edge={<-, line width = 1.5pt, orange}]-75:A = 4}] at (0.6, 0.72) {};
+                }
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+    \mycolorbox{box1}{
+        \enumitem{3} $E_{x}$ from \textbf{missing mass technique}
+        $E_{\textrm{beam}} + (E,\theta)_{\textrm{Lab}} \rightarrow E_{x}$
+    }
+\end{frame}
+
+\section{Results}
+\begin{frame}{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{3}{He})\iso{9}{Li} }{10Be(d,3He)9Li}}
+    \only<+>{
+        \begin{columns}[T]
+            \begin{column}{0.5\linewidth}
+                \includegraphics[width=\textwidth]{figures/10Be_d3He_fit.eps}
+            \end{column}
+            \begin{column}{0.5\linewidth}
+                \includegraphics[width=\textwidth]{figures/10Be_d3He_xs.eps}
+            \end{column}
+        \end{columns}
+    }
+    \only<+>{
+        Recent experiment @ Acculina. Different beam energy of \qty{40}{A\MeV}
+        \begin{columns}[T]
+            \begin{column}{0.5\linewidth}
+                \includegraphics[width=0.9\textwidth]{figures/acculina_ex.png}
+            \end{column}
+            \begin{column}{0.5\linewidth}
+                \includegraphics[width=\textwidth]{figures/acculina.eps}
+            \end{column}
+        \end{columns}
+        \begin{columns}[c]
+            \begin{column}{0.48\linewidth}
+                \mycolorbox{box1}{
+                    Their analysis: $C^2S = \qty{1.74}{}$
+                }
+            \end{column}
+            \begin{column}{0.48\linewidth}
+                \mycolorbox{box2}{
+                    Our $C^{2}S$:
+                    \begin{itemize}
+                        \item Pang: \qty{2.679(48)}{}
+                        \item HT1p: \qty{1.848(33)}{}
+                    \end{itemize}
+                }
+            \end{column}
+        \end{columns}
+    }
+\end{frame}
+
+\begin{frame}{Results: \texorpdfstring{\iso{12}{Be}(d,\iso{3}{He})\iso{11}{Li} }{12Be(d,3He)11Li}}
+    \begin{columns}[T]
+        \begin{column}{0.5\linewidth}
+            \includegraphics[width=\textwidth]{figures/12Be_d3He_fit.eps}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \includegraphics[width=\textwidth]{figures/12Be_d3He_xs.eps}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[c]{Conclusions}
+    Ola
+
+    A ver
+
+    Que
+
+    Poñemos
+
+    Aqui
+\end{frame}
+
+\begin{frame}[plain]{Acknowledgments}
+    \begin{columns}[T]
+        \begin{column}{0.33\linewidth}
+            The E748 collaboration:
+            \begin{itemize}\scriptsize
+                \item Santiago:\\
+                      B. Fernández
+                \item LPC-Caen:\\
+                      A. Matta\\
+                      F. Delaunay\\
+                      N. L. Achouri\\
+                      F. Flavigny\\
+                      J. Gibelin\\
+                      M. Marques\\
+                      N. Orr
+                \item IJCLab:\\
+                      D. Beaumel\\
+                      M. Assié\\
+                      Y. Blumenfeld\\
+                      S. Franchoo\\
+                      A. Georgiadou\\
+                      V. Girard-Alcindor\\
+                      F. Hammache\\
+                      N. de Séreville\\
+                      A. Meyer\\
+                      I. Stefan
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.33\linewidth}
+            \begin{itemize}\scriptsize
+                \item GANIL:\\
+                      B. Jacquot\\
+                      O. Kamalou\\
+                      A. Lemasson\\
+                      M. Rejmund\\
+                      T. Roger\\
+                      O. Sorlin\\
+                      J.C. Thomas\\
+                      M. Vandebrouck\\
+                      B. Bastin\\
+                      F. de Oliveira\\
+                      C. Stodel
+                \item RIKEN:\\
+                      S. Koyama\\
+                      D. Suzuki
+                \item Surrey:\\
+                      N. Timofeyuk
+            \end{itemize}
+
+        \end{column}
+        \begin{column}{0.33\linewidth}
+            \includegraphics[width=0.6\linewidth]{logos/usc_blue.png}\vspace{1em}
+            \includegraphics[width=0.6\linewidth]{logos/lpc.png}\vspace{1em}
+            \includegraphics[width=0.6\linewidth]{logos/ganil.png}\vspace{1em}
+            \includegraphics[width=0.6\linewidth]{logos/ijclab.png}\vspace{1em}
+            \includegraphics[width=0.6\linewidth]{logos/riken.png}\vspace{1em}
+            \includegraphics[width=0.6\linewidth]{logos/surrey.png}\vspace{1em}
+        \end{column}
+    \end{columns}
+
+
 \end{frame}
 \end{document}
