@@ -43,8 +43,8 @@
             \end{beamercolorbox}%
             \hfill{}
             \begin{itemize}
-                \item \textbf{Short-range}: tensor forces,...
-                \item \textbf{Long-range} correlations: vibrations, giant resonances,...
+                \item \textbf{Short-range} correlations: tensor forces,...
+                \item \textbf{Long-range}: vibrations, giant resonances,...
             \end{itemize}
         \end{column}
         \begin{column}{0.48\linewidth}
@@ -285,7 +285,7 @@
 \end{frame}
 
 \section{Results}
-\begin{frame}{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{3}{He})\iso{9}{Li} }{10Be(d,3He)9Li}}
+\begin{frame}[t]{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{3}{He})\iso{9}{Li} }{10Be(d,3He)9Li}}
     \only<+>{
         \begin{columns}[T]
             \begin{column}{0.5\linewidth}
@@ -296,8 +296,8 @@
             \end{column}
         \end{columns}
     }
-    \only<+>{
-        Recent experiment @ Acculina. Different beam energy of \qty{40}{A\MeV}
+    \only<+>{\addtocounter{beamerpauses}{1}
+        Recent experiment @ Acculina by {\small \textit{E. Yu. Nikolskii et al.,  NIM B 541 (2023)}}. Different beam energy of \qty{40}{A\MeV}
         \begin{columns}[T]
             \begin{column}{0.5\linewidth}
                 \includegraphics[width=0.9\textwidth]{figures/acculina_ex.png}
@@ -323,15 +323,64 @@
             \end{column}
         \end{columns}
     }
+    \only<+>{
+        \begin{itemize}
+            \item Discussion of results
+            \item Which potentials are we going to use?
+            \item Great differences with Pang or HT1p
+            \item And then there is the situation with STA or a standard WS
+        \end{itemize}
+    }
+    \only<+>{
+    The \textbf{first} excited state $1/2^{-}$ is also accessible.
+    \begin{columns}[T]
+        \begin{column}{0.5\linewidth}
+            \includegraphics[width=\textwidth]{figures/10Be_d3He_fit.eps}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \includegraphics[width=\textwidth]{figures/10Be_d3He_xs_g1.eps}
+        \end{column}
+    \end{columns}
+    \vspace{1.5em}
+    \begin{columns}[c]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box2}{
+                \textbf{First} direct measurement:\\
+                $C^{2}S = \qty{0.237(46)}{}$
+            }
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box1}{
+                SM calculation by Acculina:\\
+                $C^{2}S = \qty{0.207}{}$}
+        \end{column}
+    \end{columns}
+    }
 \end{frame}
 
-\begin{frame}{Results: \texorpdfstring{\iso{12}{Be}(d,\iso{3}{He})\iso{11}{Li} }{12Be(d,3He)11Li}}
+\begin{frame}[t]{Results: \texorpdfstring{\iso{12}{Be}(d,\iso{3}{He})\iso{11}{Li} }{12Be(d,3He)11Li}}
     \begin{columns}[T]
         \begin{column}{0.5\linewidth}
             \includegraphics[width=\textwidth]{figures/12Be_d3He_fit.eps}
         \end{column}
         \begin{column}{0.5\linewidth}
             \includegraphics[width=\textwidth]{figures/12Be_d3He_xs.eps}
+        \end{column}
+    \end{columns}
+    \begin{columns}[c]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box2}{
+                \begin{enumerate}
+                    \item $C^{2}S = \qty{0.33}{}$ with Haixia + HT1p
+                    \item Need to solve puzzle with different OMPs
+                \end{enumerate}}
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box3}{
+                Fulfils expectation of:\\
+                $0.65 (\text{quenching}) \cdot 0.5 (\text{GMF})$\\
+                This is true with Pang but not with HT1p...
+            }
         \end{column}
     \end{columns}
 \end{frame}
@@ -407,7 +456,63 @@
             \includegraphics[width=0.6\linewidth]{logos/surrey.png}\vspace{1em}
         \end{column}
     \end{columns}
-
-
 \end{frame}
+
+\begin{frame}[noframenumbering, plain]
+    \begin{tikzpicture}[remember picture, overlay]
+        \node at (current page.center) {
+            \usebeamercolor{frame title}
+            \usebeamerfont{frame title}
+            Backup
+        };
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[noframenumbering]{Elastic cross sections}
+    Normalization of all cross-sections was obtained from fits to the elastic data.
+    \begin{columns}[T]
+        \begin{column}{0.5\linewidth}
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0pt] (image) at(0, 0){\includegraphics[width=1\linewidth]{figures/10Be_dd_xs.eps}};
+                \myscope[false]{
+                    \node at (image.north) {\iso{10}{Be}(d,d)};
+                }
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0pt] (image) at(0, 0){\includegraphics[width=1\linewidth]{figures/12Be_dd_xs.eps}};
+                \myscope[false]{
+                    \node at (image.north) {\iso{12}{Be}(d,d)};
+                }
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+    \vspace{1.25em}
+    \mycolorbox{box2}{
+        Best OMP: new ones DA1p and Haixia!
+    }
+\end{frame}
+
+\begin{frame}[noframenumbering]{Kinematical lines}
+    \begin{columns}[T]
+        \begin{column}{0.5\linewidth}
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0pt] (image) at(0, 0){\includegraphics[width=1\linewidth]{figures/kin_10Be.eps}};
+                \myscope[false]{
+                    \node at (image.north) {\iso{10}{Be}};
+                }
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0pt] (image) at(0, 0){\includegraphics[width=1\linewidth]{figures/kin_12Be.eps}};
+                \myscope[false]{
+                    \node at (image.north) {\iso{12}{Be}};
+                }
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \end{document}
