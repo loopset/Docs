@@ -3,6 +3,8 @@
 \usepackage[aboveskip=1pt, belowskip=1pt]{caption}
 \usepackage{amsmath}
 \usepackage{siunitx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18,}
 
 % Command to display isotopes
 \newcommand{\iso}[2]{\ce{^{#1}#2}}
@@ -324,12 +326,67 @@
         \end{columns}
     }
     \only<+>{
-        \begin{itemize}
-            \item Discussion of results
-            \item Which potentials are we going to use?
-            \item Great differences with Pang or HT1p
-            \item And then there is the situation with STA or a standard WS
-        \end{itemize}
+        % \begin{tikzpicture}[scale=0.8]
+        %     \datavisualization [
+        %         scientific axes={inner ticks},
+        %         visualize as line/.list={sta, stdws},
+        %         style sheet=strong colors,
+        %         style sheet=vary dashing,
+        %         style sheet=cross marks,
+        %         sta={label in legend={text=STA}},
+        %         stdws={label in legend={text=stdWS}},
+        %         every grid/.append style={style={densely dashed, very thin}},
+        %         x axis={label={Potential},include value=0.75, include value=2.25,
+        %                 ticks={major at={
+        %                                 1 as Pang,
+        %                                 2 as HT1p,
+        %                             }}},
+        %         y axis={grid, ticks={minor steps between steps=1},label={C2S}, include value=1, include value=3}]
+        %     data [set=sta, format=TeX code]{
+        %             \pgfkeys{/data point/.cd,x=1, y=2.679} \pgfdatapoint
+        %             \pgfkeys{/data point/.cd,x=2, y=1.848} \pgfdatapoint
+        %         }
+        %     data [set=stdws, format=TeX code]{
+        %             \pgfkeys{/data point/.cd,x=1, y=2.09} \pgfdatapoint
+        %             \pgfkeys{/data point/.cd,x=2, y=1.429} \pgfdatapoint
+        %         };
+        % \end{tikzpicture}
+        \mycolorbox{box4}{
+            \begin{tikzpicture}[
+                    background rectangle/.style={fill=white},
+                    show background rectangle,
+                ]
+                \centering
+                \begin{axis}[
+                        small,
+                        xlabel={Potential},
+                        ylabel={$C^{2}S$},
+                        minor y tick num=1,
+                        xticklabels={Pang, HT1p},
+                        xtick={1,2},
+                        xmin=0.5, xmax=2.5,
+                        ymin=1, ymax=3,
+                        ymajorgrids=true, yminorgrids=true,
+                        ytick distance=0.5,
+                    ]
+                    \addplot+ [
+                        error bars/.cd,
+                        y dir=both,y explicit,
+                    ] coordinates {
+                            (1, 2.679) +- (0,0.1)
+                            (2, 1.848) +- (0,0.2)
+                        };
+                    \addplot+ [
+                        error bars/.cd,
+                        y dir=both,y explicit,
+                    ] coordinates {
+                            (1, 2.09) +- (0,0.1)
+                            (2, 1.429) +- (0,0.2)
+                        };
+                    \legend{STA, stdWS}
+                \end{axis}
+            \end{tikzpicture}
+        }
     }
     \only<+>{
     The \textbf{first} excited state $1/2^{-}$ is also accessible.
