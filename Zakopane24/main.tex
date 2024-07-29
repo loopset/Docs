@@ -296,7 +296,7 @@
             \end{column}
         \end{columns}
     }
-    \only<+>{\addtocounter{beamerpauses}{1}
+    \only<+>{
         Recent experiment @ Acculina by {\small \textit{E. Yu. Nikolskii et al.,  NIM B 541 (2023)}}. Different beam energy of \qty{40}{A\MeV}
         \begin{columns}[T]
             \begin{column}{0.5\linewidth}
@@ -461,9 +461,8 @@
 \begin{frame}[noframenumbering, plain]
     \begin{tikzpicture}[remember picture, overlay]
         \node at (current page.center) {
-            \usebeamercolor{frame title}
             \usebeamerfont{frame title}
-            Backup
+            \textcolor{mainBlue}{Backup}
         };
     \end{tikzpicture}
 \end{frame}
@@ -492,6 +491,31 @@
     \mycolorbox{box2}{
         Best OMP: new ones DA1p and Haixia!
     }
+\end{frame}
+
+\begin{frame}[noframenumbering]{Crosscheck: \texorpdfstring{\iso{10}{Be}(d,t)\iso{9}{Be} }{10Be(d,t)9Be}}
+    \begin{columns}[T]
+        \begin{column}{0.5\linewidth}
+            \includegraphics[width=\textwidth]{figures/10Be_dt_fit.eps}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \includegraphics[width=\textwidth]{figures/10Be_dt_xs.eps}
+        \end{column}
+    \end{columns}
+    \vspace{1.5em}
+    \begin{columns}[c]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box2}{
+                \textbf{Best fit} is a $\ell = 1$\\
+                $C^{2}S = \qty{2.370(69)}{}$
+            }
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box4}{
+                In accordance with $\sim \qty{60}{\percent}$ quenching of SFs
+            }
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[noframenumbering]{Kinematical lines}
