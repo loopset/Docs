@@ -299,96 +299,6 @@
         \end{columns}
     }
     \only<+>{
-        Recent experiment @ Acculina by {\small \textit{E. Yu. Nikolskii et al.,  NIM B 541 (2023)}}. Different beam energy of \qty{40}{A\MeV}
-        \begin{columns}[T]
-            \begin{column}{0.5\linewidth}
-                \includegraphics[width=0.9\textwidth]{figures/acculina_ex.png}
-            \end{column}
-            \begin{column}{0.5\linewidth}
-                \includegraphics[width=\textwidth]{figures/acculina.eps}
-            \end{column}
-        \end{columns}
-        \begin{columns}[c]
-            \begin{column}{0.48\linewidth}
-                \mycolorbox{box1}{
-                    Their analysis: $C^2S = \qty{1.74}{}$
-                }
-            \end{column}
-            \begin{column}{0.48\linewidth}
-                \mycolorbox{box2}{
-                    Our $C^{2}S$:
-                    \begin{itemize}
-                        \item Pang: \qty{2.679(48)}{}
-                        \item HT1p: \qty{1.848(33)}{}
-                    \end{itemize}
-                }
-            \end{column}
-        \end{columns}
-    }
-    \only<+>{
-        % \begin{tikzpicture}[scale=0.8]
-        %     \datavisualization [
-        %         scientific axes={inner ticks},
-        %         visualize as line/.list={sta, stdws},
-        %         style sheet=strong colors,
-        %         style sheet=vary dashing,
-        %         style sheet=cross marks,
-        %         sta={label in legend={text=STA}},
-        %         stdws={label in legend={text=stdWS}},
-        %         every grid/.append style={style={densely dashed, very thin}},
-        %         x axis={label={Potential},include value=0.75, include value=2.25,
-        %                 ticks={major at={
-        %                                 1 as Pang,
-        %                                 2 as HT1p,
-        %                             }}},
-        %         y axis={grid, ticks={minor steps between steps=1},label={C2S}, include value=1, include value=3}]
-        %     data [set=sta, format=TeX code]{
-        %             \pgfkeys{/data point/.cd,x=1, y=2.679} \pgfdatapoint
-        %             \pgfkeys{/data point/.cd,x=2, y=1.848} \pgfdatapoint
-        %         }
-        %     data [set=stdws, format=TeX code]{
-        %             \pgfkeys{/data point/.cd,x=1, y=2.09} \pgfdatapoint
-        %             \pgfkeys{/data point/.cd,x=2, y=1.429} \pgfdatapoint
-        %         };
-        % \end{tikzpicture}
-        \mycolorbox{box4}{
-            \begin{tikzpicture}[
-                    background rectangle/.style={fill=white},
-                    show background rectangle,
-                ]
-                \centering
-                \begin{axis}[
-                        small,
-                        xlabel={Potential},
-                        ylabel={$C^{2}S$},
-                        minor y tick num=1,
-                        xticklabels={Pang, HT1p},
-                        xtick={1,2},
-                        xmin=0.5, xmax=2.5,
-                        ymin=1, ymax=3,
-                        ymajorgrids=true, yminorgrids=true,
-                        ytick distance=0.5,
-                    ]
-                    \addplot+ [
-                        error bars/.cd,
-                        y dir=both,y explicit,
-                    ] coordinates {
-                            (1, 2.679) +- (0,0.1)
-                            (2, 1.848) +- (0,0.2)
-                        };
-                    \addplot+ [
-                        error bars/.cd,
-                        y dir=both,y explicit,
-                    ] coordinates {
-                            (1, 2.09) +- (0,0.1)
-                            (2, 1.429) +- (0,0.2)
-                        };
-                    \legend{STA, stdWS}
-                \end{axis}
-            \end{tikzpicture}
-        }
-    }
-    \only<+>{
     The \textbf{first} excited state $1/2^{-}$ is also accessible.
     \begin{columns}[T]
         \begin{column}{0.5\linewidth}
@@ -412,6 +322,92 @@
                 $C^{2}S = \qty{0.207}{}$}
         \end{column}
     \end{columns}
+    }
+    \only<+>{
+        \begin{columns}[T]
+            \begin{column}{0.5\linewidth}
+                \begin{tikzpicture}[
+                        % background rectangle/.style={fill=white},
+                        % show background rectangle,
+                        trim left=-30,
+                    ]
+                    \centering
+                    \begin{axis}[
+                            width=0.7\linewidth,
+                            scale only axis,
+                            title={Ground state},
+                            xlabel={Potential},
+                            ylabel={$C^{2}S$},
+                            minor y tick num=1,
+                            xticklabels={Pang, HT1p},
+                            xtick={1,2},
+                            xmin=0.5, xmax=2.5,
+                            ymin=0, ymax=2.5,
+                            ymajorgrids=true, yminorgrids=false,
+                            ytick distance=0.5,
+                            legend style={fill=none},
+                            grid style = {dashed},
+                        ]
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 1.036) +- (0,0.058)
+                                (2, 0.747) +- (0,0.042)
+                            };
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 2.03) +- (0,0.11)
+                                (2, 1.352) +- (0,0.077)
+                            };
+                        \legend{STA, stdWS}
+                    \end{axis}
+                \end{tikzpicture}
+            \end{column}
+            \begin{column}{0.5\linewidth}
+                \begin{tikzpicture}[
+                        % background rectangle/.style={fill=white},
+                        % show background rectangle,
+                        trim left=-30,
+                    ]
+                    \centering
+                    \begin{axis}[
+                            width=0.7\linewidth,
+                            scale only axis,
+                            title={1st excited},
+                            xlabel={Potential},
+                            ylabel={$C^{2}S$},
+                            minor y tick num=1,
+                            xticklabels={Pang, HT1p},
+                            xtick={1,2},
+                            xmin=0.5, xmax=2.5,
+                            ymin=0, ymax=0.5,
+                            ymajorgrids=true, yminorgrids=false,
+                            ytick distance=0.25,
+                            legend style={fill=none},
+                            grid style={dashed},
+                        ]
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 0.146) +- (0,0.028)
+                                (2, 0.104) +- (0,0.020)
+                            };
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 0.054) +- (0,0.011)
+                                (2, 0.219) +- (0,0.043)
+                            };
+                        \legend{STA, stdWS}
+                    \end{axis}
+                \end{tikzpicture}
+            \end{column}
+        \end{columns}
     }
 \end{frame}
 
@@ -553,7 +549,50 @@
 \begin{frame}[noframenumbering]{Crosscheck: \texorpdfstring{\iso{10}{Be}(d,t)\iso{9}{Be} }{10Be(d,t)9Be}}
     \begin{columns}[T]
         \begin{column}{0.5\linewidth}
-            \includegraphics[width=\textwidth]{figures/10Be_dt_fit.eps}
+            \only<1>{
+                \includegraphics[width=\textwidth]{figures/10Be_dt_fit.eps}
+            }
+            \only<2>{
+                \begin{tikzpicture}[
+                        % background rectangle/.style={fill=white},
+                        % show background rectangle,
+                        trim left=-30,
+                    ]
+                    \centering
+                    \begin{axis}[
+                            width=0.65\linewidth,
+                            scale only axis,
+                            % title={},
+                            xlabel={Potential},
+                            ylabel={$C^{2}S$},
+                            minor y tick num=1,
+                            xticklabels={Pang, HT1p},
+                            xtick={1,2},
+                            xmin=0.5, xmax=2.5,
+                            ymin=1.75, ymax=3,
+                            ymajorgrids=true, yminorgrids=false,
+                            ytick distance=0.25,
+                            legend style={fill=none},
+                            grid style={dashed},
+                        ]
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 2.315) +- (0,0.066)
+                                (2, 2.004) +- (0,0.057)
+                            };
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 2.512) +- (0,0.072)
+                                (2, 2.167) +- (0,0.062)
+                            };
+                        \legend{STA, stdWS}
+                    \end{axis}
+                \end{tikzpicture}
+            }
         \end{column}
         \begin{column}{0.5\linewidth}
             \includegraphics[width=\textwidth]{figures/10Be_dt_xs.eps}
