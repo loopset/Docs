@@ -120,7 +120,7 @@
         \end{column}
         \begin{column}{0.48\linewidth}
             \mycolorbox[0.95]{box2}{
-                \enumitem{2} Impact of core exitations (completar algo +)}
+                \enumitem{2} Many-body dynamics and/or core excitations}
         \end{column}
     \end{columns}
 \end{frame}
@@ -211,24 +211,57 @@
                     \item $\left\langle\iso{10}{Be}\middle|\iso{9}{Li}\right\rangle, \text{GMF} \sim \num{1}$
                     \item $\left\langle\iso{12}{Be}\middle|\iso{11}{Li}\right\rangle, \text{GMF} \sim \textcolor{blue}{\num{0.5}?}$
                 \end{itemize}
-                \begin{tikzpicture}[scale=0.8]
-                    \datavisualization [
-                        scientific axes={inner ticks},
-                        visualize as line=gmf,
-                        gmf={style={mark=o}},
-                        x axis={length=0.8\linewidth, include value=0, include value=2,
-                                ticks={major at={
-                                                0 as $\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
-                                                1 as [style=magenta] $\overlap{\iso{10}{Be}}{\iso{9}{Li}}$,
-                                                2 as [style=magenta] $\overlap{\iso{12}{Be}}{\iso{11}{Li}}$
-                                            }}},
-                        y axis={label={GMF}, include value=0, include value=1}]
-                    data [format=TeX code]{
-                            \pgfkeys{/data point/.cd,x=0, y=0.25} \pgfdatapoint
-                            \pgfkeys{/data point/.cd,x=1, y=1} \pgfdatapoint
-                            \pgfkeys{/data point/.cd,x=2, y=0.5} \pgfdatapoint
-                        };
+                \begin{tikzpicture}[
+                        % background rectangle/.style={fill=white},
+                        % show background rectangle,
+                        trim left=-27,
+                    ]
+                    \centering
+                    \begin{axis}[
+                            width=0.63\linewidth,
+                            scale only axis,
+                            % xlabel={Potential},
+                            ylabel={GMF},
+                            % minor y tick num=1,
+                            xticklabels={$\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
+                                    \textcolor{magenta}{$\overlap{\iso{10}{Be}}{\iso{9}{Li}}$},
+                                    \textcolor{magenta}{$\overlap{\iso{12}{Be}}{\iso{11}{Li}}$}},
+                            xtick={1,2,3},
+                            xmin=0.75, xmax=3.25,
+                            ymin=0, ymax=1,
+                            ymajorgrids=true, yminorgrids=true,
+                            ytick distance=0.25,
+                            grid style = {dashed},
+                            x tick label style = {font=\tiny},
+                        ]
+                        \addplot+ [
+                            error bars/.cd,
+                            y dir=both,y explicit,
+                        ] coordinates {
+                                (1, 0.25) +- (0,0)
+                                (2, 1) +- (0,0)
+                                (3, 0.65) +- (0, 0.15)
+                            };
+                    \end{axis}
                 \end{tikzpicture}
+                % \begin{tikzpicture}[scale=0.8]
+                %     \datavisualization [
+                %         scientific axes={inner ticks},
+                %         visualize as line=gmf,
+                %         gmf={style={mark=o}},
+                %         x axis={length=0.8\linewidth, include value=0, include value=2,
+                %                 ticks={major at={
+                %                                 0 as $\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
+                %                                 1 as [style=magenta] $\overlap{\iso{10}{Be}}{\iso{9}{Li}}$,
+                %                                 2 as [style=magenta] $\overlap{\iso{12}{Be}}{\iso{11}{Li}}$
+                %                             }}},
+                %         y axis={label={GMF}, include value=0, include value=1}]
+                %     data [format=TeX code]{
+                %             \pgfkeys{/data point/.cd,x=0, y=0.25} \pgfdatapoint
+                %             \pgfkeys{/data point/.cd,x=1, y=1} \pgfdatapoint
+                %             \pgfkeys{/data point/.cd,x=2, y=0.5} \pgfdatapoint
+                %         };
+                % \end{tikzpicture}
             }
         \end{column}
     \end{columns}
@@ -438,16 +471,67 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[c]{Conclusions}
-    Ola
-
-    A ver
-
-    Que
-
-    Poñemos
-
-    Aqui
+\begin{frame}[t]{Conclusions}
+    The reduction factor $\text{R}_{\text{S}}$ is computed using SM $C^{2}S$ from the SFO-tls interaction.
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}[
+                % background rectangle/.style={fill=white},
+                % show background rectangle,
+                trim left=-30,
+                scale=0.8,
+            ]
+            \begin{axis}[
+                width=0.4\linewidth,
+                scale only axis,
+                xlabel={Nucleus},
+                ylabel={$\text{R}_{\text{S}}$},
+                % minor y tick num=1,
+                xticklabels={$\iso{9}{Li}_{\text{g.s}}$, $\iso{9}{Li}_{\text{1st}}$, $\iso{11}{Li}_{\text{g.s}}$},
+                xtick={1,2,3},
+                xmin=0.5, xmax=3.5,
+                ymin=0, ymax=1,
+                ymajorgrids=true, yminorgrids=false,
+                ytick distance=0.25,
+                legend style={
+                        fill=none,
+                        anchor=south,
+                        at={(0.5, 1.1)},
+                        font=\scriptsize,
+                    },
+                legend columns=3,
+                grid style={dashed},
+                axis on top,
+                cycle list name=exotic,
+                ]
+                \addplot[fill=black!15, draw=none, forget plot] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.45) (\pgfkeysvalueof{/pgfplots/xmax}, 0.45)  (\pgfkeysvalueof{/pgfplots/xmax}, 0.72) (\pgfkeysvalueof{/pgfplots/xmin}, 0.72)};
+                \addplot+ [
+                    error bars/.cd,
+                    y dir=both,y explicit,
+                ] coordinates {
+                        (1, 0.429) +- (0, 0.024)
+                        (2, 0.369) +- (0, 0.072)
+                    };
+                \addplot+ [
+                    error bars/.cd,
+                    y dir=both,y explicit,
+                ] coordinates {
+                        (1, 0.776) +- (0, 0.044)
+                        (2, 0.78) +- (0, 0.15)
+                        (3, 0.177) +- (0, 0.030)
+                    };
+                \addplot+ [
+                    error bars/.cd,
+                    y dir=both,y explicit,
+                ] coordinates {
+                        (1, 0.486) +- (0, 0)
+                        (2, 0.498) +- (0, 0)
+                    };
+                \legend{STA, stdWS, STA N. Timofeyuk}
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+    And now what?
 \end{frame}
 
 \begin{frame}[plain]{Acknowledgments}
@@ -521,7 +605,7 @@
 \end{frame}
 
 \begin{frame}[noframenumbering]{Elastic cross sections}
-    Normalization of all cross-sections was obtained from fits to the elastic data.
+    Normalization of all cross-sections was obtained from fits to the elastic data using the Haixa potential.
     \begin{columns}[T]
         \begin{column}{0.5\linewidth}
             \begin{tikzpicture}
