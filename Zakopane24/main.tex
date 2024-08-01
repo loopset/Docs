@@ -395,8 +395,10 @@
                                 (1, 2.03) +- (0,0.11)
                                 (2, 1.352) +- (0,0.077)
                             };
-                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.821) (\pgfkeysvalueof{/pgfplots/xmax}, 0.821)};
-                        \legend{STA, stdWS, N. T. STA}
+                        % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.821) (\pgfkeysvalueof{/pgfplots/xmax}, 0.821)};
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.159) (\pgfkeysvalueof{/pgfplots/xmax}, 1.159)};
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.690) (\pgfkeysvalueof{/pgfplots/xmax}, 1.690)};
+                        \legend{STA, stdWS, VMC, SM}
                     \end{axis}
                 \end{tikzpicture}
             \end{column}
@@ -434,11 +436,13 @@
                             error bars/.cd,
                             y dir=both,y explicit,
                         ] coordinates {
-                                (1, 0.054) +- (0,0.011)
+                                (1, 0.340) +- (0,0.065)
                                 (2, 0.219) +- (0,0.043)
                             };
-                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.139) (\pgfkeysvalueof{/pgfplots/xmax}, 0.139)};
-                        \legend{STA, stdWS, N. T. STA}
+                        % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.139) (\pgfkeysvalueof{/pgfplots/xmax}, 0.139)};
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.43) (\pgfkeysvalueof{/pgfplots/xmax}, 0.43)};
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.279) (\pgfkeysvalueof{/pgfplots/xmax}, 0.279)};
+                        \legend{STA, stdWS, VMC, SM}
                     \end{axis}
                 \end{tikzpicture}
             \end{column}
@@ -487,7 +491,7 @@
                     xticklabels={Pang, HT1p},
                     xtick={1,2},
                     xmin=0.5, xmax=2.5,
-                    ymin=0, ymax=1,
+                    ymin=0.1, ymax=2,
                     ymajorgrids=true, yminorgrids=false,
                     ytick distance=0.25,
                     legend style={fill=none, font=\scriptsize},
@@ -500,7 +504,8 @@
                         (1, 0.65) +- (0,0.10)
                         (2, 0.291) +- (0,0.050)
                     };
-                \legend{stdWS}
+                \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.642) (\pgfkeysvalueof{/pgfplots/xmax}, 1.642)};
+                \legend{stdWS, SM}
             \end{axis}
         \end{tikzpicture}
     }%
