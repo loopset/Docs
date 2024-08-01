@@ -375,10 +375,10 @@
                             xticklabels={Pang, HT1p},
                             xtick={1,2},
                             xmin=0.5, xmax=2.5,
-                            ymin=0, ymax=2.5,
+                            ymin=0, ymax=2.75,
                             ymajorgrids=true, yminorgrids=false,
                             ytick distance=0.5,
-                            legend style={fill=none},
+                            legend style={fill=none, font=\scriptsize},
                             grid style = {dashed},
                         ]
                         \addplot+ [
@@ -395,7 +395,8 @@
                                 (1, 2.03) +- (0,0.11)
                                 (2, 1.352) +- (0,0.077)
                             };
-                        \legend{STA, stdWS}
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.821) (\pgfkeysvalueof{/pgfplots/xmax}, 0.821)};
+                        \legend{STA, stdWS, N. T. STA}
                     \end{axis}
                 \end{tikzpicture}
             \end{column}
@@ -419,7 +420,7 @@
                             ymin=0, ymax=0.5,
                             ymajorgrids=true, yminorgrids=false,
                             ytick distance=0.25,
-                            legend style={fill=none},
+                            legend style={fill=none, font=\scriptsize},
                             grid style={dashed},
                         ]
                         \addplot+ [
@@ -436,7 +437,8 @@
                                 (1, 0.054) +- (0,0.011)
                                 (2, 0.219) +- (0,0.043)
                             };
-                        \legend{STA, stdWS}
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.139) (\pgfkeysvalueof{/pgfplots/xmax}, 0.139)};
+                        \legend{STA, stdWS, N. T. STA}
                     \end{axis}
                 \end{tikzpicture}
             \end{column}
@@ -445,30 +447,63 @@
 \end{frame}
 
 \begin{frame}[t]{Results: \texorpdfstring{\iso{12}{Be}(d,\iso{3}{He})\iso{11}{Li} }{12Be(d,3He)11Li}}
-    \begin{columns}[T]
-        \begin{column}{0.5\linewidth}
-            \includegraphics[width=\textwidth]{figures/12Be_d3He_fit.eps}
-        \end{column}
-        \begin{column}{0.5\linewidth}
-            \includegraphics[width=\textwidth]{figures/12Be_d3He_xs.eps}
-        \end{column}
-    \end{columns}
-    \begin{columns}[c]
-        \begin{column}{0.48\linewidth}
-            \mycolorbox[1]{box2}{
-                \begin{enumerate}
-                    \item $C^{2}S = \qty{0.33}{}$ with Haixia + HT1p
-                    \item Need to solve puzzle with different OMPs
-                \end{enumerate}}
-        \end{column}
-        \begin{column}{0.48\linewidth}
-            \mycolorbox[1]{box3}{
-                Fulfils expectation of:\\
-                $0.65 (\text{quenching}) \cdot 0.5 (\text{GMF})$\\
-                This is true with Pang but not with HT1p...
-            }
-        \end{column}
-    \end{columns}
+    \only<+>{%
+        \begin{columns}[T]
+            \begin{column}{0.5\linewidth}
+                \includegraphics[width=\textwidth]{figures/12Be_d3He_fit.eps}
+            \end{column}
+            \begin{column}{0.5\linewidth}
+                \includegraphics[width=\textwidth]{figures/12Be_d3He_xs.eps}
+            \end{column}
+        \end{columns}
+        \begin{columns}[c]
+            \begin{column}{0.48\linewidth}
+                \mycolorbox[1]{box2}{
+                    \begin{enumerate}
+                        \item $C^{2}S = \qty{0.33}{}$ with Haixia + HT1p
+                        \item Need to solve puzzle with different OMPs
+                    \end{enumerate}}
+            \end{column}
+            \begin{column}{0.48\linewidth}
+                \mycolorbox[1]{box3}{
+                    Fulfils expectation of:\\
+                    $0.65 (\text{quenching}) \cdot 0.5 (\text{GMF})$\\
+                    This is true with Pang but not with HT1p...
+                }
+            \end{column}
+        \end{columns}}%
+    \only<+>{%
+        \begin{tikzpicture}[
+                trim left=-30,
+            ]
+            \centering
+            \begin{axis}[
+                    width=0.45\linewidth,
+                    scale only axis,
+                    title={Ground state},
+                    xlabel={Potential},
+                    ylabel={$C^{2}S$},
+                    minor y tick num=1,
+                    xticklabels={Pang, HT1p},
+                    xtick={1,2},
+                    xmin=0.5, xmax=2.5,
+                    ymin=0, ymax=1,
+                    ymajorgrids=true, yminorgrids=false,
+                    ytick distance=0.25,
+                    legend style={fill=none, font=\scriptsize},
+                    grid style={dashed},
+                ]
+                \addplot+ [
+                    error bars/.cd,
+                    y dir=both,y explicit,
+                ] coordinates {
+                        (1, 0.65) +- (0,0.10)
+                        (2, 0.291) +- (0,0.050)
+                    };
+                \legend{stdWS}
+            \end{axis}
+        \end{tikzpicture}
+    }%
 \end{frame}
 
 \begin{frame}[t]{Conclusions}
@@ -633,10 +668,10 @@
 \begin{frame}[noframenumbering]{Crosscheck: \texorpdfstring{\iso{10}{Be}(d,t)\iso{9}{Be} }{10Be(d,t)9Be}}
     \begin{columns}[T]
         \begin{column}{0.5\linewidth}
-            \only<1>{
+            \only<1>{%
                 \includegraphics[width=\textwidth]{figures/10Be_dt_fit.eps}
-            }
-            \only<2>{
+            }%
+            \only<2>{%
                 \begin{tikzpicture}[
                         % background rectangle/.style={fill=white},
                         % show background rectangle,
@@ -676,7 +711,7 @@
                         \legend{STA, stdWS}
                     \end{axis}
                 \end{tikzpicture}
-            }
+            }%
         \end{column}
         \begin{column}{0.5\linewidth}
             \includegraphics[width=\textwidth]{figures/10Be_dt_xs.eps}
