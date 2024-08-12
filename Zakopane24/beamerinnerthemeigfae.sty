@@ -30,12 +30,12 @@
         \leavevmode%
         \vbox to\my@beamer@fh{%
             \vfil%
-            \insertshorttitle{} $~|~$ %
-            \ifx\insertsubtitle\@empty%
-            \else%
-                \insertshortsubtitle{} $~|~$ %
-            \fi%
-            \insertshortauthor{}
+            \leavevmode\insertshortdate{} $~|~$ %
+            % \ifx\insertsubtitle\@empty%
+            % \else%
+            %     \insertshortsubtitle{} $~|~$ %
+            % \fi%
+            \insertshorttitle{}
             \hfill Page \insertframenumber / \inserttotalframenumber%
             \par\vfil\vfil
         }
