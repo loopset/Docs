@@ -82,51 +82,6 @@
     }
 \end{frame}
 
-\begin{frame}[t]{Status with light isotopes}
-    Several experiments allowed for the extraction of $C^{2}S$ with Li-induced (d, \iso{3}{He}) reactions:
-    \vspace{-1.75em}
-    \begin{columns}[c]
-        \column{0.48\linewidth}{
-            \begin{tikzpicture}
-                \node[anchor=south west, inner sep=0](image) at (0,0){
-                    \includegraphics[width=0.75\linewidth]{figures/empty_shell_model.pdf}
-                };
-                \myscope[false]{
-                \node[rectangle, draw, thick, magenta,
-                minimum width=1.8cm, minimum height=1.25cm,
-                label={[align=center, mainBlue]west:{\small Explored\\ \small region}}] at (0.22, 0.35) {};
-                }
-            \end{tikzpicture}
-        }%
-        \column{0.48\linewidth}{
-            \begin{figure}
-                \begin{tikzpicture}
-                    \node[anchor=south west, inner sep=0](image) at (0,0){
-                        \includegraphics[width=0.75\linewidth]{figures/matta_Rs_Li_He.png}
-                    };
-                    \myscope[false]{
-                    \node[rectangle, draw, very thick, magenta, fit={(0.9, 0.1)(0.8, 0.2)},pin={[mainBlue, pin distance=7mm,
-                            pin edge={<-, very thick, black}]75:{\small Unbound!}}
-                    ] at (0.9, 0.1) {};
-                    }
-                \end{tikzpicture}
-                \caption{A. Matta \textit{et al.}, Phys. Rev. C 92 (2015)}
-            \end{figure}
-        }
-    \end{columns}
-    Several challenges in this region:
-    \begin{columns}[T]
-        \begin{column}{0.48\linewidth}
-            \mycolorbox[0.95]{box3}{
-                \enumitem{1} Dealing with \textbf{unbound} nuclei (\iso{10}{He})}
-        \end{column}
-        \begin{column}{0.48\linewidth}
-            \mycolorbox[0.95]{box2}{
-                \enumitem{2} Many-body dynamics and/or core excitations}
-        \end{column}
-    \end{columns}
-\end{frame}
-
 \begin{frame}[t]{Importance of GMF}
     Towards exotic nuclei (loosely bound or halo), a \textbf{\textit{geometrical mismatch factor}} emerges from the very different w.f. in the overlap:
     \vspace{-1em}
@@ -162,7 +117,7 @@
     \begin{columns}[c]
         \begin{column}{0.78\linewidth}
             \mycolorbox[1]{box4}{
-                $\Rightarrow$ Need to establish more systematics for this parameter
+                $\Rightarrow$ Need to correct $C^{2}S$ by its value!
             }
         \end{column}
     \end{columns}
@@ -252,56 +207,12 @@
 \end{frame}
 
 \section{Methodology}
-\begin{frame}[c]{Experimental setup}
+\begin{frame}[c]{Experimental technique}
     Tradional solid target experiment @ LISE
     \vspace{1.5em}
     \includegraphics[width=1\linewidth]{figures/setup.pdf}
 \end{frame}
 
-\begin{frame}[t]{A glance at the analysis}
-    \begin{columns}[T]
-        \begin{column}{0.48\linewidth}
-            \mycolorbox{box4}{
-                \enumitem{1} \textbf{Heavy} ID at \qty{0}{\degree}
-            }
-            \begin{tikzpicture}
-                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
-                    \includegraphics[width=1\linewidth]{figures/heavy.png}
-                };
-                \myscope[false]{
-                \node[pin={
-                [pin distance=5mm,
-                        pin edge={<-, very thick, ForestGreen}]0:{Be}}
-                ] at (0.60, 0.42) {};
-                \node[pin={
-                [pin distance=5mm,
-                        pin edge={<-, very thick, color=ForestGreen}]0:{Li}}
-                ] at (0.60, 0.28) {};
-                }
-            \end{tikzpicture}
-        \end{column}
-        \begin{column}{0.48\linewidth}
-            \mycolorbox{box2}{
-                \enumitem{2} \textbf{Light} PID in DSSD
-            }
-            \begin{tikzpicture}
-                \node[anchor=south west, inner sep=0pt] (image) at(0,0){
-                    \includegraphics[width=1\linewidth]{figures/light.png}
-                };
-                \myscope[false]{
-                    \node[pin={[pin distance=16mm, pin edge={<-, line width = 1.5pt, orange}]-87:A = 1}] at (0.2, 0.65) {};
-                    \node[pin={[pin distance = 10mm, pin edge={<-, line width=1.5pt, orange}]-80:A = 2}] at (0.25, 0.65) {};
-                    \node[pin={[pin distance=8mm, pin edge={<-, line width=1.5pt, orange}]-70:A = 3}] at (0.4, 0.7) {};
-                    \node[pin={[pin distance=4mm, pin edge={<-, line width = 1.5pt, orange}]-75:A = 4}] at (0.6, 0.72) {};
-                }
-            \end{tikzpicture}
-        \end{column}
-    \end{columns}
-    \mycolorbox{box1}{
-        \enumitem{3} $E_{x}$ from \textbf{missing mass technique}
-        $E_{\textrm{beam}} + (E,\theta)_{\textrm{Lab}} \rightarrow E_{x}$
-    }
-\end{frame}
 
 \section{Results}
 \begin{frame}[t]{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{3}{He})\iso{9}{Li} }{10Be(d,3He)9Li}}
@@ -812,6 +723,97 @@
             \textcolor{mainBlue}{Backup}
         };
     \end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}[t, noframenumbering]{Status with light isotopes}
+    Several experiments allowed for the extraction of $C^{2}S$ with Li-induced (d, \iso{3}{He}) reactions:
+    \vspace{-1.75em}
+    \begin{columns}[c]
+        \column{0.48\linewidth}{
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0](image) at (0,0){
+                    \includegraphics[width=0.75\linewidth]{figures/empty_shell_model.pdf}
+                };
+                \myscope[false]{
+                \node[rectangle, draw, thick, magenta,
+                minimum width=1.8cm, minimum height=1.25cm,
+                label={[align=center, mainBlue]west:{\small Explored\\ \small region}}] at (0.22, 0.35) {};
+                }
+            \end{tikzpicture}
+        }%
+        \column{0.48\linewidth}{
+            \begin{figure}
+                \begin{tikzpicture}
+                    \node[anchor=south west, inner sep=0](image) at (0,0){
+                        \includegraphics[width=0.75\linewidth]{figures/matta_Rs_Li_He.png}
+                    };
+                    \myscope[false]{
+                    \node[rectangle, draw, very thick, magenta, fit={(0.9, 0.1)(0.8, 0.2)},pin={[mainBlue, pin distance=7mm,
+                            pin edge={<-, very thick, black}]75:{\small Unbound!}}
+                    ] at (0.9, 0.1) {};
+                    }
+                \end{tikzpicture}
+                \caption{A. Matta \textit{et al.}, Phys. Rev. C 92 (2015)}
+            \end{figure}
+        }
+    \end{columns}
+    Several challenges in this region:
+    \begin{columns}[T]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[0.95]{box3}{
+                \enumitem{1} Dealing with \textbf{unbound} nuclei (\iso{10}{He})}
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[0.95]{box2}{
+                \enumitem{2} Many-body dynamics and/or core excitations}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[t]{A glance at the analysis}
+    \begin{columns}[T]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox{box4}{
+                \enumitem{1} \textbf{Heavy} ID at \qty{0}{\degree}
+            }
+            \begin{tikzpicture}
+                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
+                    \includegraphics[width=1\linewidth]{figures/heavy.png}
+                };
+                \myscope[false]{
+                \node[pin={
+                [pin distance=5mm,
+                        pin edge={<-, very thick, ForestGreen}]0:{Be}}
+                ] at (0.60, 0.42) {};
+                \node[pin={
+                [pin distance=5mm,
+                        pin edge={<-, very thick, color=ForestGreen}]0:{Li}}
+                ] at (0.60, 0.28) {};
+                }
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox{box2}{
+                \enumitem{2} \textbf{Light} PID in DSSD
+            }
+            \begin{tikzpicture}
+                \node[anchor=south west, inner sep=0pt] (image) at(0,0){
+                    \includegraphics[width=1\linewidth]{figures/light.png}
+                };
+                \myscope[false]{
+                    \node[pin={[pin distance=16mm, pin edge={<-, line width = 1.5pt, orange}]-87:A = 1}] at (0.2, 0.65) {};
+                    \node[pin={[pin distance = 10mm, pin edge={<-, line width=1.5pt, orange}]-80:A = 2}] at (0.25, 0.65) {};
+                    \node[pin={[pin distance=8mm, pin edge={<-, line width=1.5pt, orange}]-70:A = 3}] at (0.4, 0.7) {};
+                    \node[pin={[pin distance=4mm, pin edge={<-, line width = 1.5pt, orange}]-75:A = 4}] at (0.6, 0.72) {};
+                }
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+    \mycolorbox{box1}{
+        \enumitem{3} $E_{x}$ from \textbf{missing mass technique}
+        $E_{\textrm{beam}} + (E,\theta)_{\textrm{Lab}} \rightarrow E_{x}$
+    }
 \end{frame}
 
 \begin{frame}[noframenumbering]{Elastic cross sections}
