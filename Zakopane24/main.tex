@@ -34,11 +34,14 @@
 \begin{frame}{A recap on spectroscopic factors}
     \textbf{Spectroscopic factors} shed light on the occupancy of single-particle states:
     \begin{equation*}
-        \left.\frac{d\sigma}{d\Omega}\right\vert_{exp} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{s.p}, \quad C^{2}S =\begin{cases}
-            (2j + 1)\; \text{removing}     \\
-            1\qquad\quad\,\, \text{adding} \\
-        \end{cases} \text{ in IPSM}
+        \left.\frac{d\sigma}{d\Omega}\right\vert_{exp} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{s.p}, \quad C^{2}S = (2j + 1) \text{ in IPSM}
     \end{equation*}
+    % \begin{equation*}
+    %     \left.\frac{d\sigma}{d\Omega}\right\vert_{exp} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{s.p}, \quad C^{2}S =\begin{cases}
+    %         (2j + 1)\; \text{removing}     \\
+    %         1\qquad\quad\,\, \text{adding} \\
+    %     \end{cases} \text{ in IPSM}
+    % \end{equation*}
     \begin{columns}[T]
         \begin{column}{0.48\linewidth}
             \hfill{}
@@ -145,19 +148,47 @@
     \begin{columns}[T]
         \begin{column}{0.52\linewidth}
             \mycolorbox[1]{box2}{
-            Overlaps:
+            $\text{R}_{\text{S}}$ and $\Delta S$ dependence:
             {\small
             \begin{itemize}
                 \item $\left\langle\iso{10}{Be}\middle|\iso{9}{Li}\right\rangle, \Delta S = \qty{-12.8}{\MeV}$
                 \item $\left\langle\iso{12}{Be}\middle|\iso{11}{Li}\right\rangle, \Delta S = \textcolor{magenta}{\qty{-19.8}{\MeV}}$
             \end{itemize}}
-            \begin{tikzpicture}
-                \node[anchor=south west, inner sep = 0pt] (image) at(0, 0){
-                    \includegraphics[width=0.6\linewidth]{figures/Be_proton_shell_model.pdf}
-                };
-                \myscope[false]{
-                \node[pin={[pin distance=4mm, pin edge={<-, very thick, magenta}]-90:{\footnotesize This strength}}] at (0.75, 0.7) {};
-                }
+            \begin{tikzpicture}[scale=0.95, trim left=-27]
+                \begin{axis}[
+                    footnotesize,
+                    % width=0.5\linewidth,
+                    % scale only axis,
+                    xlabel={$\Delta$S [MeV]},
+                    ylabel={$\text{R}_{\text{S}}$},
+                    xmin=-30, xmax=30,
+                    ymin=0, ymax=1,
+                    ymajorgrids=true, yminorgrids=true,
+                    grid style = {dashed},
+                    axis on top,
+                    ]
+                    \addplot[fill=black!12, draw=none, forget plot] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.45) (\pgfkeysvalueof{/pgfplots/xmax}, 0.45)  (\pgfkeysvalueof{/pgfplots/xmax}, 0.72) (\pgfkeysvalueof{/pgfplots/xmin}, 0.72)};
+                    \addplot [orange, only marks,
+                        error bars/.cd,
+                        y dir=both, y explicit,
+                    ] table [row sep=crcr, y error=u] {
+                            x		   y      u
+                            -18.508    0.732  0.103\\
+                            -15.028    0.496  0.099\\
+                            -10.552    0.765  0.080\\
+                            -3.425    0.607  0.058\\
+                            2.873    0.607  0.059\\
+                            3.536    0.596  0.060\\
+                            6.685    0.765  0.081\\
+                            7.845    0.586  0.060\\
+                            12.320    0.655  0.072\\
+                            18.619    0.546  0.051\\
+                        };
+                    \draw[black!75, very thick] (axis cs:-12.8,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:-12.8,\pgfkeysvalueof{/pgfplots/ymax});
+                    \node[right] at (-12.8, 0.4) {\iso{10}{Be}};
+                    \draw[magenta, very thick] (axis cs:-19.8,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:-19.8,\pgfkeysvalueof{/pgfplots/ymax});
+                    \node[magenta, right] at (-20.8, 0.25) {\iso{12}{Be}};
+                \end{axis}
             \end{tikzpicture}
             }
         \end{column}
@@ -169,37 +200,61 @@
                     \item $\left\langle\iso{12}{Be}\middle|\iso{11}{Li}\right\rangle, \text{GMF} \sim \textcolor{blue}{\num{0.5}?}$
                 \end{itemize}
                 \begin{tikzpicture}[
-                        % background rectangle/.style={fill=white},
-                        % show background rectangle,
                         trim left=-27,
                     ]
                     \centering
                     \begin{axis}[
-                            width=0.63\linewidth,
-                            scale only axis,
-                            % xlabel={Potential},
-                            ylabel={GMF},
-                            % minor y tick num=1,
-                            xticklabels={$\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
-                                    \textcolor{magenta}{$\overlap{\iso{10}{Be}}{\iso{9}{Li}}$},
-                                    \textcolor{magenta}{$\overlap{\iso{12}{Be}}{\iso{11}{Li}}$}},
-                            xtick={1,2,3},
-                            xmin=0.75, xmax=3.25,
-                            ymin=0, ymax=1,
-                            ymajorgrids=true, yminorgrids=true,
-                            ytick distance=0.25,
-                            grid style = {dashed},
-                            x tick label style = {font=\tiny},
+                        width=0.63\linewidth,
+                        scale only axis,
+                        ylabel={$\text{S}_{\text{2n}}$ [MeV]},
+                        xticklabels={\iso{10}{Be}, \iso{9}{Li}, \iso{12}{Be}, \textcolor{magenta}{\iso{11}{Li}}},
+                        xtick={1,2,3, 4},
+                        xmin=0.75, xmax=4.25,
+                        ymin=0, ymax=8.5,
+                        ymajorgrids=true, yminorgrids=true,
+                        % ytick distance=0.25,
+                        grid style = {dashed},
+                        % x tick label style = {font=\tiny},
                         ]
                         \addplot+ [
-                            error bars/.cd,
-                            y dir=both,y explicit,
+                            scatter/classes={
+                                a={blue},
+                                b={magenta}
+                            },
+                            scatter,
+                            scatter src=explicit symbolic,
                         ] coordinates {
-                                (1, 0.25) +- (0,0)
-                                (2, 1) +- (0,0)
-                                (3, 0.65) +- (0, 0.15)
+                                (1, 8.48) [a]
+                                (2, 6.10) [a]
+                                (3, 3.67) [a]
+                                (4, 0.37) [b]
                             };
                     \end{axis}
+                    % \begin{axis}[
+                    %         width=0.63\linewidth,
+                    %         scale only axis,
+                    %         ylabel={GMF},
+                    %         % minor y tick num=1,
+                    %         xticklabels={$\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
+                    %                 \textcolor{magenta}{$\overlap{\iso{10}{Be}}{\iso{9}{Li}}$},
+                    %                 \textcolor{magenta}{$\overlap{\iso{12}{Be}}{\iso{11}{Li}}$}},
+                    %         xtick={1,2,3},
+                    %         xmin=0.75, xmax=3.25,
+                    %         ymin=0, ymax=1,
+                    %         ymajorgrids=true, yminorgrids=true,
+                    %         ytick distance=0.25,
+                    %         grid style = {dashed},
+                    %         x tick label style = {font=\tiny},
+                    %     ]
+                    %     \addplot+ [
+                    %         error bars/.cd,
+                    %         y dir=both,y explicit,
+                    %     ] coordinates {
+                    %             (1, 0.25) +- (0,0)
+                    %             (2, 1) +- (0,0)
+                    %             (3, 0.65) +- (0, 0.15)
+                    %         };
+                    % \end{axis}
                 \end{tikzpicture}
             }
         \end{column}
@@ -322,7 +377,7 @@
         \begin{columns}[c]
             \begin{column}{0.5\linewidth}
                 \mycolorbox[1]{box2}{%
-                \small%
+                    \small%
                     \begin{itemize}
                         % \item Small Pang\textminus HD1p dependence
                         \item stdWS yields twice the STA SF
