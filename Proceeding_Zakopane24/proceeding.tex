@@ -1,0 +1,60 @@
+\documentclass{appolb}
+\usepackage{graphicx}
+% graphicx package included for placing figures in the text
+%------------------------------------------------------
+
+\usepackage[version=4]{mhchem}
+\newcommand{\iso}[2]{\ce{^{#1}#2}}
+\usepackage[
+style=phys,
+articletitle=false,
+biblabel=brackets,
+%sorting=none,
+maxbibnames=1,
+]{biblatex}
+\addbibresource{bibliography.bib}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                %
+%    BEGINNING OF TEXT                           %
+%                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% \eqsec  % uncomment this line to get equations numbered by (sec.num)
+\title{Quenching of spectroscopic factors in \iso{10,12}{Be}(d,\iso{3}{He}) reactions %
+\thanks{Presented at the 57th Zakopane Conference on Nuclear Physics, {\it Extremes of the Nuclear Landscape}, Zakopane, Poland, 25 August–1 September, 2024.}%
+% you can use '\\' to break lines
+}
+\author{M. Lozano-Gonz\'alez, B. Fern\'andez-Dom\'inguez, \\J. Lois-Fuentes
+\address{IGFAE and USC}
+\\[3mm]
+{A. Matta, F. Delaunay % of different affiliation
+\address{LPC-Caen}
+}
+}
+\maketitle
+\begin{abstract}
+    Ola
+\end{abstract}
+  
+\section{Introduction}
+In the mean-field picture, nucleons inside nuclei move in single-particle orbitals with well-defined energies and quantum numbers. This approach, yet it describes many of the nuclear properties, fails to account for short-range correlations among nucleons. 
+
+Transfer reactions, in which a single nucleon is added or removed from a core, provide a unique tool to probe the impact of those correlations in the single-particle strengths. For that regard, spectroscopic factors (SF) consitute a measure of the shell occupancies and thus they measure directly the magnitude of the SRC.
+
+
+\section{Next section}
+The text...
+\subsection{Subsection}
+The text...\cite{lois23}
+
+%uncomment the following lines to place a figure
+%\begin{figure}[htb]
+%\centerline{%
+%\includegraphics[width=12.5cm]{Fig1}}
+%\caption{Plot of ...}
+%\label{Fig:F2H}
+%\end{figure}
+
+\printbibliography
+\end{document}
+
