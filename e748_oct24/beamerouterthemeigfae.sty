@@ -1,0 +1,48 @@
+\mode<presentation>
+
+% Title page
+\defbeamertemplate*{title page}{igfae}[1][]
+{
+    \setlength{\unitlength}{1mm}
+    \begin{picture}(0,0)
+        % logo IGFAE
+        \put(0,25){\includegraphics[width=1\textwidth]{logos/igfae_25_bw.png}}
+        % Title
+        \put(5, 0){%
+            \begin{beamercolorbox}[sep=0ex, wd=.95\paperwidth, left]{frametitle}
+                \usebeamerfont{title}\usebeamercolor[fg]{title}%
+                \inserttitle%
+            \end{beamercolorbox}%
+        }
+        % author etc
+        \put(5,-25){%
+            \begin{beamercolorbox}[sep=0ex, wd=0.95\paperwidth, left]{frametitle}
+                \ifx\insertauthor\empty\else
+                    \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor%
+                    \vskip0.2cm%
+                \fi%
+                \ifx\insertinstitute\empty\else
+                    \usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute%
+                    \vskip0.2cm%
+                \fi%
+                \ifx\insertdate\empty\else
+                    \usebeamerfont{author}\usebeamercolor[fg]{author}\insertdate%
+                \fi%
+            \end{beamercolorbox}
+        }
+        % Other logos
+        \put(0, -45){
+            \begin{minipage}[t]{0.15\linewidth}
+                \includegraphics[width=1\linewidth]{logos/usc.png}
+            \end{minipage}%
+            \hspace{0.07\linewidth}%
+            \begin{minipage}[t]{0.65\linewidth}
+                \vspace{-2.75em}
+                \includegraphics[width=1\linewidth]{logos/mdm.png}
+            \end{minipage}
+        }
+        \put(0, -55){\includegraphics[width=1\textwidth]{logos/other_bw.png}}
+    \end{picture}
+}
+
+\mode<all>
