@@ -454,41 +454,42 @@
                     \begin{axis}[
                             width=0.7\linewidth,
                             scale only axis,
-                            title={1st excited},
-                            title style={anchor=south, at={(0.5, 1.2)}},
-                            % xlabel={Potential},
+                            % title={1st excited},
+                            xlabel={Potential},
                             ylabel={$C^{2}S$},
                             minor y tick num=1,
                             xticklabels={Pang, HT1p},
                             xtick={1,2},
                             xmin=0.5, xmax=2.5,
-                            ymin=0, ymax=2.75,
+                            ymin=0, ymax=0.5,
                             ymajorgrids=true, yminorgrids=false,
-                            ytick distance=0.5,
+                            ytick distance=0.25,
                             legend style={
                                     fill=none,
                                     anchor=south,
-                                    at={(0.5, 1.05)},
+                                    at={(0.5, 1.1)},
                                     font=\scriptsize,
                                 },
                             legend columns=3,
-                            grid style = {dashed},
+                            grid style={dashed},
                         ]
                         \addplot+ [
                             error bars/.cd,
                             y dir=both,y explicit,
                         ] coordinates {
-                                (1, 2.03) +- (0,0.11)
-                                (2, 1.352) +- (0,0.077)
+                                (1, 0.334) +- (0,0.069)
+                                (2, 0.217) +- (0,0.045)
                             };
                         \addplot+ [
                             error bars/.cd,
                             y dir=both,y explicit,
                         ] coordinates {
-                                (1, 1.036) +- (0,0.058)
-                                (2, 0.747) +- (0,0.042)
+                                (1, 0.141) +- (0,0.029)
+                                (2, 0.101) +- (0,0.021)
                             };
-                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.690) (\pgfkeysvalueof{/pgfplots/xmax}, 1.690)};
+                        % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.139) (\pgfkeysvalueof{/pgfplots/xmax}, 0.139)};
+                        % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.43) (\pgfkeysvalueof{/pgfplots/xmax}, 0.43)};
+                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.279) (\pgfkeysvalueof{/pgfplots/xmax}, 0.279)};
                         \legend{stdWS, STA, SM}
                     \end{axis}
                 \end{tikzpicture}
