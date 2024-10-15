@@ -314,15 +314,15 @@
         \end{equation*}
         \begin{columns}[c]
             \begin{column}{0.5\linewidth}
-                \mycolorbox[0.95]{box2}{
+                \mycolorbox[1]{box2}{
                     \enumitem{1} \textbf{Target thickness} not measured during experiment:
                     \begin{itemize}
                         \item Set it from normalization of elastic
                         \item \textbf{Ongoing}: fix it from simulation
                     \end{itemize}}
-            \end{column}\hfill
+            \end{column}%
             \begin{column}{0.5\linewidth}
-                \mycolorbox[0.95]{box4}{
+                \mycolorbox[1]{box4}{
                     \enumitem{2} ZDD had a poor performance. Averaged $\epsilon$:
                     \begin{itemize}
                         \item IC: \qty{30}{\percent}
@@ -330,6 +330,10 @@
                     \end{itemize}}
             \end{column}
         \end{columns}
+        \mycolorbox[1]{box2}{
+            From \textbf{npsimu}: $\epsilon = \epsilon_{\text{geo, MUST2}} \cdot \epsilon_{\text{reconstruction}} \cdot \textcolor{magenta}{\epsilon_{\text{geo, ZDD}}}$\\
+            Agglutinate missing factors: $\alpha = N_{\text{targets}} \cdot \epsilon_{\text{instrinsic, ZDD}} \cdot \epsilon_{\text{other?}}$
+        }
     }
 \end{frame}
 
