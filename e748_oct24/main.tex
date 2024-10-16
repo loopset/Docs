@@ -310,7 +310,7 @@
     \only<+>{
         Experimental cross-section formula:
         \begin{equation*}
-            \frac{d\sigma}{d\Omega} = \frac{N}{N_{\text{beam}} \textcolor{red}{N_{\text{targets}}} \textcolor{red}{\epsilon} \Delta \Omega}
+            \frac{d\sigma}{d\Omega} = \frac{N}{N_{\text{beam}} \textcolor{red}{N_{\text{targets}}} \textcolor{red}{\epsilon} \Delta \Omega} = \frac{N}{N_{\text{beam}} \textcolor{red}{\alpha} \epsilon_{\text{np}} \Delta \Omega}
         \end{equation*}
         \begin{columns}[c]
             \begin{column}{0.5\linewidth}
@@ -331,9 +331,44 @@
             \end{column}
         \end{columns}
         \mycolorbox[1]{box2}{
-            From \textbf{npsimu}: $\epsilon = \epsilon_{\text{geo, MUST2}} \cdot \epsilon_{\text{reconstruction}} \cdot \textcolor{magenta}{\epsilon_{\text{geo, ZDD}}}$\\
+            From \textbf{npsimu}: $\epsilon_{\text{np}} = \epsilon_{\text{geo, MUST2}} \cdot \epsilon_{\text{reconstruction}} \cdot \textcolor{magenta}{\epsilon_{\text{geo, ZDD}}}$\\
             Agglutinate missing factors: $\alpha = N_{\text{targets}} \cdot \epsilon_{\text{instrinsic, ZDD}} \cdot \epsilon_{\text{other?}}$
         }
+    }
+\end{frame}
+
+\begin{frame}[t]{About DWBA calculations}
+    % The DWBA approximations simplifies the single-nucleon transfer xs by considering it a \textit{small} perturbation of the \textbf{elastic} process.
+    % OMPs with imaginary parts are introduced to represent the missing flux from the elastic scattering.
+    \begin{columns}[c]
+        \begin{column}{0.5\linewidth}
+            \mycolorbox[0.95]{box2}{
+                \raisebox{0.15em}{\enumitem{1}} OMPs for elastic
+                \begin{itemize}
+                    \item \iso{10,12}{Be} + d: Haixia
+                    \item \iso{9,11}{Be,Li} + t or \iso{3}{He}: HT1p
+                \end{itemize}
+            }
+        \end{column}%
+        \begin{column}{0.5\linewidth}
+            \mycolorbox[0.95]{box3}{
+                \raisebox{0.15em}{\enumitem{2}} Light overlap.
+                Usually determines the xs strength.
+                \begin{itemize}
+                    \item $\langle \text{t} \vert \text{d} + \text{n}\rangle$
+                    \item $\langle \iso{3}{He} \vert \text{d} + \text{p}\rangle$
+                \end{itemize}
+                From GFMC calculations (\textit{ab initio})
+            }
+        \end{column}
+    \end{columns}
+    \mycolorbox[0.95]{box4}{
+        \small{
+            \raisebox{0.15em}{\enumitem{3}} Heavy overlap $\langle \iso{10,12}{Be}\vert\iso{9,11}{Be,Li} + \text{n},\text{p}\rangle$. Two WS prescriptions:
+            \begin{itemize}
+                \item Standard $r_0 = \qty{1.25}{\femto\m}$
+                \item \textit{N. Timofeyuk PRC 81 (2010)} Source Term Approach (STA): includes in a phenomenological way some correlations among nucleons. $r_0$ for each channel.
+            \end{itemize}}
     }
 \end{frame}
 
