@@ -291,21 +291,34 @@
 \end{frame}
 
 \section{Results}
-\begin{frame}[c]{Results: \texorpdfstring{\iso{10}{Be}(d,d)\iso{10}{Be} }{10Be(d,d)10Be}}
+\begin{frame}[c]{Resuls: Elastic \texorpdfstring{\iso{10,12}{Be}(d,d)\iso{10,12}{Be} }{10,12Be(d,d)10,12Be}}
     \only<+>{
-        Useful for normalization purpouses.
         \begin{columns}[c]
             \begin{column}{0.5\linewidth}
-                \includegraphics[width=\linewidth]{figures/10Be_dd_fit.eps}
-            \end{column}\hfill
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=1\linewidth]{figures/10Be_dd_fit.eps}
+                    };
+                    \myscope[false]{
+                        \node at (0.25, 0.6) {\iso{10}{Be}};
+                    }
+                \end{tikzpicture}
+                \begin{tikzpicture}
+                    \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=1\linewidth]{figures/12Be_dd_fit.eps}
+                    };
+                    \myscope[false]{
+                        \node at (0.25, 0.6) {\iso{12}{Be}};
+                    }
+                \end{tikzpicture}
+            \end{column}%
             \begin{column}{0.5\linewidth}
                 \includegraphics[width=\linewidth]{figures/10Be_dd_g0.eps}
+                \includegraphics[width=\linewidth]{figures/12Be_dd_g0.eps}
             \end{column}
         \end{columns}
-        \bigskip
-        \mycolorbox{box2}{
-            Best fit is provided by newer \textbf{Haixia} OMP.
-        }
+        % \bigskip
+        % \mycolorbox{box2}{
+        %     Best fit is provided by newer \textbf{Haixia} OMP.
+        % }
     }
     \only<+>{
         Experimental cross-section formula:
@@ -346,7 +359,7 @@
                 \raisebox{0.15em}{\enumitem{1}} OMPs for elastic
                 \begin{itemize}
                     \item \iso{10,12}{Be} + d: Haixia
-                    \item \iso{9,11}{Be,Li} + t or \iso{3}{He}: HT1p
+                    \item \iso{9,11}{Be,Li} + t,\iso{3}{He}: Pang and HT1p
                 \end{itemize}
             }
         \end{column}%
@@ -493,8 +506,8 @@
                     \begin{axis}[
                             width=0.7\linewidth,
                             scale only axis,
-                            % title={1st excited},
-                            xlabel={Potential},
+                            title={1st excited},
+                            title style={anchor=south, at={(0.5, 1.2)}},
                             ylabel={$C^{2}S$},
                             minor y tick num=1,
                             xticklabels={Pang, HT1p},
@@ -506,7 +519,7 @@
                             legend style={
                                     fill=none,
                                     anchor=south,
-                                    at={(0.5, 1.1)},
+                                    at={(0.5, 1.05)},
                                     font=\scriptsize,
                                 },
                             legend columns=3,
@@ -541,21 +554,21 @@
     }
 \end{frame}
 
-\begin{frame}[t]{Results: \texorpdfstring{\iso{12}{Be}(d,d)\iso{12}{Be} }{12Be(d,d)12Be}}
-    As before, this is used for setting the normalization of all channels.
-    \begin{columns}[c]
-        \begin{column}{0.5\linewidth}
-            \includegraphics[width=\linewidth]{figures/12Be_dd_fit.eps}
-        \end{column}\hfill
-        \begin{column}{0.5\linewidth}
-            \includegraphics[width=\linewidth]{figures/12Be_dd_g0.eps}
-        \end{column}
-    \end{columns}
-    \bigskip
-    \mycolorbox{box2}{
-        $N_{\text{targets}}$ is determined from the weighted average of this and the \iso{10}{Be}(d,d) result
-    }
-\end{frame}
+% \begin{frame}[t]{Results: \texorpdfstring{\iso{12}{Be}(d,d)\iso{12}{Be} }{12Be(d,d)12Be}}
+%     As before, this is used for setting the normalization of all channels.
+%     \begin{columns}[c]
+%         \begin{column}{0.5\linewidth}
+%             \includegraphics[width=\linewidth]{figures/12Be_dd_fit.eps}
+%         \end{column}\hfill
+%         \begin{column}{0.5\linewidth}
+%             \includegraphics[width=\linewidth]{figures/12Be_dd_g0.eps}
+%         \end{column}
+%     \end{columns}
+%     \bigskip
+%     \mycolorbox{box2}{
+%         $N_{\text{targets}}$ is determined from the weighted average of this and the \iso{10}{Be}(d,d) result
+%     }
+% \end{frame}
 
 \begin{frame}[t]{Results: \texorpdfstring{\iso{12}{Be}(d,\iso{3}{He})\iso{11}{Li} }{12Be(d,3He)11Li}}
     \only<1,2>{%
@@ -640,86 +653,137 @@
         \end{columns}
     }
     }%
-    \only<3>{%
-    The reduction factor $\text{R}_{\text{S}} = C^{2}S_{\text{exp}} / C^{2}S_{\text{SM}}$ is computed:
-    \begin{figure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                width=5cm,
-                height=3cm,
-                scale only axis,
-                ylabel={$\text{R}_{\text{S}}$},
-                % minor y tick num=1,
-                xticklabels={$\iso{9}{Be}_{\text{g.s}}$, $\iso{9}{Li}_{\text{g.s}}$, $\iso{9}{Li}_{\text{1st}}$, $\iso{11}{Li}_{\text{g.s}}$},
-                xtick={0,1,2,3},
-                xmin=-0.5, xmax=3.5,
-                ymin=0, ymax=1,
-                ymajorgrids=true, yminorgrids=false,
-                ytick distance=0.25,
-                legend style={
-                        fill=none,
-                        font=\scriptsize,
-                        legend pos=outer north east
-                    },
-                grid style={dashed},
-                axis on top,
-                ]
-                \addplot[fill=black!15, draw=none, forget plot] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.45) (\pgfkeysvalueof{/pgfplots/xmax}, 0.45)  (\pgfkeysvalueof{/pgfplots/xmax}, 0.72) (\pgfkeysvalueof{/pgfplots/xmin}, 0.72)};
-                \addplot+ [
-                    error bars/.cd,
-                    y dir=both,y explicit,
-                ] coordinates {
-                        (0, 0.896) +- (0, 0.025)
-                        (1, 0.774) +- (0, 0.042)
-                        (2, 0.78) +- (0, 0.17)
-                        (3, 0.189) +- (0, 0. 031)
-                    };
-                \addplot+ [
-                    error bars/.cd,
-                    y dir=both,y explicit,
-                ] coordinates {
-                        (0, 0.829) +- (0, 0.023)
-                        (1, 0.441) +- (0, 0.024)
-                        (2, 0.369) +- (0, 0.072)
-                    };
-                %% Left of axis
-                \path[name path=laxis] (\pgfkeysvalueof{/pgfplots/xmin}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmin}, \pgfkeysvalueof{/pgfplots/ymax});
-                %% Right of axis
-                \path[name path=raxis] (\pgfkeysvalueof{/pgfplots/xmax}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmax}, \pgfkeysvalueof{/pgfplots/ymax});
-                %% Left separation
-                \addplot[black, thick, name path=right] coordinates {(2.5, \pgfkeysvalueof{/pgfplots/ymin} ) (2.5, \pgfkeysvalueof{/pgfplots/ymax})};
-                %% Right separation
-                \addplot[black, thick, name path=left] coordinates {(0.5, \pgfkeysvalueof{/pgfplots/ymin} ) (0.5, \pgfkeysvalueof{/pgfplots/ymax})};
-                %% Fillings
-                % 1 Left
-                \addplot[violet!20] fill between [of=laxis and left];
-                % 2 Middle
-                \addplot[green!20] fill between [of=left and right];
-                % 3 Right
-                \addplot[orange!20] fill between [of=right and raxis];
-                \legend{stdWS, STA}
-            \end{axis}
-        \end{tikzpicture}
-    \end{figure}
-    \begin{columns}[c]
-        \begin{column}{0.33\linewidth}
-            \mycolorbox[1]{box1}{
-                What happens with 9Be?
-            }
+    \only<3,4>{%
+    The reduction factor $\text{R}_{\text{S}} = C^{2}S_{\text{exp}} / C^{2}S_{\text{theo}}$ is computed:
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=4cm,
+                    height=3cm,
+                    scale only axis,
+                    ylabel={$\text{R}_{\text{SM}}$},
+                    xticklabels={$\iso{9}{Be}_{\text{g.s}}$, $\iso{9}{Li}_{\text{g.s}}$, $\iso{9}{Li}_{\text{1st}}$, $\iso{11}{Li}_{\text{g.s}}$},
+                    xtick={0,1,2,3},
+                    xmin=-0.5, xmax=3.5,
+                    ymin=0, ymax=1,
+                    ymajorgrids=true, yminorgrids=false,
+                    ytick distance=0.25,
+                    grid style={dashed},
+                    axis on top,
+                    title={Shell model}
+                    ]
+                    \addplot[fill=black!15, draw=none, forget plot] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.45) (\pgfkeysvalueof{/pgfplots/xmax}, 0.45)  (\pgfkeysvalueof{/pgfplots/xmax}, 0.72) (\pgfkeysvalueof{/pgfplots/xmin}, 0.72)};
+                    \addplot+ [
+                        error bars/.cd,
+                        y dir=both,y explicit,
+                    ] coordinates {
+                            (0, 0.896) +- (0, 0.025)
+                            (1, 0.774) +- (0, 0.042)
+                            (2, 0.78) +- (0, 0.17)
+                            (3, 0.189) +- (0, 0. 031)
+                        };
+                    \only<3>{
+                        %% Left of axis
+                        \path[name path=laxis] (\pgfkeysvalueof{/pgfplots/xmin}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmin}, \pgfkeysvalueof{/pgfplots/ymax});
+                        %% Right of axis
+                        \path[name path=raxis] (\pgfkeysvalueof{/pgfplots/xmax}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmax}, \pgfkeysvalueof{/pgfplots/ymax});
+                        %% Left separation
+                        \addplot[black, thick, name path=right] coordinates {(2.5, \pgfkeysvalueof{/pgfplots/ymin} ) (2.5, \pgfkeysvalueof{/pgfplots/ymax})};
+                        %% Right separation
+                        \addplot[black, thick, name path=left] coordinates {(0.5, \pgfkeysvalueof{/pgfplots/ymin} ) (0.5, \pgfkeysvalueof{/pgfplots/ymax})};
+                        %% Fillings
+                        % 1 Left
+                        \addplot[pink1] fill between [of=laxis and left];
+                        % 2 Middle
+                        \addplot[green1] fill between [of=left and right];
+                        % 3 Right
+                        \addplot[brown1] fill between [of=right and raxis];
+                    }
+                    % \legend{stdWS, STA}
+                \end{axis}
+            \end{tikzpicture}
         \end{column}%
-        \begin{column}{0.33\linewidth}
-            \mycolorbox[1]{box4}{$\text{R}_{\text{S}} $ compatible with litterature
-            }
-        \end{column}%
-        \begin{column}{0.33\linewidth}
-            \mycolorbox[1]{box2}{
-                $\sim \qty{20}{\percent}$ reduction
-                \textbf{GMF} playing a role\\
-                Need \textbf{STA}
-            }
+        \begin{column}{0.5\linewidth}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=4cm,
+                    height=3cm,
+                    scale only axis,
+                    ylabel={$\text{R}_{\text{STA}}$},
+                    % minor y tick num=1,
+                    xticklabels={$\iso{9}{Be}_{\text{g.s}}$, $\iso{9}{Li}_{\text{g.s}}$, $\iso{9}{Li}_{\text{1st}}$, $\iso{11}{Li}_{\text{g.s}}$},
+                    xtick={0,1,2,3},
+                    xmin=-0.5, xmax=3.5,
+                    ymin=0.5, ymax=1.5,
+                    ymajorgrids=true, yminorgrids=false,
+                    ytick distance=0.25,
+                    grid style={dashed},
+                    % axis on top,
+                    title={STA}
+                    ]
+                    \addplot[color=red,mark=*,
+                        error bars/.cd,
+                        y dir=both,y explicit,
+                    ] coordinates {
+                            (0, 1.385) +- (0, 0.039)
+                            (1, 0.967) +- (0, 0.051)
+                        };
+                    %% Line 1
+                    \addplot[teal, ultra thick, name path=unity] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1) (\pgfkeysvalueof{/pgfplots/xmax}, 1)};
+                    \only<4>{
+                        %% Left of axis
+                        \path[name path=laxis] (\pgfkeysvalueof{/pgfplots/xmin}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmin}, \pgfkeysvalueof{/pgfplots/ymax});
+                        %% Right of axis
+                        \path[name path=raxis] (\pgfkeysvalueof{/pgfplots/xmax}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmax}, \pgfkeysvalueof{/pgfplots/ymax});
+                        %% Middel separation
+                        \addplot[black, thick, name path=middle] coordinates {(1.5, \pgfkeysvalueof{/pgfplots/ymin} ) (1.5, \pgfkeysvalueof{/pgfplots/ymax})};
+                        %% Fillings
+                        % 1 Left
+                        \addplot[brown1] fill between [of=laxis and middle];
+                        % 2 Right
+                        \addplot[blue1] fill between [of=middle and raxis];
+                    }
+                \end{axis}
+            \end{tikzpicture}
         \end{column}
     \end{columns}
+    \begin{figure}
+        \centering
+    \end{figure}
+    \only<3>{
+        \begin{columns}[c]
+            \begin{column}{0.33\linewidth}
+                \mycolorbox[1]{box1}{
+                    What happens with 9Be?
+                }
+            \end{column}%
+            \begin{column}{0.33\linewidth}
+                \mycolorbox[1]{box4}{$\text{R}_{\text{S}} $ compatible with litterature
+                }
+            \end{column}%
+            \begin{column}{0.33\linewidth}
+                \mycolorbox[1]{box2}{
+                    $\sim \qty{20}{\percent}$ reduction
+                    \textbf{GMF} playing a role
+                }
+            \end{column}
+        \end{columns}
+    }%
+    \only<4>{
+        \begin{columns}
+            \begin{column}{0.5\linewidth}
+                \mycolorbox{box2}{
+                    Great prediction for \iso{9}{Li} but understimates SF for \iso{9}{Be}!
+                }
+            \end{column}%
+            \begin{column}{0.5\linewidth}
+                \mycolorbox{box3}{
+                    \textbf{Missing} predictions for \iso{9}{Li_{1st}} and \iso{11}{Li}
+                }
+            \end{column}
+        \end{columns}
+    }
     }
 \end{frame}
 
