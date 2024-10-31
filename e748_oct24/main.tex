@@ -242,7 +242,19 @@
 \begin{frame}[c]{Experimental technique}
     Tradional solid target experiment @ LISE
     \vspace{1.5em}
-    \includegraphics[width=1\linewidth]{figures/setup.pdf}
+    \begin{tikzpicture}
+        \node[anchor=south west, inner sep = 0pt] (image) at (0,0){
+            \includegraphics[width=1\linewidth]{figures/setup.pdf}
+        };
+        \myscope[false]{
+            \node at(0.3, -0.15) {
+                \includegraphics[width=0.22\linewidth]{figures/cats_pic_e870.png}
+            };
+            \node at(0.8, -0.12) {
+                \includegraphics[width=0.35\linewidth]{figures/must2_pic.png}
+            };
+        }
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}[t]{A glance at the analysis}
@@ -356,7 +368,7 @@
     \begin{columns}[c]
         \begin{column}{0.5\linewidth}
             \mycolorbox[0.95]{box2}{
-                \raisebox{0.15em}{\enumitem{1}} OMPs for elastic
+                \raisebox{0.15em}{\enumitem{1}} \textbf{OMPs} for elastic
                 \begin{itemize}
                     \item \iso{10,12}{Be} + d: Haixia
                     \item \iso{9,11}{Be,Li} + t,\iso{3}{He}: Pang and HT1p
@@ -365,7 +377,7 @@
         \end{column}%
         \begin{column}{0.5\linewidth}
             \mycolorbox[0.95]{box3}{
-                \raisebox{0.15em}{\enumitem{2}} Light overlap.
+                \raisebox{0.15em}{\enumitem{2}} \textbf{Light} overlap.
                 Usually determines the xs strength.
                 \begin{itemize}
                     \item $\langle \text{t} \vert \text{d} + \text{n}\rangle$
@@ -377,7 +389,7 @@
     \end{columns}
     \mycolorbox[0.95]{box4}{
         \small{
-            \raisebox{0.15em}{\enumitem{3}} Heavy overlap $\langle \iso{10,12}{Be}\vert\iso{9,11}{Be,Li} + \text{n},\text{p}\rangle$. Two WS prescriptions:
+            \raisebox{0.15em}{\enumitem{3}} Hea\textbf{}vy overlap $\langle \iso{10,12}{Be}\vert\iso{9,11}{Be,Li} \otimes \text{n},\text{p}\rangle$. Two WS prescriptions:
             \begin{itemize}
                 \item Standard $r_0 = \qty{1.25}{\femto\m}$
                 \item \textit{N. Timofeyuk PRC 81 (2010)} Source Term Approach (STA): includes in a phenomenological way some correlations among nucleons. $r_0$ for each channel.
@@ -386,33 +398,79 @@
 \end{frame}
 
 \begin{frame}[t]{Results: \texorpdfstring{\iso{10}{Be}(d,t)\iso{9}{Be} }{10Be(d,t)9Be}}
-    Relatively high statistics. Used for benchmarking analysis routines.
-
     \begin{columns}[c]
         \begin{column}{0.5\linewidth}
             \includegraphics[width=\linewidth]{figures/10Be_dt_fit.eps}
-        \end{column}\hfill
-        \begin{column}{0.5\linewidth}
             \includegraphics[width=\linewidth]{figures/10Be_dt_g0.eps}
-        \end{column}
-    \end{columns}
-
-    \begin{columns}
-        \begin{column}{0.5\linewidth}
-            \mycolorbox{box3}{
-            \textbf{STA} prediction:
-            $C^2S = \qty{1.50}{}$\\
-            Our result:
-            $C^2S_{\text{exp}} = \qty{2.08}{}$
-            }
         \end{column}\hfill
         \begin{column}{0.5\linewidth}
-            \mycolorbox{box4}{
-                SFO-tls shell-model:
-                $C^2S = \qty{2.51}{}$
-            }
+            \begin{tikzpicture}[
+                    % background rectangle/.style={fill=white},
+                    % show background rectangle,
+                    trim left=-30,
+                ]
+                \centering
+                \begin{axis}[
+                        width=0.7\linewidth,
+                        scale only axis,
+                        % title={Ground state},
+                        % title style={anchor=south, at={(0.5, 1.2)}},
+                        % xlabel={Potential},
+                        ylabel={$C^{2}S$},
+                        minor y tick num=1,
+                        xticklabels={Pang, HT1p},
+                        xtick={1,2},
+                        xmin=0.5, xmax=2.5,
+                        ymin=1.25, ymax=2.75,
+                        ymajorgrids=true, yminorgrids=false,
+                        ytick distance=0.5,
+                        legend style={
+                                fill=none,
+                                anchor=south,
+                                at={(0.5, 1.0)},
+                                font=\tiny,
+                            },
+                        legend columns=2,
+                        grid style = {dashed},
+                    ]
+                    \addplot+ [
+                        error bars/.cd,
+                        y dir=both,y explicit,
+                    ] coordinates {
+                            (1, 2.608) +- (0,0.072)
+                            (2, 2.249) +- (0,0.062)
+                        };
+                    \addplot+ [
+                        error bars/.cd,
+                        y dir=both,y explicit,
+                    ] coordinates {
+                            (1, 2.403) +- (0,0.067)
+                            (2, 2.081) +- (0,0.058)
+                        };
+                    % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.159) (\pgfkeysvalueof{/pgfplots/xmax}, 1.159)};
+                    \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 2.511) (\pgfkeysvalueof{/pgfplots/xmax}, 2.511)};
+                    \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.503) (\pgfkeysvalueof{/pgfplots/xmax}, 1.503)};
+                    \legend{stdWS, STA, SM, Natasha}
+                \end{axis}
+            \end{tikzpicture}
         \end{column}
     \end{columns}
+    % \begin{columns}
+    %     \begin{column}{0.5\linewidth}
+    %         \mycolorbox{box3}{
+    %         \textbf{STA} prediction:
+    %         $C^2S = \qty{1.50}{}$\\
+    %         Our result:
+    %         $C^2S_{\text{exp}} = \qty{2.08}{}$
+    %         }
+    %     \end{column}\hfill
+    %     \begin{column}{0.5\linewidth}
+    %         \mycolorbox{box4}{
+    %             SFO-tls shell-model:
+    %             $C^2S = \qty{2.51}{}$
+    %         }
+    %     \end{column}
+    % \end{columns}
 \end{frame}
 
 \begin{frame}[t]{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{3}{He})\iso{9}{Li} }{10Be(d,3He)9Li}}
@@ -719,9 +777,11 @@
                     ymajorgrids=true, yminorgrids=false,
                     ytick distance=0.25,
                     grid style={dashed},
-                    % axis on top,
+                    axis on top,
                     title={STA}
                     ]
+                    %% Line 1
+                    \addplot[teal, ultra thick, name path=unity] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1) (\pgfkeysvalueof{/pgfplots/xmax}, 1)};
                     \addplot[color=red,mark=*,
                         error bars/.cd,
                         y dir=both,y explicit,
@@ -729,8 +789,6 @@
                             (0, 1.385) +- (0, 0.039)
                             (1, 0.967) +- (0, 0.051)
                         };
-                    %% Line 1
-                    \addplot[teal, ultra thick, name path=unity] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1) (\pgfkeysvalueof{/pgfplots/xmax}, 1)};
                     \only<4>{
                         %% Left of axis
                         \path[name path=laxis] (\pgfkeysvalueof{/pgfplots/xmin}, 0) -- ( \pgfkeysvalueof{/pgfplots/xmin}, \pgfkeysvalueof{/pgfplots/ymax});
@@ -793,11 +851,6 @@
     }
     \vspace{1em}
 
-    \mycolorbox{box2}{
-        Found strong sensitivity to nuclear overlap: stdWS or newer STA
-    }
-    \vspace{1em}
-
     \mycolorbox{box3}{
         \rs for {\scriptsize $\overlap{\iso{10}{Be}}{\iso{9}{Li}}$} in agreement with systematics
     }
@@ -805,6 +858,11 @@
 
     \mycolorbox{box4}{
         \rs for {\scriptsize $\overlap{\iso{12}{Be}}{\iso{11}{Li}}$} displays a strong reduction linked to GMF
+    }
+    \vspace{1em}
+
+    \mycolorbox{box2}{
+        Need more theoretical insights to check validity of STA
     }%
 \end{frame}
 
