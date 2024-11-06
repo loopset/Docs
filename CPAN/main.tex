@@ -3,6 +3,7 @@
 \usepackage[aboveskip=1pt, belowskip=1pt]{caption}
 \usepackage{amsmath}
 \usepackage{siunitx}
+\usepackage{emoji}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18,}
 
@@ -16,11 +17,11 @@
 \newcommand{\enumitem}[1]{%
 \setcounter{enumi}{#1}\usebeamertemplate{enumerate item}% 
 }
-\newcommand{\boxitem}[1]{\raisebox{0.15em}{\enumitem{1}}}
+\newcommand{\boxitem}[1]{\raisebox{0.15em}{\enumitem{#1}}}
 % Set caption package options
 \captionsetup{labelformat=empty}
 
-\title[SF quenching]{Quenching of spectroscopic factors in \\ \texorpdfstring{\iso{10,12}{Be}(d, \iso{3}{He})}{10,12Be(d,3He)} reactions}
+\title[SF quenching]{Quenching of spectroscopic factors in \\ \texorpdfstring{\iso{10,12}{Be}}{10,12Be} transfer reactions}
 \date[CPAN]{ASTRANUCAP and CPAN Days 2024}
 \author[M. Lozano et al.]{M. Lozano-González, A. Matta, B. Fernández-Domínguez,\texorpdfstring{\newline}{} F. Delaunay, J. Lois-Fuentes}
 \institute{USC-IGFAE and LPC-Caen}
@@ -35,7 +36,7 @@
 \begin{frame}{A recap on spectroscopic factors}
     \textbf{Spectroscopic factors} shed light on the occupancy of single-particle states:
     \begin{equation*}
-        \left.\frac{d\sigma}{d\Omega}\right\vert_{exp} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{s.p}, \quad \sum C^{2}S = (2j + 1) \text{ in IPSM}
+        \left.\frac{d\sigma}{d\Omega}\right\vert_{\text{exp}} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{\text{s.p}}, \quad \sum C^{2}S = (2j + 1) \text{ in IPSM}
     \end{equation*}
     \begin{columns}[T]
         \begin{column}{0.48\linewidth}
@@ -60,7 +61,7 @@
 \end{frame}
 
 \begin{frame}{A long-standing puzzle}
-    A trend with asymmetry energy $\Delta S \equiv S_{n} - S_{p}$ is found depending on the experimental \textbf{probe}!
+    A trend with asymmetry energy $\Delta S \equiv \pm \left(S_{p} - S_{n}\right)$ is found depending on the experimental \textbf{probe}!
     \begin{figure}
         \begin{tikzpicture}
             \node[anchor=south west,inner sep=0] (image) at (0,0) { \includegraphics[width=0.9\linewidth]{figures/auman.jpg}
@@ -122,7 +123,7 @@
 \end{frame}
 
 \begin{frame}{Physics case of E748}
-    E748 @ GANIL back in 2017. Using \iso{10,12}{Be}(d,\iso{3}{He}) reactions to:
+    E748 @ GANIL back in 2017. Using \iso{10,12}{Be}(d,t$\vert$\iso{3}{He}) reactions to:
     \bigskip
     \begin{columns}[T]
         \begin{column}{0.52\linewidth}
@@ -130,8 +131,8 @@
             $\text{R}_{\text{S}}$ and $\Delta S$ dependence:
             {\small
             \begin{itemize}
-                \item $\left\langle\iso{10}{Be}\middle|\iso{9}{Li}\right\rangle, \Delta S = \qty{-12.8}{\MeV}$
-                \item $\left\langle\iso{12}{Be}\middle|\iso{11}{Li}\right\rangle, \Delta S = \textcolor{magenta}{\qty{-19.8}{\MeV}}$
+                \item {\footnotesize $\left\langle\iso{10}{Be}\middle|\iso{9}{Be,Li}\right\rangle$}, $\Delta S = \mp \qty{12.8}{\MeV}$
+                \item {\footnotesize $\left\langle\iso{12}{Be}\middle|\iso{11}{Be,Li}\right\rangle$}, $\Delta S = \mp \textcolor{magenta}{\qty{19.8}{\MeV}}$
             \end{itemize}}
             \begin{tikzpicture}[scale=0.95, trim left=-27]
                 \begin{axis}[
@@ -164,8 +165,10 @@
                             18.619    0.546  0.051\\
                         };
                     \draw[black!75, very thick] (axis cs:-12.8,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:-12.8,\pgfkeysvalueof{/pgfplots/ymax});
-                    \node[right] at (-12.8, 0.4) {\iso{10}{Be}};
+                    \draw[black!75, very thick] (axis cs:+12.8,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:+12.8,\pgfkeysvalueof{/pgfplots/ymax});
                     \draw[magenta, very thick] (axis cs:-19.8,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:-19.8,\pgfkeysvalueof{/pgfplots/ymax});
+                    \draw[magenta, very thick] (axis cs:+19.8,\pgfkeysvalueof{/pgfplots/ymin}) -- (axis cs:+19.8,\pgfkeysvalueof{/pgfplots/ymax});
+                    \node[right] at (-12.8, 0.4) {\iso{10}{Be}};
                     \node[magenta, right] at (-20.8, 0.25) {\iso{12}{Be}};
                 \end{axis}
             \end{tikzpicture}
@@ -175,7 +178,7 @@
             \mycolorbox[1]{box3}{\small
                 Explore effects of GMF:
                 \begin{itemize}
-                    \item $\left\langle\iso{10}{Be}\middle|\iso{9}{Li}\right\rangle, \text{GMF} \sim \num{1}$
+                    \item $\left\langle\iso{10}{Be}\middle|\iso{9}{Be,Li}\right\rangle, \text{GMF} \sim \num{1}$
                     \item $\left\langle\iso{12}{Be}\middle|\iso{11}{Li}\right\rangle, \text{GMF} \sim \textcolor{blue}{\num{0.5}?}$
                 \end{itemize}
                 \begin{tikzpicture}[
@@ -209,31 +212,6 @@
                                 (4, 0.37) [b]
                             };
                     \end{axis}
-                    % \begin{axis}[
-                    %         width=0.63\linewidth,
-                    %         scale only axis,
-                    %         ylabel={GMF},
-                    %         % minor y tick num=1,
-                    %         xticklabels={$\overlap{\iso{11}{Li}}{\iso{10}{He}}$,
-                    %                 \textcolor{magenta}{$\overlap{\iso{10}{Be}}{\iso{9}{Li}}$},
-                    %                 \textcolor{magenta}{$\overlap{\iso{12}{Be}}{\iso{11}{Li}}$}},
-                    %         xtick={1,2,3},
-                    %         xmin=0.75, xmax=3.25,
-                    %         ymin=0, ymax=1,
-                    %         ymajorgrids=true, yminorgrids=true,
-                    %         ytick distance=0.25,
-                    %         grid style = {dashed},
-                    %         x tick label style = {font=\tiny},
-                    %     ]
-                    %     \addplot+ [
-                    %         error bars/.cd,
-                    %         y dir=both,y explicit,
-                    %     ] coordinates {
-                    %             (1, 0.25) +- (0,0)
-                    %             (2, 1) +- (0,0)
-                    %             (3, 0.65) +- (0, 0.15)
-                    %         };
-                    % \end{axis}
                 \end{tikzpicture}
             }
         \end{column}
@@ -308,21 +286,17 @@
                     \enumitem{1} \textbf{Target thickness} not measured during experiment:
                     \begin{itemize}
                         \item Set it from normalization of elastic
-                              % \item \textbf{Ongoing}: fix it from simulation
                     \end{itemize}}
             \end{column}%
             \begin{column}{0.5\linewidth}
                 \mycolorbox[1]{box4}{
                     \enumitem{2} ZDD had a poor performance.
                     \begin{itemize}
-                        \item $\epsilon \sim$ \qtyrange[range-phrase={\text{--}}, range-units=single]{20}{30}{\percent}
-                              % \item IC: \qty{30}{\percent}
-                              % \item Plastic: \qty{50}{\percent}
+                        \item Estimated $\sim$ \qtyrange[range-phrase={\text{--}}, range-units=single]{20}{30}{\percent}
                     \end{itemize}}
             \end{column}
         \end{columns}
         \mycolorbox[1]{box3}{
-            % From \textbf{npsimu}: $\epsilon_{\text{np}} = \epsilon_{\text{geo, MUST2}} \cdot \epsilon_{\text{reconstruction}} \cdot \textcolor{magenta}{\epsilon_{\text{geo, ZDD}}}$\\
             Agglutination of unknown factors: $\alpha = N_{\text{targets}} \cdot \epsilon_{\text{instrinsic, ZDD}}$
         }
     }%
@@ -355,475 +329,165 @@
             \includegraphics[width=1\linewidth]{figures/transfer_ex.pdf}
         \end{figure}
         \mycolorbox{box2}{
-            \textbf{First} state at \qty{2.7}{\MeV} of \iso{9}{Li} is seen too!
+            \textbf{First} state at \qty{2.7}{\MeV} of \iso{9}{Li} is seen too! \emoji{slightly-smiling-face}
         }
     }%
     \only<+>{
         \includegraphics[height=1.75em]{figures/Fresco2.png} is employed to
         perform the \textbf{DWBA} calculations.
-        \begin{columns}
-            \begin{column}{0.5\linewidth}
+        \begin{columns}[T]
+            \begin{column}{0.48\linewidth}
                 \mycolorbox[1]{box1}{%
                     \small
-                    \boxitem{1} OMP:
+                    \textbf{OMP}
                     \begin{itemize}
                         \item In: set from elastic
                         \item Out: Pang or HT1p\\
                               {\scriptsize\itshape D. Y. Pang et al., PRC 79, 91 (2009, 2015)}
                     \end{itemize}
                 }
-                \vspace{0.25em}
+                \vspace{-1em}
                 \mycolorbox[1]{box3}{%
                 \small
-                \boxitem{2} Light overlap {\scriptsize $\langle\iso{}{d}\vert\iso{}{t},\iso{3}{He}\rangle$}: Accurate GFMC\\
+                \textbf{Light overlap} \\
+                {\small $\langle\iso{}{t},\iso{3}{He}\vert\iso{}{d}\otimes \text{n,p}\rangle$}\\
+                \vspace{0.5em}
+                Accurate GFMC\\
                 {\scriptsize\itshape I. Brida et al., PRC 84 (2011)}
                 }%
-            \end{column}%
-            \begin{column}{0.5\linewidth}
-
+            \end{column}\hfill
+            \begin{column}{0.48\linewidth}
+                \mycolorbox[1]{box2}
+                {
+                \boxitem{1} \textbf{Heavy overlap}\\
+                {\small$\langle\iso{10,12}{Be}\vert\iso{9,11}{Be,Li}\otimes\iso{}{n,p}\rangle$}\\
+                \vspace{0.5em}
+                A standard WS\\
+                $r_{0} = \qty{1.25}{\femto\m}$, $a = \qty{0.65}{\femto\m}$
+                }
+                \vspace{-1em}
+                \mycolorbox[1]{box4}
+                {
+                \boxitem{2} \textbf{Heavy overlap}\\
+                {\small$\langle\iso{10,12}{Be}\vert\iso{9,11}{Be,Li}\otimes\iso{}{n,p}\rangle$}\\
+                \vspace{0.5em}
+                WS from novel \textit{Source Term Approach} (STA)\\
+                {\itshape\scriptsize N. Timofeyuk PRC 81 (2010)}
+                }
             \end{column}
         \end{columns}
     }
+\end{frame}
+
+\begin{frame}[t]{Results: transfer}
+    Angular distributions for all the states
+    \begin{figure}
+        \includegraphics[width=0.85\linewidth]{figures/all_xs.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[t]{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{}{t})\iso{9}{Be} }{10Be(d,t)9Be}}
+    \begin{figure}
+        \includegraphics[width=0.5\linewidth]{figures/sf0.pdf}
+    \end{figure}
+    \begin{columns}[c]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box3}{
+            SM calculation using \textbf{SFO-tls} interaction\\
+            {\itshape\scriptsize T. Suzuki, T. Otsuka PRC 78 (2008)}
+            }
+        \end{column}\hfill
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box1}{
+                \textbf{STA} yields \qty{40}{\percent} of SM value.\\
+                Better accord with exp values
+            }
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[t]{Results: \texorpdfstring{\iso{10}{Be}(d,\iso{3}{He})\iso{9}{Li} }{10Be(d,3He)9Li}}
-    \only<+>{
-        Excitation energy spectrum with all data:
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.6\textwidth]{figures/10Be_d3He_fit.eps}
-        \end{figure}
-        \mycolorbox{box1}{
-            Counts per $\theta_{\text{CM}}$ bin $\Rightarrow$ \textbf{Angular distribution}\\
-            Theo. model: finite-range \textbf{DWBA} in \textit{FRESCO} code
-        }
-    }%
-    \only<+>{%
-    \textbf{Ground state}: known $3/2^{-}$ ($\ell = 1$)
-    \begin{columns}[T]
-        \begin{column}{0.55\linewidth}
-            \includegraphics[width=1\linewidth]{figures/10Be_d3He_xs.eps}
-
-            \mycolorbox[1]{box3}{%
-            \small
-            \enumitem{2} {\scriptsize$\overlap{\iso{}{d}}{\iso{3}{He}}$}: Accurate GFMC\\
-            {\scriptsize\itshape I. Brida et al., PRC 84 (2011)}
-            }
-        \end{column}%
-        \begin{column}{0.45\linewidth}
-            \mycolorbox[1]{box2}{%
-                \small
-                OMP:
-                \begin{itemize}
-                    \item In: Haixia {\scriptsize\itshape H. An et al. PRC 73 (2006)}
-                    \item Out: Pang and HT1p\\
-                          {\scriptsize\itshape D. Y. Pang et al., PRC 79, 91 (2009, 2015)}
-                \end{itemize}
-            }
-            \vspace{-1.5em}
-            \mycolorbox[1]{box4}{%
-                \small
-                \enumitem{1} {\scriptsize $\overlap{\iso{10}{Be}}{\iso{9}{Li}}$}
-                \begin{itemize}
-                    \item A standard Wood-Saxon
-                    \item The novel source-term approach (STA) {\itshape\scriptsize N. Timofeyuk PRC 81 (2010)}
-                \end{itemize}
-            }
-        \end{column}
-    \end{columns}
-    }%
-    \only<+>{%
-        \vspace{-0.5em}
-        \begin{columns}[c]
-            \begin{column}{0.55\linewidth}
-                \includegraphics[width=1\linewidth]{figures/10Be_d3He_xs.eps}
-            \end{column}%
-            \begin{column}{0.45\linewidth}
-                \begin{tikzpicture}[
-                        % background rectangle/.style={fill=white},
-                        % show background rectangle,
-                        trim left=-20,
-                    ]
-                    \centering
-                    \begin{axis}[
-                            width=0.7\linewidth,
-                            scale only axis,
-                            % title={Ground state},
-                            xlabel={Potential},
-                            ylabel={$C^{2}S$},
-                            minor y tick num=1,
-                            xticklabels={Pang, HT1p},
-                            xtick={1,2},
-                            xmin=0.5, xmax=2.5,
-                            ymin=0, ymax=2.75,
-                            ymajorgrids=true, yminorgrids=false,
-                            ytick distance=0.5,
-                            legend style={
-                                    fill=none,
-                                    anchor=south,
-                                    at={(0.5, 1.1)},
-                                    font=\scriptsize,
-                                },
-                            legend columns=3,
-                            grid style = {dashed},
-                        ]
-                        \addplot+ [
-                            error bars/.cd,
-                            y dir=both,y explicit,
-                        ] coordinates {
-                                (1, 2.03) +- (0,0.11)
-                                (2, 1.352) +- (0,0.077)
-                            };
-                        \addplot+ [
-                            error bars/.cd,
-                            y dir=both,y explicit,
-                        ] coordinates {
-                                (1, 1.036) +- (0,0.058)
-                                (2, 0.747) +- (0,0.042)
-                            };
-                        % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.821) (\pgfkeysvalueof{/pgfplots/xmax}, 0.821)};
-                        % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.159) (\pgfkeysvalueof{/pgfplots/xmax}, 1.159)};
-                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.690) (\pgfkeysvalueof{/pgfplots/xmax}, 1.690)};
-                        \legend{stdWS, STA, SM}
-                    \end{axis}
-                \end{tikzpicture}\vspace{-0.75em}
-            \end{column}
-        \end{columns}
-        \vspace{-0.75em}
-        \begin{columns}[c]
-            \begin{column}{0.5\linewidth}
-                \mycolorbox[1]{box2}{%
-                    \small%
-                    \begin{itemize}
-                        % \item Small Pang\textminus HD1p dependence
-                        \item stdWS yields twice the STA SF
-                        \item Sensitivity to $r_0$ to be further investigated\\ {\scriptsize\itshape F. Flavigny et al., PRC 97 (2018)}
-                    \end{itemize}
-                }%
-            \end{column}%
-            \begin{column}{0.5\linewidth}
-                \mycolorbox{box4}{
-                    Shell model calculation with SFO-tls interaction:\\
-                    $C^{2}S = \qty{1.69}{}$
-                }
-            \end{column}
-        \end{columns}
-    }%
-    \only<+>{
-    The \textbf{first} excited state $1/2^{-}$ ($\ell = 1$) is also accessible.
-    \begin{columns}[c]
-        \begin{column}{0.55\linewidth}
-            \includegraphics[width=\textwidth]{figures/10Be_d3He_xs_g1.eps}
-        \end{column}
-        \begin{column}{0.45\linewidth}
-            \begin{tikzpicture}[
-                    % background rectangle/.style={fill=white},
-                    % show background rectangle,
-                    trim left=-20,
-                ]
-                \centering
-                \begin{axis}[
-                        width=0.7\linewidth,
-                        scale only axis,
-                        % title={1st excited},
-                        xlabel={Potential},
-                        ylabel={$C^{2}S$},
-                        minor y tick num=1,
-                        xticklabels={Pang, HT1p},
-                        xtick={1,2},
-                        xmin=0.5, xmax=2.5,
-                        ymin=0, ymax=0.5,
-                        ymajorgrids=true, yminorgrids=false,
-                        ytick distance=0.25,
-                        legend style={
-                                fill=none,
-                                anchor=south,
-                                at={(0.5, 1.1)},
-                                font=\scriptsize,
-                            },
-                        legend columns=3,
-                        grid style={dashed},
-                    ]
-                    \addplot+ [
-                        error bars/.cd,
-                        y dir=both,y explicit,
-                    ] coordinates {
-                            (1, 0.340) +- (0,0.065)
-                            (2, 0.219) +- (0,0.043)
-                        };
-                    \addplot+ [
-                        error bars/.cd,
-                        y dir=both,y explicit,
-                    ] coordinates {
-                            (1, 0.146) +- (0,0.028)
-                            (2, 0.104) +- (0,0.020)
-                        };
-                    % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.139) (\pgfkeysvalueof{/pgfplots/xmax}, 0.139)};
-                    % \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.43) (\pgfkeysvalueof{/pgfplots/xmax}, 0.43)};
-                    \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.279) (\pgfkeysvalueof{/pgfplots/xmax}, 0.279)};
-                    \legend{stdWS, STA, SM}
-                \end{axis}
-            \end{tikzpicture}
-        \end{column}
-    \end{columns}
-    \begin{columns}[c]
-        \begin{column}{0.5\linewidth}
-            \mycolorbox[1]{box2}{%
-                \begin{itemize}
-                    \item \textbf{First} direct measurement!
-                    \item Same trends as for g.s.
-                \end{itemize}
-            }
-        \end{column}
-        \begin{column}{0.5\linewidth}
-            \mycolorbox[1]{box4}{%
-                Shell model with SFO-tls:\\
-                $C^{2}S = \qty{0.279}{}$
-            }
-        \end{column}
-    \end{columns}
-    }
-    \only<+>{
-    The reduction factor $\text{R}_{\text{S}} = C^{2}S_{\text{exp}} / C^{2}S_{\text{SM}}$ is computed:
     \begin{figure}
-        \centering
-        \begin{tikzpicture}[
-                % background rectangle/.style={fill=white},
-                % show background rectangle,
-                trim left=-20,
-                % scale=0.8,
-            ]
-            \begin{axis}[
-                % width=0.3\linewidth,
-                width=5cm,
-                height=2.5cm,
-                scale only axis,
-                % xlabel={System},
-                ylabel={$\text{R}_{\text{S}}$},
-                % minor y tick num=1,
-                xticklabels={$\iso{9}{Li}_{\text{g.s}}$, $\iso{9}{Li}_{\text{1st}}$, $\iso{11}{Li}_{\text{g.s}}$},
-                xtick={1,2,3},
-                xmin=0.5, xmax=3.5,
-                ymin=0, ymax=1,
-                ymajorgrids=true, yminorgrids=false,
-                ytick distance=0.25,
-                legend style={
-                        fill=none,
-                        anchor=south,
-                        at={(0.5, 1.1)},
-                        font=\scriptsize,
-                    },
-                legend columns=3,
-                grid style={dashed},
-                axis on top,
-                ]
-                \addplot[fill=black!15, draw=none, forget plot] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.45) (\pgfkeysvalueof{/pgfplots/xmax}, 0.45)  (\pgfkeysvalueof{/pgfplots/xmax}, 0.72) (\pgfkeysvalueof{/pgfplots/xmin}, 0.72)};
-                \addplot+ [
-                    error bars/.cd,
-                    y dir=both,y explicit,
-                ] coordinates {
-                        (1, 0.776) +- (0, 0.044)
-                        (2, 0.78) +- (0, 0.15)
-                    };
-                \addplot+ [
-                    error bars/.cd,
-                    y dir=both,y explicit,
-                ] coordinates {
-                        (1, 0.429) +- (0, 0.024)
-                        (2, 0.369) +- (0, 0.072)
-                    };
-                \legend{stdWS, STA}
-            \end{axis}
-        \end{tikzpicture}
+        \includegraphics[width=0.9\linewidth]{figures/sf1.pdf}
     \end{figure}
     \begin{columns}[c]
-        \begin{column}{0.5\linewidth}
-            \mycolorbox{box4}{
-                Compatible with accepted values for \rs in transfer
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box3}{
+                Same significant differences SM-STA
             }
-        \end{column}%
-        \begin{column}{0.5\linewidth}
-            \mycolorbox{box2}{
-                Systematic \qty{50}{\percent} difference STA\textminus stdWS
+        \end{column}\hfill
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box1}{
+                Worse agreement within STA data\\
+                $\sim$ \qty{40}{\percent} discrepancies
             }
         \end{column}
     \end{columns}
-    }
 \end{frame}
 
 \begin{frame}[t]{Results: \texorpdfstring{\iso{12}{Be}(d,\iso{3}{He})\iso{11}{Li} }{12Be(d,3He)11Li}}
-    \only<1,2>{%
-    So far only the \textbf{ground state} $3/2^{-}$ ($\ell = 1$) is analyzed.
-    \begin{columns}[c]
-        \begin{column}{0.5\linewidth}
-            \only<1>{%
-                \vspace{1.25em}
-                \includegraphics[width=\textwidth]{figures/12Be_d3He_fit.eps}
-            }%
-            \only<2>{%
-                \begin{tikzpicture}[
-                        trim left=-30,
-                    ]
-                    \centering
-                    \begin{axis}[
-                            width=0.7\linewidth,
-                            scale only axis,
-                            xlabel={Potential},
-                            ylabel={$C^{2}S$},
-                            minor y tick num=2,
-                            xticklabels={Pang, HT1p},
-                            xtick={1,2},
-                            xmin=0.5, xmax=2.5,
-                            ymin=0.1, ymax=2,
-                            ymajorgrids=true, yminorgrids=false,
-                            % ytick distance=0.25,
-                            legend style={
-                                    fill=none,
-                                    anchor=south,
-                                    at={(0.5, 1.1)},
-                                    font=\scriptsize,
-                                },
-                            legend columns=3,
-                            grid style={dashed, very thin},
-                        ]
-                        \addplot+ [
-                            error bars/.cd,
-                            y dir=both,y explicit,
-                        ] coordinates {
-                                (1, 0.56) +- (0,0.11)
-                                (2, 0.280) +- (0,0.051)
-                            };
-                        \addplot+ [mark=none, densely dashdotted, thick] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 1.642) (\pgfkeysvalueof{/pgfplots/xmax}, 1.642)};
-                        \legend{stdWS, SM}
-                    \end{axis}
-                \end{tikzpicture}
-            }
-        \end{column}
-        \begin{column}{0.5\linewidth}
-            \includegraphics<1,2>[width=\textwidth]{figures/12Be_d3He_xs.eps}
-        \end{column}
-    \end{columns}
-    \only<1>{
-        \begin{columns}[c]
-            \begin{column}{0.5\linewidth}
-                \mycolorbox[1]{box2}{
-                    Much lower cross section!
-                }
-            \end{column}
-            \begin{column}{0.5\linewidth}
-                \mycolorbox[1]{box4}{
-                    Expected sizeable contribution of GMF
-                }
-            \end{column}
-        \end{columns}
-    }
-    \only<2>{
-        \begin{columns}[c]
-            \begin{column}{0.5\linewidth}
-                \mycolorbox[1]{box2}{
-                    STA \textbf{not available} yet!
-                }
-            \end{column}
-            \begin{column}{0.5\linewidth}
-                \mycolorbox[1]{box4}{
-                    Shell model with SFO-tls:\\
-                    $C^{2}S = \qty{1.642}{}$
-                }
-            \end{column}
-        \end{columns}
-    }
-    }%
-    \only<3>{%
-    The reduction factor $\text{R}_{\text{S}} = C^{2}S_{\text{exp}} / C^{2}S_{\text{SM}}$ is computed:
     \begin{figure}
-        \centering
-        \begin{tikzpicture}[
-                trim left=-20,
-            ]
-            \begin{axis}[
-                width=5cm,
-                height=2.5cm,
-                scale only axis,
-                ylabel={$\text{R}_{\text{S}}$},
-                % minor y tick num=1,
-                xticklabels={$\iso{9}{Li}_{\text{g.s}}$, $\iso{9}{Li}_{\text{1st}}$, $\iso{11}{Li}_{\text{g.s}}$},
-                xtick={1,2,3},
-                xmin=0.5, xmax=3.5,
-                ymin=0, ymax=1,
-                ymajorgrids=true, yminorgrids=false,
-                ytick distance=0.25,
-                legend style={
-                        fill=none,
-                        anchor=south,
-                        at={(0.5, 1.1)},
-                        font=\scriptsize,
-                    },
-                legend columns=3,
-                grid style={dashed},
-                axis on top,
-                ]
-                \addplot[fill=black!15, draw=none, forget plot] coordinates {(\pgfkeysvalueof{/pgfplots/xmin}, 0.45) (\pgfkeysvalueof{/pgfplots/xmax}, 0.45)  (\pgfkeysvalueof{/pgfplots/xmax}, 0.72) (\pgfkeysvalueof{/pgfplots/xmin}, 0.72)};
-                \addplot+ [
-                    error bars/.cd,
-                    y dir=both,y explicit,
-                ] coordinates {
-                        (1, 0.776) +- (0, 0.044)
-                        (2, 0.78) +- (0, 0.15)
-                        (3, 0.170) +- (0, 0. 031)
-                    };
-                \addplot+ [
-                    error bars/.cd,
-                    y dir=both,y explicit,
-                ] coordinates {
-                        (1, 0.429) +- (0, 0.024)
-                        (2, 0.369) +- (0, 0.072)
-                    };
-                \legend{stdWS, STA}
-            \end{axis}
-        \end{tikzpicture}
+        \includegraphics[width=0.5\linewidth]{figures/sf2.pdf}
     \end{figure}
     \begin{columns}[c]
-        \begin{column}{0.5\linewidth}
-            \mycolorbox[1]{box4}{
-                \begin{itemize}
-                    \item \qty{17(3)}{\percent} \textbf{reduction}!
-                          % \item Largest GMF only recovers up to \qty{\sim 35}{\percent}
-                    \item Need to correct for \textbf{GMF} (ongoing)
-                \end{itemize}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box3}{
+                Gigantic quenching, signature of \textbf{GMF} playing a role
             }
-        \end{column}%
-        \begin{column}{0.5\linewidth}
-            \mycolorbox[1]{box2}{
-                \begin{itemize}
-                    \item \textbf{STA} still in development
-                    \item \textbf{stdWS} requires physical constraints to $r_0$
-                \end{itemize}
-                % What about \textbf{STA}?\\
-                % Still in development
+        \end{column}\hfill
+        \begin{column}{0.48\linewidth}
+            \mycolorbox[1]{box1}{
+                No STA predictions.\\
+                In contact with N.Timofeyuk to develop them
             }
         \end{column}
     \end{columns}
-    }
+\end{frame}
+
+\begin{frame}[t]{Overall results}
+    The reduction factor $\text{R}_{\text{S}} = C^{2}S_{\text{exp}} / C^{2}S_{\text{SM}}$ is computed:
+    \begin{figure}
+        \includegraphics[width=0.9\linewidth]{figures/rs.pdf}
+    \end{figure}
+    \begin{columns}[T]
+        \begin{column}{0.33\linewidth}
+            \mycolorbox[0.95]{box3}{
+                SM \textbf{compatible} with current systematics!
+            }
+        \end{column}\hfill
+        \begin{column}{0.33\linewidth}
+            \mycolorbox[0.95]{box2}{
+                \textbf{\iso{11}{Li}} requires GMF correction\\
+                (pending)
+            }
+        \end{column}\hfill
+        \begin{column}{0.33\linewidth}
+            \mycolorbox[0.95]{box1}
+            {
+                \textbf{STA} improves SRC modelling but falls short
+            }
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}[c]{Conclusions}
-    \mycolorbox{box1}{
-        Angular distributions for \iso{10,12}{Be}(d,\iso{3}{He}) have been extracted and compared with DWBA
+    \mycolorbox{box3}{
+        Angular distributions for \iso{9}{Be,Li} and \iso{11}{Li} have been extracted and compared with DWBA
     }
     \vspace{1em}
 
     \mycolorbox{box2}{
-        Found strong sensitivity to nuclear overlap: stdWS or newer STA
+        \rs for SM agrees with literature, while STA still understimates NN correlations
     }
     \vspace{1em}
 
-    \mycolorbox{box3}{
-        \rs for {\scriptsize $\overlap{\iso{10}{Be}}{\iso{9}{Li}}$} in agreement with systematics
+    \mycolorbox{box1}{
+        \iso{11}{Li} needs correction for a major geometrical mismatch value
     }
     \vspace{1em}
 
     \mycolorbox{box4}{
-        \rs for {\scriptsize $\overlap{\iso{12}{Be}}{\iso{11}{Li}}$} displays a strong reduction linked to GMF
+        STA requires further developments to reach \iso{11}{Li}
     }%
 \end{frame}
 
@@ -943,99 +607,14 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}[noframenumbering]{Elastic cross sections}
-    Normalization of all cross-sections was obtained from fits to the elastic data using the Haixa potential.
-    \begin{columns}[T]
-        \begin{column}{0.5\linewidth}
-            \begin{tikzpicture}
-                \node[anchor=south west, inner sep=0pt] (image) at(0, 0){\includegraphics[width=1\linewidth]{figures/10Be_dd_xs.eps}};
-                \myscope[false]{
-                    \node at (image.north) {\iso{10}{Be}(d,d)};
-                }
-            \end{tikzpicture}
-        \end{column}
-        \begin{column}{0.5\linewidth}
-            \begin{tikzpicture}
-                \node[anchor=south west, inner sep=0pt] (image) at(0, 0){\includegraphics[width=1\linewidth]{figures/12Be_dd_xs.eps}};
-                \myscope[false]{
-                    \node at (image.north) {\iso{12}{Be}(d,d)};
-                }
-            \end{tikzpicture}
-        \end{column}
-    \end{columns}
-    \vspace{1.25em}
-    \mycolorbox{box2}{
-        Best OMP: new ones DA1p and Haixia!
+\begin{frame}[noframenumbering]{What happens with \texorpdfstring{\iso{11}{Be}}{11Be}?}
+    It shows a strong inhibition of the ground state.
+    \begin{figure}
+        \includegraphics[width=0.8\linewidth]{figures/12Be_dt_ex.pdf}
+    \end{figure}
+    \mycolorbox{box4}{
+        Impossible to disentangle excited states \emoji{frowning-face}
     }
-\end{frame}
-
-\begin{frame}[noframenumbering]{Crosscheck: \texorpdfstring{\iso{10}{Be}(d,t)\iso{9}{Be} }{10Be(d,t)9Be}}
-    \begin{columns}[T]
-        \begin{column}{0.5\linewidth}
-            \only<1>{%
-                \includegraphics[width=\textwidth]{figures/10Be_dt_fit.eps}
-            }%
-            \only<2>{%
-                \begin{tikzpicture}[
-                        % background rectangle/.style={fill=white},
-                        % show background rectangle,
-                        trim left=-30,
-                    ]
-                    \centering
-                    \begin{axis}[
-                            width=0.65\linewidth,
-                            scale only axis,
-                            % title={},
-                            xlabel={Potential},
-                            ylabel={$C^{2}S$},
-                            minor y tick num=1,
-                            xticklabels={Pang, HT1p},
-                            xtick={1,2},
-                            xmin=0.5, xmax=2.5,
-                            ymin=1.75, ymax=3,
-                            ymajorgrids=true, yminorgrids=false,
-                            ytick distance=0.25,
-                            legend style={fill=none},
-                            grid style={dashed},
-                        ]
-                        \addplot+ [
-                            error bars/.cd,
-                            y dir=both,y explicit,
-                        ] coordinates {
-                                (1, 2.512) +- (0,0.072)
-                                (2, 2.167) +- (0,0.062)
-                            };
-                        \addplot+ [
-                            error bars/.cd,
-                            y dir=both,y explicit,
-                        ] coordinates {
-                                (1, 2.315) +- (0,0.066)
-                                (2, 2.004) +- (0,0.057)
-                            };
-                        \legend{stdWS, STA}
-                    \end{axis}
-                \end{tikzpicture}
-            }%
-        \end{column}
-        \begin{column}{0.5\linewidth}
-            \includegraphics[width=\textwidth]{figures/10Be_dt_xs.eps}
-        \end{column}
-    \end{columns}
-    \vspace{1.5em}
-    \begin{columns}[c]
-        \begin{column}{0.48\linewidth}
-            \mycolorbox[1]{box2}{
-                Same behaviour as for the other channels
-            }
-        \end{column}
-        \begin{column}{0.48\linewidth}
-            \mycolorbox[1]{box4}{
-            Match with \qty{\sim 65}{\percent} reduction \\
-            if $C^{2}S_{\text{SM}} = \qty{3.1}{}$\\
-            Not likely!
-            }
-        \end{column}
-    \end{columns}
 \end{frame}
 
 \begin{frame}[noframenumbering]{Kinematical lines}
