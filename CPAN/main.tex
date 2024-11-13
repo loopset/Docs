@@ -267,13 +267,14 @@
 \end{frame}
 
 \section{Results}
-\begin{frame}[c]{Results: (In)elastic \texorpdfstring{\iso{10,12}{Be}(d,d)\iso{10,12}{Be} }{10,12Be(d,d)10,12Be}}
+\begin{frame}[c]{Results: Elastic \texorpdfstring{\iso{10,12}{Be}(d,d)\iso{10,12}{Be} }{10,12Be(d,d)10,12Be}}
     \only<+>{
-        The \textbf{ground state} provides a means to test our normalization
+        The \textbf{ground state} sets our normalization!
         \begin{figure}
             \includegraphics[width=1\linewidth]{figures/elastic_ex.pdf}
         \end{figure}
-        First $2^{+}$ is seen in both cases but not yet exploited!
+        \mycolorbox{box2}{
+            First $2^{+}$ is seen in both cases but not yet exploited!}
     }
     \only<+>{
         Experimental cross-section formula:
@@ -298,6 +299,10 @@
         \end{columns}
         \mycolorbox[1]{box3}{
             Agglutination of unknown factors: $\alpha = N_{\text{targets}} \cdot \epsilon_{\text{instrinsic, ZDD}}$
+        }
+        \vspace{-0.35em}
+        \mycolorbox[1]{box1}{
+            $\alpha$ is determined from fits of theoretical cross-sections to data
         }
     }%
     \only<+>{
@@ -387,7 +392,7 @@
 \end{frame}
 
 
-\begin{frame}[t]{Overall results}
+\begin{frame}[t]{Results: quenching factor}
     The reduction factor $\text{R}_{\text{S}} = C^{2}S_{\text{exp}} / C^{2}S_{\text{theo}}$ is computed:
     \begin{figure}
         \begin{tikzpicture}
@@ -415,7 +420,8 @@
             }}%
             \only<2>{
                 \mycolorbox[0.95]{box1}{
-                    \rs$= 1$ is expected
+                    \rs$= 1$\\
+                     is expected now
                 }}
         \end{column}\hfill
         \begin{column}{0.33\linewidth}
