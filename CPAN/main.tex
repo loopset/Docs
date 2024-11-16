@@ -284,17 +284,14 @@
         \begin{columns}[c]
             \begin{column}{0.5\linewidth}
                 \mycolorbox[1]{box2}{
-                    \enumitem{1} \textbf{Target thickness} not measured during experiment:
-                    \begin{itemize}
-                        \item Set it from normalization of elastic
-                    \end{itemize}}
+                    \enumitem{1} \textbf{Target thickness} not measured during experiment
+                }
             \end{column}%
             \begin{column}{0.5\linewidth}
                 \mycolorbox[1]{box4}{
-                    \enumitem{2} ZDD had a poor performance.
-                    \begin{itemize}
-                        \item Estimated $\sim$ \qtyrange[range-phrase={\text{--}}, range-units=single]{20}{30}{\percent}
-                    \end{itemize}}
+                    \enumitem{2} Missing intrinsic ZDD $\epsilon$\\
+                    $\sim$ \qtyrange[range-phrase={\text{--}}, range-units=single]{20}{30}{\percent}
+                }
             \end{column}
         \end{columns}
         \mycolorbox[1]{box3}{
@@ -342,7 +339,7 @@
         perform the \textbf{DWBA} calculations.
         \begin{columns}[c]
             \begin{column}{0.48\linewidth}
-                \mycolorbox[1]{box1}{%
+                \mycolorbox[1]{box4}{%
                     \small
                     \textbf{OMP}
                     \begin{itemize}
@@ -352,7 +349,7 @@
                     \end{itemize}
                 }
                 \vspace{-1em}
-                \mycolorbox[1]{box3}{%
+                \mycolorbox[1]{box2}{%
                 \small
                 \textbf{Light overlap} \\
                 {\small $\langle\iso{}{t},\iso{3}{He}\vert\iso{}{d}\otimes \text{n,p}\rangle$}\\
@@ -362,7 +359,7 @@
                 }%
             \end{column}\hfill
             \begin{column}{0.48\linewidth}
-                \mycolorbox[1]{box2}
+                \mycolorbox[1]{box3}
                 {
                 \boxitem{1} \textbf{Heavy overlap}\\
                 {\small$\langle\iso{10,12}{Be}\vert\iso{9,11}{Be,Li}\otimes\iso{}{n,p}\rangle$}\\
@@ -371,7 +368,7 @@
                 $r_{0} = \qty{1.25}{\femto\m}$, $a = \qty{0.65}{\femto\m}$
                 }
                 \vspace{-1em}
-                \mycolorbox[1]{box4}
+                \mycolorbox[1]{box1}
                 {
                 \boxitem{2} \textbf{Heavy overlap}\\
                 {\small$\langle\iso{10,12}{Be}\vert\iso{9,11}{Be,Li}\otimes\iso{}{n,p}\rangle$}\\
@@ -457,16 +454,16 @@
     \vspace{1em}
 
     \mycolorbox{box2}{
-        \rs for SM agrees with literature, while STA still understimates NN correlations
-    }
-    \vspace{1em}
-
-    \mycolorbox{box1}{
-        \iso{11}{Li} needs correction for a major geometrical mismatch value
+        \rs for SPM agrees with literature, while STA still understimates NN correlations
     }
     \vspace{1em}
 
     \mycolorbox{box4}{
+        \iso{11}{Li} needs correction for a major geometrical mismatch value
+    }
+    \vspace{1em}
+
+    \mycolorbox{box1}{
         STA requires further developments to reach \iso{11}{Li}
     }%
 \end{frame}
