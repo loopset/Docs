@@ -237,34 +237,6 @@
     \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[t]{A glance at the analysis}
-    \begin{columns}[T]
-        \begin{column}{0.48\linewidth}
-            \mycolorbox{box4}{
-                \enumitem{1} \textbf{Heavy} ID at \qty{0}{\degree}
-            }
-            \begin{tikzpicture}
-                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
-                    \includegraphics[width=1\linewidth]{figures/heavy.pdf}
-                };
-            \end{tikzpicture}
-        \end{column}
-        \begin{column}{0.48\linewidth}
-            \mycolorbox{box2}{
-                \enumitem{2} \textbf{Light} PID in DSSD
-            }
-            \begin{tikzpicture}
-                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
-                    \includegraphics[width=1\linewidth]{figures/light.pdf}
-                };
-            \end{tikzpicture}
-        \end{column}
-    \end{columns}
-    \mycolorbox{box1}{
-        \enumitem{3} $E_{x}$ from \textbf{missing mass technique}
-        $E_{\textrm{beam}} + (E,\theta)_{\textrm{Lab}} \rightarrow E_{x}$
-    }
-\end{frame}
 
 \section{Results}
 \begin{frame}[c]{Results: Elastic \texorpdfstring{\iso{10,12}{Be}(d,d)\iso{10,12}{Be} }{10,12Be(d,d)10,12Be}}
@@ -471,10 +443,12 @@
 \begin{frame}[plain]{Acknowledgments}
     \begin{columns}[T]
         \begin{column}{0.33\linewidth}
-            The E748 collaboration:
+            % The E748 collaboration:
             \begin{itemize}\scriptsize
                 \item Santiago:\\
-                      B. Fernández
+                      B. Fernández\\
+                      M. Caamaño\\
+                      J. Lois
                 \item LPC-Caen:\\
                       A. Matta\\
                       F. Delaunay\\
@@ -582,6 +556,35 @@
                 \enumitem{2} Many-body dynamics and/or core excitations}
         \end{column}
     \end{columns}
+\end{frame}
+
+\begin{frame}[t]{A glance at the analysis}
+    \begin{columns}[T]
+        \begin{column}{0.48\linewidth}
+            \mycolorbox{box4}{
+                \enumitem{1} \textbf{Heavy} ID at \qty{0}{\degree}
+            }
+            \begin{tikzpicture}
+                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
+                    \includegraphics[width=1\linewidth]{figures/heavy.pdf}
+                };
+            \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            \mycolorbox{box2}{
+                \enumitem{2} \textbf{Light} PID in DSSD
+            }
+            \begin{tikzpicture}
+                \node[anchor = south west, inner sep = 0pt] (image) at (0,0){
+                    \includegraphics[width=1\linewidth]{figures/light.pdf}
+                };
+            \end{tikzpicture}
+        \end{column}
+    \end{columns}
+    \mycolorbox{box1}{
+        \enumitem{3} $E_{x}$ from \textbf{missing mass technique}
+        $E_{\textrm{beam}} + (E,\theta)_{\textrm{Lab}} \rightarrow E_{x}$
+    }
 \end{frame}
 
 \begin{frame}[noframenumbering]{What happens with \texorpdfstring{\iso{11}{Be}}{11Be}?}
