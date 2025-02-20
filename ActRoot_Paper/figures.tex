@@ -1,10 +1,14 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfmath}
 \usepackage{ifthen}
-\usetikzlibrary{shapes.misc, shapes.geometric, decorations.pathreplacing, calc, patterns, external}
-\tikzexternalize[prefix=figures/]
-\tikzset{external/force remake}
+\usetikzlibrary{shapes.misc, shapes.geometric, positioning,
+decorations.pathreplacing, calc, patterns, external,
+arrows.meta}
+% \tikzexternalize[prefix=figures/]
+% \tikzset{external/force remake}
 
 % Define some colors
 \definecolor{generic}{named}{ProcessBlue}
@@ -13,6 +17,14 @@
 \definecolor{heavy}{named}{Rhodamine}
 \definecolor{line}{named}{Plum}
 
+% Text box
+\tikzstyle{textbox} = [draw=none,
+minimum width = 4.2cm, minimum height = 2.5cm, 
+text width = 3.8cm,
+inner sep = 2mm]
+\tikzstyle{labelbox} = [rectangle, rounded corners, 
+text centered, fill=cyan!20,
+inner sep = 0.5cm]
 % Declare objects
 \tikzset{
   pics/track/.style args={#1/#2/#3/#4/#5/#6}{
@@ -66,89 +78,150 @@
 }
 
 \begin{document}
-\section{Filter}
-\subsection{BreakChi2}
+\section{Signal treatment}
 
-Initial approach:
-
-\tikzsetnextfilename{break_chi2_0}
+\tikzsetnextfilename{signal}
 \begin{tikzpicture}
-	\pic {actar};
+	\begin{axis}[
+			% width=12cm, height=6cm,
+			y tick label style={/pgf/number format/sci},
+			ylabel style={yshift=10pt},
+			xlabel={Time bucket}, ylabel={Pulse height [fC]},
+			ymin=0, ymax=4096,
+			domain=0:128, samples=800,
+			axis lines=left
+		]
+		\addplot[thick] { (200 + 50 * (rand - 0.5) + 3500 * exp(-((x-50)^2)/15) }; % Random baseline + Gaussian peak
+		\coordinate(peak) at (axis cs:50, 3500+50);
+		\node[fill=red, circle, inner sep=2pt, thick] at (peak) {};
+		\draw[dashed] (peak) -- (50, 0);
+		\draw[dashed] (peak) -- (axis cs:0, 3500 +50);
+		\node[pin={[pin distance=1cm]45:{$Z$ coordinate}}] at (axis cs:50, 0) {};
+		\node[pin={[pin distance=1cm]-70:{$Q$ of voxel}}] at (axis cs:0, 3500 + 50) {};
 
-	\pic (beam) {track={0/3/0/3/generic/}};
-	\pic (light) {track={3/3/70/3.2/generic/}};
-	\pic (heavy) {track={3/3/-10/3.1/generic/}};
-
-	% define line coordinates
-	\coordinate (up0) at (0, 3.2);
-	\coordinate (up1) at (6, 3.2);
-	\coordinate (low0) at (0, 2.8);
-	\coordinate (low1) at (6, 2.8);
-	\draw[very thick, line] (up0) -- (up1);
-	\draw[very thick, line] (low0) -- (low1);
+	\end{axis}
 \end{tikzpicture}
 
-After applying the breakchi2 operation:
+\section{ActRoot scheme}
 
-\tikzsetnextfilename{break_chi2_1}
-\begin{tikzpicture}
-	\pic {actar};
+\tikzsetnextfilename{actroot_scheme}
+\begin{tikzpicture}[scale=0.8]
+	\coordinate (a) at (0, 0);
+	\coordinate (b) at (-4.5, -6);
+	\coordinate (c) at (4.5, -6);
+	\coordinate (d) at (0, -12);
+	\node[draw, labelbox](raw) at (a) {\textbf{\Large Raw}};
+	\node[draw, textbox, right=0.2cm of raw] (textRaw) {
+		$\bullet$ $(X,Y,Z,Q)$\\
+		$\bullet$ Silicons, triggers, scalers...
+	};
+	\node[textbox](tpc) at (b) {\textbf{\Large TPCData}\\
+		$\bullet$ Clusters\\
+		$\bullet$ Noise\\
+		$\bullet$ Reaction point(s)};
+	\node[draw, textbox](sil) at (c) {
+	\textbf{\Large SilData}\\ {
 
-	\pic (beam) {track={0/3/0/3/generic/}};
-	\pic (light) {track={3/3/70/3.2/light/}};
-	\pic (heavy) {track={3/3/-10/3.1/heavy/}};
-
-	% define line coordinates
-	\coordinate (up0) at (0, 3.2);
-	\coordinate (up1) at (6, 3.2);
-	\coordinate (low0) at (0, 2.8);
-	\coordinate (low1) at (6, 2.8);
-	\draw[very thick, line] (up0) -- (up1);
-	\draw[very thick, line] (low0) -- (low1);
-
-	\begin{scope}
-		\clip (up0) -- (up1) -- (low1) -- (low0);  % Clip between the lines
-		\pic (beam) {track={0/3/0/3/generic/}};
-		\pic (light) {track={3/3/70/3.2/generic/}};
-		\pic (heavy) {track={3/3/-10/3.1/generic/}};
-	\end{scope}
+	$\bullet$ Calibrated silicon energies\\
+	$\bullet$ Selected scalers, triggers
+	}
+	};
+	\node[draw, textbox](merger) at (d) {
+		\textbf{\Large MergerData}\\
+		$\bullet$ Angles\\
+		$\bullet$ Energy loss in gas\\
+		$\bullet$ Trackk length\\
+	};
+	%% Raw to TPC and Sil
+	\draw[-{Latex[length=3mm]}] (raw) -- (tpc) node[midway, above] {Ola};
+	\draw[-{Latex[length=3mm]}] (raw) -- (sil) node[midway, above] {Ola};
+	%% Children to grandchild
+	\draw[-{Latex[length=3mm]}] (tpc) -- (merger) node[midway, above] {Aaaa};
+	\draw[-{Latex[length=3mm]}] (sil) -- (merger) node[midway, above] {Aaaa};
 \end{tikzpicture}
-
-\subsection{Merge broken tracks}
-
-\tikzsetnextfilename{merge}
-\begin{tikzpicture}
-	\pic {actar};
-
-	\pic (beam) {track={0/3/0/3/generic/}};
-	\pic (heavy) {track={3-0.1/3/-2/3.1/generic/}};
-	\pic (light) {track={3/3/45/1.6/generic/true}};
-	\pic (light) {track={4.25/4.25/47/2.4/generic/true}};
-\end{tikzpicture}
-
-\subsection{Pileup}
-\tikzsetnextfilename{pileup}
-\begin{tikzpicture}
-
-	% define line coordinates
-	\coordinate (up0) at (0, 4);
-	\coordinate (up1) at (6, 4);
-	\coordinate (low0) at (0, 2);
-	\coordinate (low1) at (6, 2);
-	\draw[very thick, line] (up0) -- (up1);
-	\fill[orange!40] (up0) -- (up1) -- (6,6) -- (0,6) -- cycle;
-	\draw[very thick, line] (low0) -- (low1);
-	\fill[orange!40] (low0) -- (low1) -- (6,0) -- (0,0) -- cycle;
-
-	\pic (beam) {track={0/3/0/6/generic/}};
-	\pic (other) {track={0/5/0/6/gray/}};
-	\pic (other) {track={0/1/0/6/gray/}};
-
-	\pic {actar={Z}};
-\end{tikzpicture}
-
-\subsection{Fine analysis of tracks}
-It's going to be difficult to get the same images as Juan has
+% \section{Filter}
+% \subsection{BreakChi2}
+%
+% Initial approach:
+%
+% \tikzsetnextfilename{break_chi2_0}
+% \begin{tikzpicture}
+% 	\pic {actar};
+%
+% 	\pic (beam) {track={0/3/0/3/generic/}};
+% 	\pic (light) {track={3/3/70/3.2/generic/}};
+% 	\pic (heavy) {track={3/3/-10/3.1/generic/}};
+%
+% 	% define line coordinates
+% 	\coordinate (up0) at (0, 3.2);
+% 	\coordinate (up1) at (6, 3.2);
+% 	\coordinate (low0) at (0, 2.8);
+% 	\coordinate (low1) at (6, 2.8);
+% 	\draw[very thick, line] (up0) -- (up1);
+% 	\draw[very thick, line] (low0) -- (low1);
+% \end{tikzpicture}
+%
+% After applying the breakchi2 operation:
+%
+% \tikzsetnextfilename{break_chi2_1}
+% \begin{tikzpicture}
+% 	\pic {actar};
+%
+% 	\pic (beam) {track={0/3/0/3/generic/}};
+% 	\pic (light) {track={3/3/70/3.2/light/}};
+% 	\pic (heavy) {track={3/3/-10/3.1/heavy/}};
+%
+% 	% define line coordinates
+% 	\coordinate (up0) at (0, 3.2);
+% 	\coordinate (up1) at (6, 3.2);
+% 	\coordinate (low0) at (0, 2.8);
+% 	\coordinate (low1) at (6, 2.8);
+% 	\draw[very thick, line] (up0) -- (up1);
+% 	\draw[very thick, line] (low0) -- (low1);
+%
+% 	\begin{scope}
+% 		\clip (up0) -- (up1) -- (low1) -- (low0);  % Clip between the lines
+% 		\pic (beam) {track={0/3/0/3/generic/}};
+% 		\pic (light) {track={3/3/70/3.2/generic/}};
+% 		\pic (heavy) {track={3/3/-10/3.1/generic/}};
+% 	\end{scope}
+% \end{tikzpicture}
+%
+% \subsection{Merge broken tracks}
+%
+% \tikzsetnextfilename{merge}
+% \begin{tikzpicture}
+% 	\pic {actar};
+%
+% 	\pic (beam) {track={0/3/0/3/generic/}};
+% 	\pic (heavy) {track={3-0.1/3/-2/3.1/generic/}};
+% 	\pic (light) {track={3/3/45/1.6/generic/true}};
+% 	\pic (light) {track={4.25/4.25/47/2.4/generic/true}};
+% \end{tikzpicture}
+%
+% \subsection{Pileup}
+% \tikzsetnextfilename{pileup}
+% \begin{tikzpicture}
+%
+% 	% define line coordinates
+% 	\coordinate (up0) at (0, 4);
+% 	\coordinate (up1) at (6, 4);
+% 	\coordinate (low0) at (0, 2);
+% 	\coordinate (low1) at (6, 2);
+% 	\draw[very thick, line] (up0) -- (up1);
+% 	\fill[orange!40] (up0) -- (up1) -- (6,6) -- (0,6) -- cycle;
+% 	\draw[very thick, line] (low0) -- (low1);
+% 	\fill[orange!40] (low0) -- (low1) -- (6,0) -- (0,0) -- cycle;
+%
+% 	\pic (beam) {track={0/3/0/6/generic/}};
+% 	\pic (other) {track={0/5/0/6/gray/}};
+% 	\pic (other) {track={0/1/0/6/gray/}};
+%
+% 	\pic {actar={Z}};
+% \end{tikzpicture}
+%
+% \subsection{Fine analysis of tracks}
+% It's going to be difficult to get the same images as Juan has
 
 
 \end{document}
