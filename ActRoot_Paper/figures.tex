@@ -1,7 +1,9 @@
 \documentclass[12pt]{article}
+\usepackage{newtxtext, newtxmath}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{pgfmath}
 \usepackage{ifthen}
 \usetikzlibrary{shapes.misc, shapes.geometric, positioning,
@@ -19,12 +21,15 @@ arrows.meta}
 
 % Text box
 \tikzstyle{textbox} = [draw=none,
-minimum width = 4.2cm, minimum height = 2.5cm, 
-text width = 3.8cm,
+minimum width = 3.5cm, minimum height = 2.75cm, 
+text width = 3.8cm,font=\small,
 inner sep = 2mm]
 \tikzstyle{labelbox} = [rectangle, rounded corners, 
-text centered, fill=cyan!20,
+text centered,
 inner sep = 0.5cm]
+\tikzstyle{actionbox} = [
+font=\bfseries\itshape,
+]
 % Declare objects
 \tikzset{
   pics/track/.style args={#1/#2/#3/#4/#5/#6}{
@@ -105,39 +110,41 @@ inner sep = 0.5cm]
 \section{ActRoot scheme}
 
 \tikzsetnextfilename{actroot_scheme}
-\begin{tikzpicture}[scale=0.8]
+\begin{tikzpicture}[scale=0.7]
 	\coordinate (a) at (0, 0);
-	\coordinate (b) at (-4.5, -6);
-	\coordinate (c) at (4.5, -6);
+	\coordinate (b) at (-4, -6);
+	\coordinate (c) at (4, -6);
 	\coordinate (d) at (0, -12);
-	\node[draw, labelbox](raw) at (a) {\textbf{\Large Raw}};
-	\node[draw, textbox, right=0.2cm of raw] (textRaw) {
-		$\bullet$ $(X,Y,Z,Q)$\\
-		$\bullet$ Silicons, triggers, scalers...
+	\node[draw, labelbox, fill=gray!20](raw) at (a) {\textbf{\large Raw}};
+	\node[draw, textbox, right=0.1cm of raw] (textRaw) {
+		\textendash\ $(X,Y,Z,Q)$\\
+		\textendash\ Silicons, triggers, scalers...
 	};
-	\node[textbox](tpc) at (b) {\textbf{\Large TPCData}\\
-		$\bullet$ Clusters\\
-		$\bullet$ Noise\\
-		$\bullet$ Reaction point(s)};
-	\node[draw, textbox](sil) at (c) {
-	\textbf{\Large SilData}\\ {
-
-	$\bullet$ Calibrated silicon energies\\
-	$\bullet$ Selected scalers, triggers
-	}
+	\node[draw, labelbox, fill=cyan!20](tpc) at (b) {\textbf{\large TPCData}};
+	\node[draw, textbox, left=-0.5cm of tpc](textTpc) {
+		\textendash\ Clusters\\
+		\textendash\ Noise\\
+		\textendash\ Reaction point(s)};
+  \node[draw, labelbox, fill=orange!15, text width=2.35cm](sil) at (c) {\textbf{SilData\\ModularData}};
+	\node[textbox, right=0.1cm of sil](textSil){
+		\textendash\ Calibrated silicon energies\\
+		\textendash\ Selected scalers, triggers
 	};
-	\node[draw, textbox](merger) at (d) {
-		\textbf{\Large MergerData}\\
-		$\bullet$ Angles\\
-		$\bullet$ Energy loss in gas\\
-		$\bullet$ Trackk length\\
+	\node[draw, labelbox, fill=green!10](merger) at (d) {\textbf{\large MergerData}};
+	\node[textbox,right=0.1cm of merger](textMerger) {
+		\textendash\ Angles\\
+		\textendash\ Energy loss in gas\\
+		\textendash\ Trackk length\\
 	};
 	%% Raw to TPC and Sil
-	\draw[-{Latex[length=3mm]}] (raw) -- (tpc) node[midway, above] {Ola};
-	\draw[-{Latex[length=3mm]}] (raw) -- (sil) node[midway, above] {Ola};
+	\draw[-{Latex[length=3mm]}] (raw) -- (tpc)
+    node[midway, above left=0.2 and 0.5cm, actionbox] {Clustering};
+	\draw[-{Latex[length=3mm]}] (raw) -- (sil)
+    node[midway, above right=0.2 and 0.5cm, actionbox] {Calibration};
 	%% Children to grandchild
-	\draw[-{Latex[length=3mm]}] (tpc) -- (merger) node[midway, above] {Aaaa};
-	\draw[-{Latex[length=3mm]}] (sil) -- (merger) node[midway, above] {Aaaa};
+	\draw[-{Latex[length=3mm]}] (tpc) -- (merger) 
+    node[midway, above, left=0.0 and 0.5cm, actionbox] {Filtering};
+	\draw[-{Latex[length=3mm]}] (sil) -- (merger);
 \end{tikzpicture}
 % \section{Filter}
 % \subsection{BreakChi2}
