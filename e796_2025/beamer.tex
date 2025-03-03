@@ -99,10 +99,113 @@
 		\includegraphics[width=0.95\textwidth]{figures/elastic_xz.pdf}
 		% \caption{}
 	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.45\linewidth}
+			\mycolorbox{box1}{Only 1st excited state}
+		\end{column}%
+		\begin{column}{0.45\linewidth}
+			\mycolorbox{box2}{
+				Up to 7 $E_{x} > 0$ states observed!
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
 
+\begin{frame}{Results: \iso{20}{O}(d,d)}
+	Angular distributions for the \textbf{ground-state} and first excited states:
+	\begin{figure}
+		\includegraphics[width=0.85\linewidth]{figures/d_ang.pdf}
+	\end{figure}
+	\mycolorbox{box3}{Remaining states: low stats. Coming soon.}
+\end{frame}
+
+\begin{frame}{Results: \iso{20}{O}(p,p)}
+	For the proton scattering:
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{figures/p_ang.pdf}
+	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.55\linewidth}
+			\mycolorbox{box2}{
+				\textbf{Issue}: gs not reproduced by any OMP!\\
+				\emoji{cold-sweat}
+			}
+		\end{column}%
+		\begin{column}{0.45\linewidth}
+			\mycolorbox{box4}{
+				1st excited as well?
+			}
+		\end{column}
+	\end{columns}
 
 \end{frame}
 
+\begin{frame}{About normalizations}
+	Just to recall the xs formula:
+	\begin{equation*}
+		\frac{d\sigma}{d\Omega} = \frac{N}{ \textcolor{red}{N_{\text{beam}}N_{\text{targets}}} \epsilon \Delta \Omega} = \frac{N}{ \textcolor{red}{\alpha} \epsilon \Delta \Omega}
+	\end{equation*}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{box2}{
+				\begin{itemize}
+					\item $N_{\text{beam}} \leftarrow$ CFA counter
+					\item $N_{\text{targets}} \leftarrow$ Gas mixture. Sensitive to p.
+				\end{itemize}
+				Theo. lines need \textbf{scaling} ($\alpha$) to match experimental data\\
+				$\alpha$ in agreement with Juan's\\
+				$\Rightarrow$ Not likely $\epsilon$ issue
+				% 	% Not likely an issue of reconstruction $\epsilon$
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{box4}{
+				Which norm should we use?
+				\begin{figure}
+					\includegraphics[width=0.9\textwidth]{figures/theo.pdf}
+				\end{figure}
+				Protons are more "reliable" \emoji{thinking}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
 
+\begin{frame}{Results: \iso{20}{O}(d,t)}
+	Excited states are populated up to $\sim\qty{15}{\MeV}$:
+	\begin{figure}
+		\includegraphics[width=0.95\textwidth]{figures/dt_xs.pdf}
+	\end{figure}
+	\mycolorbox{box3}{
+		1n and 2n \textbf{phase spaces} are included in the fit. Small (p,d) contamination as $\sim \qty{16}{\MeV}$ under control.
+	}
+\end{frame}
 
+\begin{frame}{Results: \iso{20}{O}(d,t)}
+	\only<+>{
+		\begin{figure}
+			\includegraphics[width=0.95\textwidth]{figures/ang_0.pdf}
+		\end{figure}
+		\mycolorbox{box1}{
+			g.s fits well to $\Delta L = 2$.
+		}
+  }%
+  \only<+>{
+    \begin{columns}[c]
+    \begin{column}{0.6\linewidth}
+    \begin{figure}
+      \includegraphics[height=0.825\textheight]{figures/ang_1.pdf}
+    \end{figure}
+    
+    \end{column}%
+    \begin{column}{0.4\linewidth}
+    \mycolorbox{box3}{
+      Few stats for some. Rebinning is foreseen.
+    }\\ 
+    \mycolorbox{box4}{
+      Almost all are $\Delta L = 1$!
+    }
+    \end{column}
+    \end{columns}
+  }
+\end{frame}
 \end{document}
