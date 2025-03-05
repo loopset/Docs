@@ -33,6 +33,23 @@
 \maketitle
 
 \section{Motivation}
+\begin{frame}{Physics case}
+	Neutron-rich \iso{20}{O}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\begin{itemize}
+				\item $N = 8$ shell gap
+				\item Ground-state wave function
+			\end{itemize}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{boxGreen}{
+        \includegraphics[width=0.9\linewidth]{figures/sm.pdf}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
 \begin{frame}{A recap on spectroscopic factors}
 	\textbf{Spectroscopic factors} shed light on the occupancy of single-particle states:
 	\begin{equation*}
@@ -92,11 +109,34 @@
 
 \end{frame}
 
+\section{Analysis}
+\begin{frame}{A glance at the analysis}
+	Independent analyis from Juan: same general idea but different execution and (I hope) some improvements.
+	\begin{figure}
+		\includegraphics[width=0.95\textwidth]{figures/pid.pdf}
+	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{boxPink}{
+				Good PID after vetoing punchthrough
+			}
+		\end{column}% 
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{boxGreen}{
+				$E_{x}$ resolution in very good agreement with simulations!
+			}
+		\end{column}
+	\end{columns}
+
+
+
+\end{frame}
+
 \section{Results}
 \begin{frame}{Results: (in)elastic scattering}
 	These are the excitation energy spectra for protons and deuterons.
 	\begin{figure}
-		\includegraphics[width=0.95\textwidth]{figures/elastic_xz.pdf}
+		\includegraphics[width=0.95\textwidth]{figures/elastic_xs.pdf}
 		% \caption{}
 	\end{figure}
 	\begin{columns}[c]
@@ -176,11 +216,12 @@
 		\includegraphics[width=0.95\textwidth]{figures/dt_xs.pdf}
 	\end{figure}
 	\mycolorbox{box3}{
-		1n and 2n \textbf{phase spaces} are included in the fit. Small (p,d) contamination as $\sim \qty{16}{\MeV}$ under control.
+		1n and 2n \textbf{phase spaces} are included in the fit. Small (p,d) contamination at $\sim \qty{16}{\MeV}$ under control.
 	}
 \end{frame}
 
 \begin{frame}{Results: \iso{20}{O}(d,t)}
+	OMPs: Daehnick (d), Pang (t)
 	\only<+>{
 		\begin{figure}
 			\includegraphics[width=0.95\textwidth]{figures/ang_0.pdf}
@@ -188,24 +229,113 @@
 		\mycolorbox{box1}{
 			g.s fits well to $\Delta L = 2$.
 		}
-  }%
-  \only<+>{
-    \begin{columns}[c]
-    \begin{column}{0.6\linewidth}
-    \begin{figure}
-      \includegraphics[height=0.825\textheight]{figures/ang_1.pdf}
-    \end{figure}
-    
-    \end{column}%
-    \begin{column}{0.4\linewidth}
-    \mycolorbox{box3}{
-      Few stats for some. Rebinning is foreseen.
-    }\\ 
-    \mycolorbox{box4}{
-      Almost all are $\Delta L = 1$!
-    }
-    \end{column}
-    \end{columns}
-  }
+	}%
+	\only<+>{
+		\begin{columns}[c]
+			\begin{column}{0.6\linewidth}
+				\begin{figure}
+					\includegraphics[height=0.75\textheight]{figures/ang_1.pdf}
+				\end{figure}
+
+			\end{column}%
+			\begin{column}{0.4\linewidth}
+				\mycolorbox{box3}{
+					Few stats for some. Rebinning is foreseen.
+				}\\
+				\mycolorbox{box4}{
+					Almost all are $\Delta L = 1$!
+				}
+			\end{column}
+		\end{columns}
+	}
+\end{frame}
+
+\begin{frame}{Results: \iso{20}{O}(d,t)}
+	SF are compared with shell-model calculations with \textbf{YSOX} and \textbf{SFO-tls}.
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{figures/normalized_models.pdf}
+	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{box1}{
+				\textbf{Normalized} to gs SF
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{box2}{
+				More $p_{1/2}$ strength than predicted at $E_{x} < \qty{10}{\MeV}$}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{About ESPEs}
+	Effective single-particle energies (ESPEs) are needed to locate the $1p_{1/2}$ and $1d_{5/2}$ orbits: \textbf{Baranger's formula}
+	\begin{equation*}
+		\text{ESPE}_{nlj} = \frac{\sum_{i+}(2j + 1)\text{SF}_{i+}(E_{i+} - E_0) + \sum_{i-}\text{SF}_{i-}(E_{0} - E_{i-})}{\sum_{i+}(2j + 1)\text{SF}_{i+} + \sum_{i-}\text{SF}_{i-}}
+	\end{equation*}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{box1}{
+				\textbf{Removal} ($-$) from our (d,t) or (p,d) channels.
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{box2}{
+			\textbf{Adding} ($+$) from \iso{20}{O}(d,p)\iso{21}{O} by\\
+			{\small B. Fernández-Domínguez \textit{et al.} PRC 84 (2011)}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Results: \iso{20}{O}(d,t)}
+	Assuming all $\Delta L = 1$ states below $E_{x} = \qty{10}{\MeV}$ are $p_{1/2}$...
+	\begin{figure}
+		\includegraphics[width=0.75\textwidth]{figures/gap.pdf}
+	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{box3}{
+				\textbf{Smaller} experimental gap than predicted!
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{box2}{
+				Higher $1p_{1/2}$ occupation according to exp.
+			}
+		\end{column}
+	\end{columns}
+	{\footnotesize Note: \textit{p-norm} refers to absolute SFs with (p,p) normalization, whereas \textit{d-norm} to (d,d) data}
+\end{frame}
+
+\begin{frame}{Results: \iso{20}{O}(p,d)}
+	Fewer states are populated in this channel:
+	\begin{figure}
+		\includegraphics[width=0.95\textwidth]{figures/pd_xs.pdf}
+	\end{figure}
+	\mycolorbox{box2}{
+		Strong (d,d) background since we only identify the outgoing deuteron!
+	}
+
+\end{frame}
+
+\begin{frame}{Results: \iso{20}{O}(p,d)}
+	OMPs: CH89 (p), ADWA (d). Not so encouraging results:
+	\begin{figure}
+		\includegraphics[width=0.95\textwidth]{figures/pd_ang_0.pdf}
+	\end{figure}
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{boxBrown}{
+				Either Fresco or ZR Twofnr fail to reproduce \textbf{gs} \emoji{confused}
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{boxGreen}{
+				Yet 1st excited state seems well-reproduced!
+				\emoji{raised-eyebrow}
+			}
+		\end{column}
+	\end{columns}
 \end{frame}
 \end{document}
