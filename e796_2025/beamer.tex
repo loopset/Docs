@@ -19,10 +19,10 @@
 }
 \newcommand{\boxitem}[1]{\raisebox{0.15em}{\enumitem{#1}}}
 % Set caption package options
-\captionsetup{labelformat=empty}
+\captionsetup{labelformat=empty, font={rm,footnotesize}}
 
-\title[Oxygen spectroscopy]{Low-lying spectroscopy of 20O}
-\date[Feb 2025]{February 2025}
+\title[Oxygen spectroscopy]{Low-lying spectroscopy of \iso{19,20}{O}}
+\date[March 2025]{March 2025}
 \author[M. Lozano et al.]{M. Lozano-González, B. Fernández-Domínguez, \texorpdfstring{\newline}{} J. Lois-Fuentes, F. Delaunay}
 \institute{USC-IGFAE and LPC-Caen}
 
@@ -31,51 +31,6 @@
 \begin{document}
 
 \maketitle
-
-\section{Motivation}
-\begin{frame}{Physics case}
-	Neutron-rich \iso{20}{O}
-	\begin{columns}[c]
-		\begin{column}{0.5\linewidth}
-			\begin{itemize}
-				\item $N = 8$ shell gap
-				\item Ground-state wave function
-			\end{itemize}
-		\end{column}%
-		\begin{column}{0.5\linewidth}
-			\mycolorbox{boxGreen}{
-        \includegraphics[width=0.9\linewidth]{figures/sm.pdf}
-			}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{A recap on spectroscopic factors}
-	\textbf{Spectroscopic factors} shed light on the occupancy of single-particle states:
-	\begin{equation*}
-		\left.\frac{d\sigma}{d\Omega}\right\vert_{\text{exp}} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{\text{s.p}}, \quad \sum C^{2}S = (2j + 1) \text{ in IPSM}
-	\end{equation*}
-	\begin{columns}[T]
-		\begin{column}{0.48\linewidth}
-			\hfill{}
-			\begin{beamercolorbox}[sep=0.75em, center, wd=0.85\linewidth,rounded=true]{box1}
-				\textbf{Experimentally:} Reduction of \sim\qty{65}{\percent}!
-			\end{beamercolorbox}%
-			\hfill{}
-			\begin{itemize}
-				\item \textbf{Short-range} correlations: tensor forces,...
-				\item \textbf{Long-range}: vibrations, giant resonances,...
-			\end{itemize}
-		\end{column}
-		\begin{column}{0.48\linewidth}
-			\vspace{-1em}
-			\begin{figure}
-				\includegraphics[width=0.725\linewidth]{example-image}
-				\caption{L. Lapikás, Nuclear Phys. A 553 (1993)}
-			\end{figure}
-		\end{column}
-	\end{columns}
-\end{frame}
 
 \section{Experimental setup}
 \begin{frame}{Experimental setup}
@@ -87,15 +42,23 @@
 				\item Gas: \qty{90}{\percent}\ce{D_2} and \qty{10}{\percent} \ce{iC_4H_{10}}
 				\item Silicons: two front layers and one left. \qty{500}{\micro\m}-thick
 			\end{itemize}
-			\mycolorbox[0.4]{box2}{
-				\textbf{Neutron removal}\\
-				$\iso{20}{O}(\iso{}{p}, \iso{}{d})$\\
-				$\iso{20}{O}(\iso{}{d}, \iso{}{t})$
-			}\hfill
-			\mycolorbox[0.4]{box3}{
-				\textbf{Proton removal}\\
-				$\iso{20}{O}(\iso{}{d},\iso{3}{He})$
-			}
+			\begin{columns}[c]
+				\begin{column}{0.5\linewidth}
+					\mycolorbox[1]{boxPink}{
+						\textbf{(In)elastic}\\
+						$\iso{20}{O}(\iso{}{p}, \iso{}{p})$\\
+						$\iso{20}{O}(\iso{}{d}, \iso{}{d})$
+					}\hfill
+				\end{column}%
+				\begin{column}{0.5\linewidth}
+					\mycolorbox[1]{boxBrown}{
+						\textbf{p and n removal}\\
+						$\iso{20}{O}(\iso{}{d},\iso{3}{He})$\\
+						$\iso{20}{O}(\iso{}{d},\iso{}{t})$\\
+						$\iso{20}{O}(\iso{}{p},\iso{}{d})$\\
+					}
+				\end{column}
+			\end{columns}
 		\end{column}\hfil
 		\begin{column}{0.45\linewidth}
 			\begin{figure}
@@ -107,6 +70,59 @@
 		\end{column}
 	\end{columns}
 
+\end{frame}
+
+\section{Motivation}
+\begin{frame}[c]{Physics case}
+	\textbf{Inelastic}: \iso{20}{O}(p,p') and (d,d') excitations
+	\bigskip
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{boxBrown}{
+				Probing their \textbf{isoscalar} or \textbf{isovector} character
+				\begin{enumerate}
+					\item Determine $\beta_{nucl}$ from xs normalization
+					\item Use previous $\beta_{em}$
+					\item Bernstein formula for $M_{n}/M_{p}$ ratio
+				\end{enumerate}
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{boxGreen}{
+				\includegraphics[width=1\linewidth]{figures/khan.png}
+				{\small\itshape E.Khan thesis (2000)}
+				\begin{itemize}
+					\item $\sim 1 \Rightarrow$ isoscalar
+					\item $\gg 1 \Rightarrow$ isovector
+				\end{itemize}
+			}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]{Physics case}
+	\textbf{Transfer}: spectroscopy on \iso{20}{O}(d,t),(p,d)\iso{19}{O}
+	\begin{equation*}
+		\left.\frac{d\sigma}{d\Omega}\right\vert_{\text{exp}} = C^{2}S \cdot \left.\frac{d\sigma}{d\Omega}\right\vert_{\text{s.p}}, \quad \sum C^{2}S = (2j + 1)
+	\end{equation*}
+	\bigskip
+	\begin{columns}[c]
+		\begin{column}{0.5\linewidth}
+			\mycolorbox{boxBrown}{
+				Two goals:
+				\begin{enumerate}
+					\item Study of the \iso{20}{O} gs wave-function
+					\item Behaviour of $\mathcal{N} = 8$ gap
+				\end{enumerate}
+			}
+		\end{column}%
+		\begin{column}{0.5\linewidth}
+			\mycolorbox[1]{boxGreen}{
+				\includegraphics[width=0.7\linewidth]{figures/sm.pdf}
+				\captionof{figure}{\iso{20}{O} shell-model prediction}
+			}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \section{Analysis}
@@ -152,7 +168,7 @@
 \end{frame}
 
 \begin{frame}{Results: \iso{20}{O}(d,d)}
-	Angular distributions for the \textbf{ground-state} and first excited states:
+	Angular distributions for the \textbf{ground state} and first excited states:
 	\begin{figure}
 		\includegraphics[width=0.85\linewidth]{figures/d_ang.pdf}
 	\end{figure}
@@ -172,8 +188,9 @@
 			}
 		\end{column}%
 		\begin{column}{0.45\linewidth}
-			\mycolorbox{box4}{
-				1st excited as well?
+			\mycolorbox[0.9]{box4}{
+				1st excited seems fine\\
+				$\Rightarrow$ compare $\beta_2$ with E. Khan
 			}
 		\end{column}
 	\end{columns}
@@ -221,7 +238,7 @@
 \end{frame}
 
 \begin{frame}{Results: \iso{20}{O}(d,t)}
-	OMPs: Daehnick (d), Pang (t)
+	Fresco DWBA with OMPs: Daehnick (d), Pang (t)
 	\only<+>{
 		\begin{figure}
 			\includegraphics[width=0.95\textwidth]{figures/ang_0.pdf}
@@ -240,9 +257,10 @@
 			\end{column}%
 			\begin{column}{0.4\linewidth}
 				\mycolorbox{box3}{
-					Few stats for some. Rebinning is foreseen.
+					\includegraphics[width=0.9\linewidth]{figures/sm_l1.pdf}
+					% Few stats for some. Rebinning is foreseen.
 				}\\
-				\mycolorbox{box4}{
+				\mycolorbox{boxPink}{
 					Almost all are $\Delta L = 1$!
 				}
 			\end{column}
@@ -337,5 +355,26 @@
 			}
 		\end{column}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Future work}
+	\mycolorbox{box3}{
+    Detailed study of \textbf{inelastic} channels
+	}
+	\vspace{1em}
+
+	\mycolorbox{box2}{
+    Solve normalization issue or find it an explanation
+	}
+	\vspace{1em}
+
+	\mycolorbox{box4}{
+    Ask theoriticians if interactions can be tuned for our data
+	}
+	\vspace{1em}
+
+	\mycolorbox{box1}{
+    Continue to investigate (p,d)
+	}%
 \end{frame}
 \end{document}
