@@ -73,32 +73,32 @@
 \end{frame}
 
 \section{Motivation}
-\begin{frame}[c]{Physics case}
-	\textbf{Inelastic}: \iso{20}{O}(p,p') and (d,d') excitations
-	\bigskip
-	\begin{columns}[c]
-		\begin{column}{0.5\linewidth}
-			\mycolorbox{boxBrown}{
-				Probing their \textbf{isoscalar} or \textbf{isovector} character
-				\begin{enumerate}
-					\item Determine $\beta_{nucl}$ from xs normalization
-					\item Use previous $\beta_{em}$
-					\item Bernstein formula for $M_{n}/M_{p}$ ratio
-				\end{enumerate}
-			}
-		\end{column}%
-		\begin{column}{0.5\linewidth}
-			\mycolorbox[1]{boxGreen}{
-				\includegraphics[width=1\linewidth]{figures/khan.png}
-				{\small\itshape E.Khan thesis (2000)}
-				\begin{itemize}
-					\item $\sim 1 \Rightarrow$ isoscalar
-					\item $\gg 1 \Rightarrow$ isovector
-				\end{itemize}
-			}
-		\end{column}
-	\end{columns}
-\end{frame}
+% \begin{frame}[c]{Physics case}
+% 	\textbf{Inelastic}: \iso{20}{O}(p,p') and (d,d') excitations
+% 	\bigskip
+% 	\begin{columns}[c]
+% 		\begin{column}{0.5\linewidth}
+% 			\mycolorbox{boxBrown}{
+% 				Probing their \textbf{isoscalar} or \textbf{isovector} character
+% 				\begin{enumerate}
+% 					\item Determine $\beta_{nucl}$ from xs normalization
+% 					\item Use previous $B(E2)$
+% 					\item Bernstein formula for $M_{n}/M_{p}$ ratio
+% 				\end{enumerate}
+% 			}
+% 		\end{column}%
+% 		\begin{column}{0.5\linewidth}
+% 			\mycolorbox[1]{boxGreen}{
+% 				\includegraphics[width=1\linewidth]{figures/khan.png}
+% 				{\small\itshape E.Khan thesis (2000)}
+% 				\begin{itemize}
+% 					\item $\sim 1 \Rightarrow$ isoscalar
+% 					\item $\gg 1 \Rightarrow$ isovector
+% 				\end{itemize}
+% 			}
+% 		\end{column}
+% 	\end{columns}
+% \end{frame}
 
 \begin{frame}[c]{Physics case}
 	\textbf{Transfer}: spectroscopy on \iso{20}{O}(d,t),(p,d)\iso{19}{O}
@@ -139,7 +139,7 @@
 		\end{column}% 
 		\begin{column}{0.5\linewidth}
 			\mycolorbox[1]{boxGreen}{
-				$E_{x}$ resolution in very good agreement with simulations!
+				Only p and d for side silicons
 			}
 		\end{column}
 	\end{columns}
@@ -189,8 +189,7 @@
 		\end{column}%
 		\begin{column}{0.45\linewidth}
 			\mycolorbox[0.9]{box4}{
-				1st excited seems fine\\
-				$\Rightarrow$ compare $\beta_2$ with E. Khan
+				1st excited seems fine
 			}
 		\end{column}
 	\end{columns}
@@ -244,7 +243,7 @@
 			\includegraphics[width=0.95\textwidth]{figures/ang_0.pdf}
 		\end{figure}
 		\mycolorbox{box1}{
-			g.s fits well to $\Delta L = 2$.
+			Agreement with already known assignments.
 		}
 	}%
 	\only<+>{
@@ -262,32 +261,35 @@
 				}\\
 				\mycolorbox{boxPink}{
 					Almost all are $\Delta L = 1$!
-				}
+				}\\ 
+        \mycolorbox{boxBrown}{
+          SFO-tls and YSOX $\Rightarrow 0p_{1/2}$
+        }
 			\end{column}
 		\end{columns}
 	}
 \end{frame}
 
-\begin{frame}{Results: \iso{20}{O}(d,t)}
-	SF are compared with shell-model calculations with \textbf{YSOX} and \textbf{SFO-tls}.
-	\begin{figure}
-		\includegraphics[width=0.8\textwidth]{figures/normalized_models.pdf}
-	\end{figure}
-	\begin{columns}[c]
-		\begin{column}{0.5\linewidth}
-			\mycolorbox[1]{box1}{
-				\textbf{Normalized} to gs SF
-			}
-		\end{column}%
-		\begin{column}{0.5\linewidth}
-			\mycolorbox[1]{box2}{
-				More $p_{1/2}$ strength than predicted at $E_{x} < \qty{10}{\MeV}$}
-		\end{column}
-	\end{columns}
-\end{frame}
+% \begin{frame}{Results: \iso{20}{O}(d,t)}
+% 	SF are compared with shell-model calculations with \textbf{YSOX} and \textbf{SFO-tls}.
+% 	\begin{figure}
+% 		\includegraphics[width=0.8\textwidth]{figures/normalized_models.pdf}
+% 	\end{figure}
+% 	\begin{columns}[c]
+% 		\begin{column}{0.5\linewidth}
+% 			\mycolorbox[1]{box1}{
+% 				\textbf{Normalized} to gs SF
+% 			}
+% 		\end{column}%
+% 		\begin{column}{0.5\linewidth}
+% 			\mycolorbox[1]{box2}{
+% 				More $p_{1/2}$ strength than predicted at $E_{x} < \qty{10}{\MeV}$}
+% 		\end{column}
+% 	\end{columns}
+% \end{frame}
 
 \begin{frame}{About ESPEs}
-	Effective single-particle energies (ESPEs) are needed to locate the $1p_{1/2}$ and $1d_{5/2}$ orbits: \textbf{Baranger's formula}
+	Effective single-particle energies (ESPEs) are needed to locate the $0p_{1/2}$ and $0d_{5/2}$ orbits: \textbf{Baranger's formula}
 	\begin{equation*}
 		\text{ESPE}_{nlj} = \frac{\sum_{i+}(2j + 1)\text{SF}_{i+}(E_{i+} - E_0) + \sum_{i-}\text{SF}_{i-}(E_{0} - E_{i-})}{\sum_{i+}(2j + 1)\text{SF}_{i+} + \sum_{i-}\text{SF}_{i-}}
 	\end{equation*}
@@ -307,7 +309,7 @@
 \end{frame}
 
 \begin{frame}{Results: \iso{20}{O}(d,t)}
-	Assuming all $\Delta L = 1$ states below $E_{x} = \qty{10}{\MeV}$ are $p_{1/2}$...
+	All $\Delta L = 1$ states below $E_{x} = \qty{10}{\MeV}$ are $p_{1/2}$ based on YSOX and SFO-tls
 	\begin{figure}
 		\includegraphics[width=0.75\textwidth]{figures/gap.pdf}
 	\end{figure}
@@ -319,7 +321,7 @@
 		\end{column}%
 		\begin{column}{0.5\linewidth}
 			\mycolorbox{box2}{
-				Higher $1p_{1/2}$ occupation according to exp.
+				Higher $0p_{1/2}$ occupation according to exp.
 			}
 		\end{column}
 	\end{columns}
@@ -369,12 +371,12 @@
 	\vspace{1em}
 
 	\mycolorbox{box4}{
-    Ask theoriticians if interactions can be tuned for our data
+    Ask theoreticians if interactions can be tuned for our data
 	}
 	\vspace{1em}
 
 	\mycolorbox{box1}{
-    Continue to investigate (p,d)
+    Continue to investigate (p,p) and (p,d)
 	}%
 \end{frame}
 \end{document}
