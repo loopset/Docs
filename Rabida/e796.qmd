@@ -1,0 +1,49 @@
+---
+title: "$\\mathcal{N}$ = 8 gap breakdown in oxygen isotopes"
+subtitle: "La Rábida 2025"
+author:
+  - name: M. Lozano-González
+    affiliation:
+      - id: usc
+        name: IGFAE-USC
+  - name: B. Fernández-Domínguez
+    affiliation:
+      - ref: usc
+  - name: J. Lois-Fuentes
+    affiliation: 
+      - ref: usc
+  - name: F. Delaunay
+    affiliation:
+      - id: lpc
+        name: LPC-Caen
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    css: style.css
+
+---
+
+## Physics motivation {.center}
+
+:::: {.columns}
+::: {.column width="50%"}
+This is important cause:
+
+ - 20O is an oxygen
+ - d is a deuterium
+ - t is a tritium
+:::
+
+::: {.column width="50%"}
+![](figures/ex-1.png){width=100%}
+:::
+
+:::::
+
+::: {.box .orange}
+
+**ola** que tal
+do
+:::
+

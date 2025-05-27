@@ -1,0 +1,26 @@
+.reveal .columns {
+  display: flex;
+  /* gap: 2rem; */
+  justify-content: space-between;
+  align-items: flex-start;  /* Optional: aligns items to the top */
+}
+
+.reveal .column {
+  width: 48%;          /* Optional: control column width */
+}
+
+
+.box {
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #000;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.box.orange {
+    background-color: #fff3e0;
+    /* border-left: 5px solid #f57c00; */
+}
