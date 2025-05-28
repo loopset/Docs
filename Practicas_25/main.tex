@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{slashed}
+\usepackage{wrapfig}
 %\usepackage{amsfonts}
 %\numberwithin{equation}{section}%%numbering eqs by section
 \usepackage{fancyhdr} 
@@ -229,6 +230,26 @@ Depende esencialmente da partícula a considerar ($Z$ e $A$) e do gas (a través
 \end{itemize}
 Esta información está tabulada nun programa que se coñece como \textit{\textbf{SRIM}} e que foi empregado para obter os datos que se analizarán. Non obstante, vas familiarizarte con el para entender ben os conceptos da interación radiación-materia explicados máis arriba.
 
+\subsection{Detectores de silicio}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \begin{center}
+    \includegraphics[width=0.7\linewidth]{figures/pn_junction.png}
+    \end{center}
+    \caption{Esquema dunha unión PN polarizada en inversa}
+\end{wrapfigure}
+Vas estudar os seus principios de funcionamento o próximo curso en \textit{Electrónica Física}, pero aquí tes unhas nocións básicas sobre o seu funcionamento. Cada silicio funciona como unha \textbf{unión PN}, na cal se algúns átomos da rede cristalina de Si se subsituíron por outros: na rexión \textit{P}, por átomos deficitiarios en electróns (hai máis \textit{ocos}), mentres que na \textit{N} por outros ricos en $e^-$. Ao xuntalos créase unha zona interna de campo eléctrico pola diferenza de cargas, o que se coñece como \textit{zona de baleirado} ou de \textit{carga espacial}, e que ten un tamaño típico de \unit{\micro\m}.
+
+Baixo a aplicación dun potencial apropiado, nunha configuración que se coñece como \textit{polarización inversa}, esta zona de baleirado faise moi grande. E isto é o que nos interesa: as partículas cargadas, ao atravesar esta rexión, ionizan o medio liberando electróns. Grazas ao campo eléctrico interno da unión PN podemos recollelos e medilos como correcte eléctrica. O sinal recollido é proporcional ao número de electróns liberados na ionización e, polo tanto, á enerxía incidente da partícula.
+
+\subsection{Incertezas experimentais}
+Como xa comentamos, os datos que se analizarán non proveñen dun experimento real senón dunha simulación. Non obstante, esta ten en conta os defectos experimentais implementables nun computado e que son determinantes en moitos casos do éxito ou non dun experimento. Aquí unha lista:
+\begin{itemize}
+    \item O \textit{straggling} en enerxía da partícula ao propagarse no gas.
+    \item O mesmo pero ao propagarse no silicio.
+    \item A \textbf{resolución} dos detectores de silicio. Na Sección anterior comentamos que a corrente medida é proporcional ao número de electróns de ionización xerados no proceso. Non obstante, a estatística gaussiana asígnalle unha interteza $u = \sqrt{N_e}$, o cal quere dicir que unha partícula coas mesmas características que atravese o Si non vai necesariamente rexistrar a mesma $\Delta E$. Experimentalmente mídese e estímase en \qty{50}{\keV} de incerteza a unha enerxía incidente de \qty{5.5}{\MeV}.
+\end{itemize}
+
 % Unha pequena apreciación: SRIM vainos dar o \textit{straggling} en posición, mais nós deberémolo converter a en enerxía. Aquí o algoritmo que imos usar:
 % \begin{enumerate}
 %     \item Calculamos $R_{ini}$ coa enerxía inicial, xunto co seu \textit{straggling}.
@@ -238,14 +259,15 @@ Esta información está tabulada nun programa que se coñece como \textit{\textb
 %     \item Con este novo rango calculamos a enerxía final, efectivamente implementando o \textit{straggling}!
 % \end{enumerate}
 
-\subsection{Resolución en enerxía}\label{sec:res}
-Complementariamente acostuman situarse detectores de Si que nos van permitir medir a enerxía das partículas á súa saída do \textit{pad plane} (seguindo os mesmos principios que na anterior Sección). Un parámetro importante destes é a \textbf{resolución en enerxía}, definida como a capacidade para \textit{resolver} enerxías depositadas distintas: $R = \textrm{FWHM} / E$.
 
-Para o noso experimento, esta resolución está tabulada en \qty{50}{\keV} a \qty{5.5}{\MeV} e podemos extrapolala ao resto de enerxías coa función:
-\begin{equation*}
-    R = \frac{2.35 \sigma}{E} = \frac{K}{\sqrt{E}} \quad \implies \quad \sigma = \frac{K}{2.35}\sqrt{E} = \frac{\qty{0.0213}{\MeV}}{2.35} \sqrt{E}
-\end{equation*}
-Isto vai significar que a perda de enerxía $\Delta E$ que calcules nos Si deberala aleatorizar cunha gaussiana de $\sigma$ obtida coa anterior fórmula.
+% \subsection{Resolución en enerxía}\label{sec:res}
+% Complementariamente acostuman situarse detectores de Si que nos van permitir medir a enerxía das partículas á súa saída do \textit{pad plane} (seguindo os mesmos principios que na anterior Sección). Un parámetro importante destes é a \textbf{resolución en enerxía}, definida como a capacidade para \textit{resolver} enerxías depositadas distintas: $R = \textrm{FWHM} / E$.
+
+% Para o noso experimento, esta resolución está tabulada en \qty{50}{\keV} a \qty{5.5}{\MeV} e podemos extrapolala ao resto de enerxías coa función:
+% \begin{equation*}
+%     R = \frac{2.35 \sigma}{E} = \frac{K}{\sqrt{E}} \quad \implies \quad \sigma = \frac{K}{2.35}\sqrt{E} = \frac{\qty{0.0213}{\MeV}}{2.35} \sqrt{E}
+% \end{equation*}
+% Isto vai significar que a perda de enerxía $\Delta E$ que calcules nos Si deberala aleatorizar cunha gaussiana de $\sigma$ obtida coa anterior fórmula.
 
 \subsection{Cinemática}
 Todo proceso de interacción entre partículas podes escribirse en termos de variables cinemáticas (enerxías e ángulos) usando as \textbf{leis de conservación} de enerxía e de momento. Esta pode ser descrita no sistema LAB ou no CM (mediante unha transformación Lorentz a un sistema con 3-momento nulo en ambas canles de entrada e saída) do seguinte xeito:
@@ -257,11 +279,11 @@ Todo proceso de interacción entre partículas podes escribirse en termos de var
     \end{gathered}
 \end{equation*}
 
-É estándar asumir unha partícula \textit{target} (a 2) en repouso. O que vamos necesitar para a simulación é:
+É estándar asumir unha partícula \textit{target} (a 2) en repouso. Aínda que a simulación xa está feito, penso que é interesante que comprendas como se xeran os eventos. Para iso, vas resolver as ecuacións de cinemática para obter a representación $T$ vs $\theta$ da partícula 3 que mediremos nós. Para iso:
 \begin{itemize}
     \item Partiremos da enerxía cinética $T_1$ do feixe (1) no LAB.
-    \item Calculares a transformación Lorentz da canle de entrada ao CM.
-    \item Repartiremos a $E_{CM}$ (enerxía total no centro de masas) entre as partículas de saída cun $\theta_{CM}$ e $\phi_{CM}$ aleatorios.
+    \item Calcularás a transformación Lorentz da canle de entrada ao CM.
+    \item Repartiremos a $E_{CM}$ (enerxía total no centro de masas) entre as partículas de saída en función de $\theta_{CM}$ e $\phi_{CM}$.
     \item Finalmente, recuperaremos as enerxías de saída de ambas partículas no LAB coa transformación inversa.
     \item Tamén necesitaremos os ángulos no laboratorio, $\theta_{Lab}$ e $\phi_{Lab} = \phi_{CM}$.
 \end{itemize}
@@ -271,27 +293,22 @@ Algunhas fórmulas que che poden ser interesantes para unha transformación Lore
     E^{\prime} = \gamma \left(E - \beta p_x\right), \qquad p^{\prime}_{x} = \gamma \left(p_x - \beta E\right)\\
     E = \gamma \left(E^{\prime} + \beta p_{x}^{\prime}\right), \qquad p_x = \gamma \left(p^{\prime}_x + \beta E^{\prime}\right)
 \end{gather*}
-Onde as variables primadas indican que son no CM. Cando transformes ao final do CM ao LAB terás en conta $\theta_{CM}$: $p_{4,x}^{\prime} = |\vect{p^{\prime}_4}| \cdot\cos(\theta_{CM})$. O ángulo $\phi_{CM}$ non aparece de momento posto que é transversal á transformación.
+Onde as variables primadas indican que son no CM. Cando transformes ao final do CM ao LAB terás en conta $\theta_{CM}$: $p_{3,x}^{\prime} = |\vect{p^{\prime}_3}| \cdot\cos(\theta_{CM})$. O ángulo $\phi_{CM}$ non aparece de momento posto que é transversal á transformación.
 
 \section{Para comezar}
-\subsection{Introdución a ROOT}
-O primeiro de todo é aprender a programar en C++ con \href{https://root.cern.ch/}{ROOT}. No \href{https://github.com/Practicas24/Practicas_24}{repositorio de Github}, dentro da carpeta \textit{Macros}, tes algúns exemplos de como traballar con el. Comeza polo básico e despois vas ver como podes crear histogramas, gráficos e números aleatorios: o básico que necesitamos para estar prácticas.
+\subsection{Instalación de paquetes}
+Para poder realizar esta análise imos necesitar unha serie de paquetes de \textit{python}:
+\begin{enumerate}
+    \item Crea un entorno virtual para esta análise, así non modificaremos nada da túa instalación actual. Segue as instrucións de \href{https://docs.python.org/3/library/venv.html}{aquí}.
+    \item Unha vez dentro do teu \textit{venv}, instala os paquetes básicos: \verb|numpy|, \verb|matplotlib|, \verb|pandas|
+    \item Instala \href{https://uproot.readthedocs.io/en/stable/basic.html}{\texttt{uproot}}. É un paquete que nos vai permitir ler os ficheiros de simulación creados en formato \verb|.root|
+    \item Instala o paquete \href{https://github.com/loopset/PyPhysics}{\texttt{PyPhysics}} que che ofrecerá moitas clases de interese (cinemática e perdas de enerxía). Clona o repositorio e modifica o teu \verb|PYTHONPATH|.
+\end{enumerate}
 
-Velaquí algunha información básica que necesitas para comezar:
-\begin{itemize}
-    \item ROOT é un código desenvolto polo CERN que permite executar código de C++ sen compilar, mediante o que se coñece como \textbf{macros}:
-          \begin{lstlisting}
-        $ root -l NomeDoMacro.cxx
-    \end{lstlisting}
 
-          Vai executar a función chamada \textit{NomeDoMacro} dentro dese ficheiro. Polo tanto, debes nomear o ficheiro igual que a función principal que conteña dentro. Isto non impide que definas outras funcións dentro do mesmo.
-    \item Debes saír sempre da sesión unha vez o programa termina, escribindo
-          \lstinline|.q|
-    \item ROOT provee de numerosas \textbf{clases} que realizan múltiples funcións: \lstinline|TH1D| (histogramas), \lstinline|TGraph| (gráficos), ... Sempre podes consular a documentación na web cando non saibas como se constrúe ou que funcións ten unha clase. Escribe no teu buscador favorito: \textit{NomeDaClase root cern} e deberías ter a documentación no primeiro resultado.
-\end{itemize}
 
 \subsection{Github}
-Git é unha ferramenta de control de versións que che permitirá manter un historial do teu código, podendo volver atrás cando sexa necesario. Github é unha web para almacenar repositorios Git. Vamos utilizala para poder revisar o código a distancia.
+Git é unha ferramenta de control de versións que che permitirá manter un historial do teu código, podendo volver atrás cando sexa necesario. Github é unha web para almacenar repositorios Git. Vamos utilizala para manter o código seguro nun servidor e volver cara atrás cando sexa necesario.
 
 Para iso, o primeiro é ter unha conta en \url{www.github.com}. Tras unha configuración inicial un pouco tediosa, o plan de traballo é o seguinte, que se debe executar cando fagas cambios importantes ou cando remates a túa sesión de traballo:
 \begin{enumerate}
@@ -300,16 +317,17 @@ Para iso, o primeiro é ter unha conta en \url{www.github.com}. Tras unha config
     \item \lstinline|git push| envía os cambios á nube
 \end{enumerate}
 
-\section{Programa}
-Desenvolveremos a simulación de forma modular, separando as distintas partes en diferentes macros e xuntando todo ao final.
+Para o paquete \texttt{PyPhysics}, probablemente teremos que actualizalo ao longo das prácticas. Para recibir os cambios do servidor, vai á carpeta na que está descargado e executa \verb|git pull|. Desta forma terás o paquete actualizado.
 
-A proposta é a seguinte:
+
+\section{Plan de traballo}
+Este é o plan de traballo das próximas semanas.
+
 \begin{itemize}
-    \item \textbf{Primeira semana}: Configuración do entorno e familiarización con ROOT. Macros para constuír gráficos e samplear en histogramas.
-    \item \textbf{Segunda semana}: Resolución da cinemática e implementación da xeometría.
-    \item \textbf{Terceira semana}: Introdución das perdas de enerxía e das distintas resolucións.
-    \item \textbf{Cuarta semana}: Estudo sistemático da resolución en $\theta_{Lab}$ para distintas configuracións da xeometría, gases, etc.
-    \item \textbf{Quinta semana}: Posibilidade de engardir máis cousas á simulación (en función da evolución) ou comezo da memoria.
+    \item \textbf{Primeira semana}: Instalación de paquetes e familiriziación co entorno. Representación de todas as variables da simulación e das súas correlacións. Estudo da cinemática e das perdas de enerxía.
+    \item \textbf{Segunda semana}: Preparación dos datos para entrenar unha rede neuronal. Comprensión do funcionamento destas e implementación dunha simple.
+    \item \textbf{Terceira semana}: Engédega da rede neuronal convolucional 1D á anterior para analizar os perfís de carga. Ver se isto mellora os resultados. \textit{Fine-tuning} dos hiperparámetros.
+    \item \textbf{Cuarta semana}: Análises complementarias e propostas doutras solucións en caso de que non funcione. Redacción da memoria de prácticas.
 \end{itemize}
 
 \subsection{Primeira semana}
