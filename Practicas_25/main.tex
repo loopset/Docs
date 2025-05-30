@@ -79,7 +79,7 @@
 \lstset{
 %backgroundcolor=\color{backcolour},
 basicstyle=\small\ttfamily,
-language=C++,
+language=python,
 keepspaces=false,
 keywordstyle=\bfseries\color{Purple},
 morekeywords={TSpectrum, TH1, TH1I, TH1D,
@@ -143,35 +143,35 @@ belowskip=-0.85 \baselineskip,
 % }
 \section{Presentación}
 \subsection{Obxectivos}
-O obxectivo destas prácticas vai ser de introducir técnicas de \textit{machine learning} na análise de datos do detector \textit{ACtive TARget and Time Projection Chamber} (ACTAR TPC). Máis concretamente, centrarémonos en identificar as partiículas de alta enerxía que superan dous muros de silicio. Trátase dunha técnica novel que nunca se implementou neste tipo de dispositivos, polo que non está garantido que funcione... Pero merece a pena probar e pode ofrecer unha formación moi interesante. 
+O obxectivo destas prácticas vai ser de introducir técnicas de \textit{machine learning} na análise de datos do detector \textit{ACtive TARget and Time Projection Chamber} (ACTAR TPC). Máis concretamente, centrarémonos en identificar as partiículas de alta enerxía que superan dous muros de silicio. Trátase dunha técnica novel que nunca se implementou neste tipo de dispositivos, polo que non está garantido que funcione... Pero merece a pena probar e pode ofrecer unha formación moi interesante.
 
 Abarcaremos varias áreas:
 \begin{itemize}
     \item \textbf{Programación}: Afondaremos na programación con \verb|python|, utilizando módulos de \textit{ML} como \verb|tensorflow| ou \texttt{scikit-learn}. Melloraremos os coñecementos de \verb|pandas| e \verb|matplotlib|, así como unha introdución aos \textbf{histogramas} con \verb|hist|.
-    
+
     \item \textbf{Detectores}: ACTAR TPC é un detector gasoso moi recente que abre todo unha nova ventá de posibilidades no eido das reaccións nucleares. Introduciremos os conceptos básicos dun detector gasoso e complementarémolos cos de detectores de silicio, esenciais neste experimento.
-    
+
     \item \textbf{Teoría}: Expoñeremos as leis básicas da cinemática que rixen calquera reacción entre partículas e introduciremos os fundamentos da interacción radiación-materia, básicos neste experimento.
 \end{itemize}
 
 Comezaremos estudando os fundamentos teóricos e implmentándoos manualmente para asegurar que se entenden ben. A segunda parte abarcará a parte computacional en si mesma, tentando chegar ao obxectivo final de identificar as partículas.
 
 \subsection{Motivación}
-Neste ano levarase a cabo un experimento para estudar reaccións de transferencia co \iso{11}{Li}, de xeito que se poda facer un estudo pormenorizado da súa estrutura nuclear. Estudos coma este son moi importantes, posto que o \textit{modelo de capas nuclear} (moi parecido ao seu análogo atómico) sábese que falla a medida que nos afastamos da estabilidade e pasamos a outros máis exóticos ($N / Z \gg 1$), e faise necesario postular modelos teóricos máis amplos, válidos de forma xenérica.
+Este ano levarase a cabo un experimento para estudar reaccións de transferencia co \iso{11}{Li}, de xeito que se poda facer un estudo pormenorizado da súa estrutura nuclear. Estudos coma este son moi importantes, posto que o \textit{modelo de capas nuclear} (moi parecido ao seu análogo atómico) sábese que falla a medida que nos afastamos da estabilidade e pasamos a outros núcleos máis exóticos ($N / Z \gg 1$), e faise necesario postular modelos teóricos máis amplos, válidos de forma xenérica.
 
 As reaccións que imos estudar son:
 \begin{itemize}
     \item $\iso{11}{Li} + \iso{}{d} \rightarrow \iso{}{p} + \iso{12}{Li}$
 
-    É unha reacción de engádega dun neutrón.
-    
+          É unha reacción de engádega dun neutrón.
+
     \item $\iso{11}{Li} + \iso{}{d} \rightarrow \iso{}{d} + \iso{11}{Li}$
 
-    É a difusión elástica (E$_{x} = 0$) ou inelástica (E$_x > 0$).
-    
+          É a difusión elástica (E$_{x} = 0$) ou inelástica (E$_x > 0$).
+
     \item $\iso{11}{Li} + \iso{}{d} \rightarrow \iso{}{t} + \iso{10}{Li}$
 
-    Aquí, ao contrario, eliminamos un neutrón.
+          Aquí, ao contrario, eliminamos un neutrón.
 \end{itemize}
 
 Todo isto é posíbel grazas á seguinte configuración do detector:
@@ -182,7 +182,7 @@ Todo isto é posíbel grazas á seguinte configuración do detector:
 
 \section{Principios físicos}
 \subsection{Un detector gasoso}
-ACTAR TPC segue os principios de funcionamento dunha \textit{time projection chamber}: as partículas ao pasaren polo gas ionizan os átomos, liberando electróns que \textbf{derivan} baixo aplicación dun campo eléctrico. Esta carga é recollida nun sensor amplamente fragmentado (), permitindo \textit{seguir} as partículas no seu traspaso dentro do medio en 2D.
+ACTAR TPC segue os principios de funcionamento dunha \textit{time projection chamber}: as partículas ao pasaren polo gas ionizan os átomos, liberando electróns que \textbf{derivan} baixo aplicación dun campo eléctrico. Esta carga é recollida nun sensor amplamente fragmentado (\textit{pad plane}), permitindo \textit{seguir} as partículas no seu traspaso dentro do medio en 2D.
 
 Pero é máis: pódese engadir a terceira coordenada coñecendo o tempo que lle leva aos electróns chegar ao \textit{pad plane}, pois a \textbf{velocidade de deriva} é constante. Deste xeito, o seguimento das partículas faise en \textbf{3D}.
 
@@ -228,19 +228,19 @@ Depende esencialmente da partícula a considerar ($Z$ e $A$) e do gas (a través
     \item Rango ($R$): É o camiño percorrido por unha partícula ata que \textit{case} se detén. É función da enerxía inicial e do material a atravesar. Existe unha \textbf{relación unívoca} $E \Longleftrightarrow R$ que imos utilizar para estimar a perda da enerxía en función da distancia percorrida pola partícula.
     \item \textit{Straggling}: Como a perda de enerxía é un \textbf{proceso estatístico}, dúas partículas coa mesma enerxía inicial non van depositar a mesma $\Delta E$. O \textit{straggling} mide, dalgunha forma, a $\sigma$ desta distribución.
 \end{itemize}
-Esta información está tabulada nun programa que se coñece como \textit{\textbf{SRIM}} e que foi empregado para obter os datos que se analizarán. Non obstante, vas familiarizarte con el para entender ben os conceptos da interación radiación-materia explicados máis arriba.
+Esta información está tabulada nun programa que se coñece como \textit{\textbf{SRIM}} e que foi empregado para obter os datos que se analizarán. Non obstante, vas familiarizarte con el para entender ben os conceptos da interación radiación-materia introducidos.
 
 \subsection{Detectores de silicio}
 
 \begin{wrapfigure}{r}{0.4\textwidth}
     \begin{center}
-    \includegraphics[width=0.7\linewidth]{figures/pn_junction.png}
+        \includegraphics[width=0.7\linewidth]{figures/pn_junction.png}
     \end{center}
     \caption{Esquema dunha unión PN polarizada en inversa}
 \end{wrapfigure}
-Vas estudar os seus principios de funcionamento o próximo curso en \textit{Electrónica Física}, pero aquí tes unhas nocións básicas sobre o seu funcionamento. Cada silicio funciona como unha \textbf{unión PN}, na cal se algúns átomos da rede cristalina de Si se subsituíron por outros: na rexión \textit{P}, por átomos deficitiarios en electróns (hai máis \textit{ocos}), mentres que na \textit{N} por outros ricos en $e^-$. Ao xuntalos créase unha zona interna de campo eléctrico pola diferenza de cargas, o que se coñece como \textit{zona de baleirado} ou de \textit{carga espacial}, e que ten un tamaño típico de \unit{\micro\m}.
+Vas estudar os seus principios de funcionamento o próximo curso en \textit{Electrónica Física}, pero aquí tes unhas nocións básicas sobre o seu funcionamento. Cada silicio funciona como unha \textbf{unión PN}, na cal algúns átomos da rede cristalina de Si se subsituíron por outros: na rexión \textit{P}, por átomos deficitiarios en electróns (hai máis \textit{ocos}), mentres que na \textit{N} por outros ricos en $e^-$. Ao xuntalos créase unha zona interna de campo eléctrico pola diferenza de cargas, o que se coñece como \textit{zona de baleirado} ou de \textit{carga espacial}, e que ten un tamaño típico de \unit{\micro\m}.
 
-Baixo a aplicación dun potencial apropiado, nunha configuración que se coñece como \textit{polarización inversa}, esta zona de baleirado faise moi grande. E isto é o que nos interesa: as partículas cargadas, ao atravesar esta rexión, ionizan o medio liberando electróns. Grazas ao campo eléctrico interno da unión PN podemos recollelos e medilos como correcte eléctrica. O sinal recollido é proporcional ao número de electróns liberados na ionización e, polo tanto, á enerxía incidente da partícula.
+Baixo a aplicación dun potencial apropiado, nunha configuración que se coñece como \textit{polarización inversa}, esta zona de baleirado faise moi grande, ocupando case todo o detector. E isto é o que nos interesa: as partículas cargadas, ao atravesar esta rexión, ionizan o medio liberando pares electrón-oco. Grazas ao campo eléctrico interno da unión PN podemos recollelos (os $e^-$) e medilos como correcte eléctrica. O sinal recollido é proporcional ao número de electróns liberados na ionización e, polo tanto, á enerxía incidente da partícula.
 
 \subsection{Incertezas experimentais}
 Como xa comentamos, os datos que se analizarán non proveñen dun experimento real senón dunha simulación. Non obstante, esta ten en conta os defectos experimentais implementables nun computado e que son determinantes en moitos casos do éxito ou non dun experimento. Aquí unha lista:
@@ -317,7 +317,7 @@ Para iso, o primeiro é ter unha conta en \url{www.github.com}. Tras unha config
     \item \lstinline|git push| envía os cambios á nube
 \end{enumerate}
 
-Para o paquete \texttt{PyPhysics}, probablemente teremos que actualizalo ao longo das prácticas. Para recibir os cambios do servidor, vai á carpeta na que está descargado e executa \verb|git pull|. Desta forma terás o paquete actualizado.
+No tocante ao paquete \texttt{PyPhysics}, probablemente teremos que actualizalo ao longo das prácticas. Para recibir os cambios do servidor, vai á carpeta na que está descargado e executa \verb|git pull|. Desta forma teralo actualizado.
 
 
 \section{Plan de traballo}
@@ -331,143 +331,96 @@ Este é o plan de traballo das próximas semanas.
 \end{itemize}
 
 \subsection{Primeira semana}
-Os obxectivos son os seguintes:
+Imos comezar por representar todas as variables que nos dá a simulación. Para iso empregaremos histogramas, que podes construír usando o módulo \verb|hist|.
 
-\subsubsection*{Cinemática}
-Resolverás as ecuacións de cinemática para obter as enerxías cinéticas e ángulos no LAB das dúas partículas finais, aínda que presentando máis atención á pesada. Faino de forma xeral, tal e como está escrito na Sección correspondente. O criterio de números é o seguinte: $1 + 2 \longrightarrow 3 + 4$.
+\begin{lstlisting}
+    import hist
+    ## histograma 1D
+    h1d = hist.Hist.new.Reg(nbinsx, xmin, xmax, label="X axis").Double()
+    ## histograma 2D: hai que especificar ambos eixos
+    h2d = hist.Hist.new.Reg(nbinsx, xmin, xmax, label="X axis")
+                        .Reg(nbinsy, ymin, ymax, label="Y axis").Double()
 
-Na simulación, as variables que teremos que introducir nas fórmulas serán as masas, a enerxía do feixe e o ángulo $\theta_{CM}$ (que será aleatorio, como veremos).
+\end{lstlisting}
+Xunta todos os ficheiros nun único dataframe e representa:
 
-\subsubsection*{Macros iniciais}
-Quero que fagas dous macros onde me representes as seguintes cousas, usando a axuda do repositorio de Github:
+\begin{itemize}
+    \item A cinemática: $T_3$ vs $\theta_3$. deberías ver 3 liñas ben diferenciadas
+    \item As perdas de enerxía nos silicios: $\Delta E_0$ vs $\Delta E_1$. É o que se coñece como \textit{Particle IDentification, (PID)}.
+    \item A coordenada X do punto de reacción \verb|RPx|
+    \item Colle un perfil de carga de cada reacción e compáraos
+\end{itemize}
+
+O seguinte paso vai ser entender o que vemos:
 \begin{enumerate}
-    \item Representacións \textbf{cinemáticas}: Creas un \lstinline|TCanvas| con 3 \textit{pads} e representas a cinemática para estas tres reaccións distintas: $\iso{11}{Li}(d, p)\iso{12}{Li}$, $\iso{11}{Li}(d, d)\iso{11}{Li}$ e $\iso{11}{Li}(d, t)\iso{10}{Li}$. Usa a mesma enerxía do feixe para todas de \qty{7.5}{A\MeV}.
-
-          A clase que vai facer iso é \lstinline|ActPhysics::Kinematics|. O criterio que debes usar para chamar ao constructor é o seguinte: \lstinline|("feixe", "target", "lixeira", "pesada", Tbeam)|, que configura a equivalencia coas fórmulas matemáticas do seguinte xeito: $$1 (\text{feixe}) + 2 (\text{target}) \longrightarrow 3 (\text{lixeira}) + 4 (\text{pesada})$$
-          Ademais, \lstinline|GetKinematicLine3()| darache a representación $T_3$ vs $\theta_{Lab, 3}$ (polo tanto, da partícula marcada como \textit{lixeira}) e \lstinline|GetKinematicLine4()| o mesmo pero da 4, a pesada. Representa ambas no mesmo \textit{pad}.
-
-          Vas ver como as formas son moi diferentes, o que forza a deseñar experimentos moi distintos en función da reacción a medir (ou un que sexa capaz de medir todas as canles de reacción).
-
-    \item \textbf{Sampleado} de variables: Para a simulación vamos necesitar samplear variables gaussianas e uniformes. Crea un macro con 3 histogramas (que vas representar en 3 \textit{pads}) distintos nos que samplees as seguintes distribucións (podes xogar cos parámetros como queiras);
-          \begin{itemize}
-              \item Gaussiana: \lstinline|gRandom->Gaus(mean, sigma)|
-              \item Uniforme: \lstinline|gRandom->Uniform(x0, x1)|
-              \item O ángulo polar $\theta$ é especial se queres obter unha \href{https://mathworld.wolfram.com/SpherePointPicking.html}{distribución uniforme}:
-                    $$\theta = \arccos\left(\texttt{gRandom->Uniform(-1, 1)}\right)$$
-          \end{itemize}
-          Nota que este ángulo vai estar en radiáns. Para converter a graos, debes multiplicar polo factor de conversión correspondente. Se non o queres escribir, podes usar \lstinline|TMath::RadToDeg()| (a inversa é \lstinline|TMath::DegToRad()|) de ROOT.
+    \item Fai os cálculos de cinemática para obter a liña téorica para as tres reaccións: $\iso{11}{Li}(\iso{}{d},\iso{}{p}), (\iso{}{d}, \iso{}{d}), (\iso{}{d}, \iso{}{t})$. Podes intentar facer unha \textbf{clase} en \verb|python|.
+    \item Empregando a clase \verb|EnergyLoss| de \verb|PyPhysics| fai propagar $\iso{}{p},\iso{}{d},\iso{}{t}$ unha mesma distancia no gas para distintas enerxías. Estuda o que vés e intenta explicalo a partir da fórmula de Bethe-Bloch.
+    \item Explica porque hai moitas máis contas de \verb|RPx| cara ao final da TPC.
 \end{enumerate}
 
 \subsection{Segunda semana}
-\subsubsection*{Representación gráfica da perda de enerxía}
-Na carpeta \lstinline|SRIM| do repositorio tes táboas de perda de enerxía calculadas con SRIM. Se abres unha vas ver toda a información que conteñen:
+Agora imos aprender o que é unha rede neuronal e os conceptos básicos do \textit{machine learning}.
+\begin{enumerate}
+    \item Usa o Capítulo 2 de \textit{Hands-on Machine Learning with Scikit-Learn and Tensorflow} para ter unha idea de como debes tratar os datos. Aquí van algunhas suxestións:
+          \begin{itemize}
+              \item Crea un único dataframe con \textit{labels} indicando se é $p,d,t$
+              \item Downsample os datos de forma que haxa o mesmo número de eventos de cada reacción
+              \item Aleatoriza o \verb|df|
+              \item Decide que \textit{features} debes eliminar: a $T_3$ claramente, pois se non permitiría unha distinción absoluta entre as partículas. Pensa que experimentalmente non é accesible sen identificar antes a partícula medida. Por outra banda, os perfís de carga deixarémolos para máis adiante.
+              \item Normaliza as \textit{features}
+              \item Encodifica as variables de clasificación: de strings a enteiros
+              \item Dívideo en \textit{train} e \textit{validation}
+          \end{itemize}
+    \item Le as \textit{Lectures} da U. Cornell para entender o que é unha rede neuronal e en que consiste o proceso de entrenamento. A idea coa que debes reter sobre unha rede neuronal é que é un conxunto de funcións as cales, a partir duns parámetros de entrada (\textit{features}), aplican unha serie de transformacións (\textit{weights} + \textit{activation function}) para devolver unha saída. No noso caso, esta é unha clasificación: probabilidade de que sexa $p,d,t$.
+    \item Cando metamos a rede convolucional estaría ben que leses os capítulos 6 e 7 das \textit{Lectures} da U. Pennsylvania. A nosa rede convolucional será 1D (un histograma) en lugar de 2D (unha imaxe), pero os conceptos son os mesmos.
+\end{enumerate}
+
+De seguido imos construír o noso primeiro modelo de rede neuronal. Na seguinte Figura tes un exemplo.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/basic_model.png}
+    \caption{Modelo básico de rede neuronal para clasificación.}
+\end{figure}
+
+Algunhas apreciacións:
 \begin{itemize}
-    \item Información do material no que se calculou a perda.
-    \item O mesmo sobre a partícula que o vai atraversar.
-    \item Múltiples columnas coa $E$, o rango, o \textit{straggling} en rango e o $dE/dx$.
+    \item Usamos activación \textit{softmax} na layer de saída para clasificación non binaria (hai 3 clases de saída)
+    \item A función a minimizar é a \textit{cross entropy}, tamén adecuada para estas tarefas
 \end{itemize}
-Para ler e traballar con esta clase vas utilizar a clase \lstinline|ActPhysics::SRIM|, tal e como tes no macro de exemplo (\lstinline|Macros/srim.cxx|). As funcións básicas que necesitas son estas:
-\begin{itemize}
-    \item \lstinline|EvalDirect()|: obtén o rango para unha enerxía dada.
-    \item \lstinline|EvalInverse()|: enerxía para un rango dado.
-    \item \lstinline|Slow()|: para unha enerxía inicial, calcula a enerxía final tras atravesar un espesor de material a especificar. Tamén lle podes dar un ángulo, de xeito que a lonxitude efectiva é: $l_{\text{eff} = l / \cos{\theta}}$. O ángulo debe especificarse en radiáns.
-    \item \lstinline|EvalInitialEnergy()|: cos mesmos argumentos que a anterior función, fai o proceso inverso: calcula a enerxía inicial dada unha enerxía final, lonxitude e opcionalmente ángulo.
-\end{itemize}
-En todas as funcións o primeiro argumento é unha \textit{string} que especifica a táboa a usar, anteriormente lida con \lstinline|ReadTable()|.
+Axusta o modelo e plotea a fit accuracy por epoch, así como a matrix de confusión. Podes representar outras métricas, como a precision ou a recall. Le o Capítulo 3 do libro para máis información.
 
-O que quero que fagas é que plotees a perda de enerxía no gas en función da distancia. Para iso, escolle unha táboa (por exemplo, \iso{11}{Li} no gas) e asume unha enerxía inicial. Calcula o rango da partícula a esa enerxía.
+Podes probar outras arquitecturas da rede, con outras funcións de activación ou optimizadores (Capítulo 11, \textit{Optimizers} do libro) a ver se atopas unha combinación que ofreza unha mellor exactitude.
 
-Despois, discretiza esa distancia nun intervalo suficientemente pequeno e nun bucle \textit{for}, utilizando a función \lstinline|Slow|, calculas a perda de enerxía (como a diferenza entre as iteracións). Representa iso en dous  \lstinline|TGraph|s: un de perda de enerxía vs distancia e outro de perda de enerxía vs enerxía.
-
-Vas ver unha característica moi importante no gráfico: a medida que a partícula se para, a perda de enerxía aumenta: é o que se coñece como \textbf{pico de Bragg}. Estas dúas características (o perfil de perda de carga e o pico de Bragg) permiten identificar as partículas nun detector, xa que son unha pegada única de cada partícula!
-
-\subsubsection*{Valicación da cinemática}
-Crea un macro sinxelo no que definas as funcións necesarias para calcular a cinemática. Mira o exemplo \lstinline|Macros/funcs.cxx| para ver como podes devolver varios parámetros nunha función e escolle a forma que máis che guste.
-
-Unha vez fagas isto, no propio macro vas validar que todo funcione ben. Escolle a reacción $\iso{11}{Li}(d, t)\iso{10}{Li}$ a \qty{7.5}{A\MeV} e segue os seguintes pasos:
-\begin{itemize}
-    \item Crea un \lstinline|TGraph|.
-    \item Nun bucle for, vas percorrer unha variable $\theta_{CM} \in [0, 180]\unit{\degree}$.
-    \item Utiliza as túas funcións para calcular $T_{4}, \theta_{Lab, 4}$.
-    \item Enche o gráfico.
-\end{itemize}
-Representa isto nun \lstinline|TCanvas| e \textbf{superimpón} a cinemática de \lstinline|ActPhysis::Kinematics::GetKinematicLine4()|, tal e como aprendiches a facer na anterior semana. Debería quedar exactamente igual!
+Por último, no plot do PID superimpón os eventos mal identificados e que ideas se che ocorren para explicalo.
 
 \subsection{Terceira semana}
-\subsubsection*{Comezo da simulación}
-Unha vez aprendido o básico, vamos comezar co macro de simulación. O primeiro é adaptar o que acabas de aprender de sampleado:
+Finalmente, intentaremos mellorar a rede neuronal introducindo os perfís de carga, pois como xa viches son característicos de cada partícula, polo que poderían axudar moito na clasificación. Para iso deberemos combinar a rede neuronal simple anterior cunha convolucional 1D, pois non se trata dunha imaxe senón dunha serie de valores de $d\text{E}/d\text{x}$.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/cnn_model.png}
+    \caption{Exemplo de rede CNN1d.}
+    \label{fig:cnn}
+\end{figure}
+
+Na anterior Subsección tes os documentos base que che permitirán entender o seu funcionamento. O modelo que entrenamos vaise ter que modificar, pois agora imos \textit{concatenar} os resultados de dúas redes: a DNN + a CNN1d. A estrutura é a seguinte:
+
+\begin{itemize}
+    \item Un modelo secuencial exactamente igual ao anterior para a parte non convolucional.
+    \item Un modelo secuencial para a parte convolucional. Podes probar co da \autoref{fig:cnn} para comezar.
+
+    No código, \verb|filters| é o número de patróns que vai intentar aprender a CNN; \texttt{kernelsize} o número de posicións do vector que se teñen en conta en cada  filtro e \verb|strides| o número de posicións que se despraza o \textit{kernel} entre iteracións. Podes xogar metendo máis layers CNN, cambiando o número de filtros, o tamaño do \textit{kernel}, etc. Tamén podes probar engadindo unha capa de \textit{pooling}. A layer \verb|Flatten| é necesaria para adecuar as dimensións para a seguinte \verb|Dense|, que necesitamos para ter a mesma saída que o modelo DNN.
+
+    \item Concatenamos ambos modelos e superpoñemos máis capas densas para combinar as saídas de ambos modelos. A output é a mesma que anteriormente, coa activación \textit{softmax}. Deberías apreciar unha mellora do \qty{10}{\percent} respecto ao modelo anterior.
+\end{itemize}
+
+\section{Referencias}
 \begin{enumerate}
-    \item Define o tamaño de ACTAR ao comezo do macro en \unit{\mm}. Tes os tamaños ao principio deste guión. En cada iteración, nunha variable tipo \lstinline|XYZPoint| garda:
-          \begin{itemize}
-              \item X: uniforme na dirección do feixe.
-              \item Y e Z: gaussianas de media o centro do detector e de $\sigma$ uns \qty{5}{\mm}. Os feixes de partículas creados nos aceleradores non son perfectos e teñen unha determinada anchura espacial. De momento, asumimos un caso sinxelo de dispersión gaussiana dun feixe ben centrado no detector.
-          \end{itemize}
-          Podes crear puntos e vectores no espazo coas clases definidas en \lstinline|#include "Math/Point3D.h| e \\ \lstinline|#include "Math/Vector3D.h"|. Podes acceder a elas como \lstinline|ROOT::Math::XYZPoint| ou \\ \lstinline|ROOT::Math::XYZVector|.
+    \item \textit{Hands-on Machine Learning with Scikit-Learn \& Tensorflow}, A. Géron (2017)
+    
+    É o libro de referencia. A maioría de conceptos están aí definidos, tanto para redes neuronais densas como convolucionais.
 
-          Valida que todo vai ben: crea dous histogramas 2D para representar isto:
-          \begin{itemize}
-              \item Un onde representes Y vs X.
-              \item Outro no que representes Z vs Y.
-          \end{itemize}
-          \item  Fai o mesmo para os ángulos no CM: samplea e crea histogramas para representalos.
-
-          \item   O seguinte será usar a clase de \textbf{cinemática} que creaches para obter as variables da partícula pesada. Cos ángulos sampleados e coa enerxía do feixe, calcula $T_4$ e $\theta_{4}$.
-          
-          Representa nun histograma 2D que todo vai ben: nun plot de enerxía fronte a ángulo deberías reproducir a cinemática teórica.
-
-          \item  A continuación, vamos implementar a xeometría do silicio que vai medir esta partícula pesada. Na variable de tipo \lstinline|ActSim::Geometry| está implementada a xeometría do detector, tal e como se ve na seguinte \autoref{fig:geo}. 
-
-          \begin{figure}[!htb]
-              \centering
-              \includegraphics[width=0.5\linewidth]{figures/geo.pdf}
-              \caption{Esquema da xeometría: en azul, a TPC; en vermello, o silicio.}
-              \label{fig:geo}
-          \end{figure}
-
-          Esta clase contén todos os tamaños necesarios para simular a xeometría, cos seguintes valores
-          \begin{itemize}
-              \item Os tamaños da TPC normal
-              \item Os do Si, de \qtyproduct[product-units=power]{80 x 50 x 1.5}{\mm}
-              \item Unha distancia de \qty{10.4}{\cm}
-          \end{itemize}
-
-          A función que imos utilizar é \lstinline|PropagateTrackToSiliconArray()|. Os argumentos que necesitas son uns cantos:
-          \begin{itemize}
-              \item O \textbf{vértice}, tal e como sampleaches.
-              \item A \textbf{dirección} da partícula. Debes definila do seguinte xeito:
-                    \begin{lstlisting}
-        ROOT::Math::XYZVector direction {TMath::Cos(theta4), TMath::Sin(theta4) * TMath::Sin(phi4),
-                                         TMath::Sin(theta4) * TMath::Cos(phi4)};
-
-    \end{lstlisting}
-              \item O índice do muro de silicions, xa que pode haber varios. Como só hai un, pasa un 0.
-              \item Os seguintes argumentos van \textbf{devolver} o resultado da operación, e deberás pasar as variables obrigatoriamente:
-                    \begin{itemize}
-                        \item Un \lstinline|bool| co lado. Ignoraremos isto de momento.
-                        \item A distancia dende o vertice ao punto de impacto, en \textbf{\unit{\cm}}. Debes convertela a \unit{\mm}. É a variable máis importante.
-                        \item O tipo de silicio. Só hai un, así que ignorarémolo.
-                        \item O índice do silicio. Moi importante tamén: se a partícula non chega ao silicon, vale -1.
-                        \item Un \lstinline|XYZPoint| co punto de impacto. Ignorarémolo.
-                    \end{itemize}
-          \end{itemize}
-
-          Deste xeito, só os eventos que cheguen xeometricamente ao silicio terán un valor de \lstinline|silIndex != -1|, e o máis importante, terás a distancia que teñen que viaxar para chegar alí.
-
-          A primeira vez que necesites usar a xeometría debes creala. Hai un macro na carpeta \textit{Geo/Build.cxx} que tes que executar só unha vez. Isto vai crear un ficheiro \textit{.root} cos parámetros necesarios que despois lerás como: \lstinline|geo.ReadGeometry("./Geo/", "simple");|
-
-          \item Finalmente, para os eventos que chegan, representa a enerxía $T_4$ na entrada do silicio: é dicir, usa a variable de tipo \lstinline|SRIM| para reducir a perda de enerxía no gas. Represéntaa respecto do ángulo nun histograma 2D.
-
-          Para iso, terás que usar a táboa de enerxía correspondente. O que che recomendo é ler a táboa do \iso{12}{Li} e que a chames \textit{heavy}, para non evitar malentendidos despois, posto que usaremos as táboas de varias partículas.
-          \item Remata calculando a $\Delta E$ da partícula nos silicios. Deberás ter en conta o ángulo coa normal ao chamar a función \lstinline|SRIM::Slow|. Para iso, computa o $\theta$ entre o vector dirección anteriormente calculado e a normal \lstinline|ROOT::Math::XYZVector normal {1, 0, 0}|.
-
-          Deberás usar unha táboa de enerxía distinta! A correspondente da partícula no silicio. Recoméndoche que a chames \textit{heavySil} para diferenciala da \textit{heavy} no gas.
-\end{enumerate} 
-\subsubsection*{Implementación dos defectos experimentais}
-Froito das incertezas estatísticas do proceso de perda de enerxía e das limitacións de contrución e electrónicas do detector, as liñas cinemáticas non son unha \textit{liña} senón unha distribución de valores.
-
-O obxetivo da simulación é ver como, en función da configuración do detector, se dispersas estas liñas e como iso nos afecta na extracción de resultados. Dúas son as que imos implementar:
-\begin{enumerate}
-    \item \textbf{\textit{Straggling} en enerxía:} Segue o exposto na \autoref{sec:de} para implementalo. Deberás crear unha función que substitúa á \lstinline|SRIM::Slow|, de forma que pasándolle o obxecto \lstinline|SRIM|, unha enerxía inicial $T_{ini}$ e unha distacia $d$ devolva o valor reducido e aleatorizado convenientemente.
-    \item \textbf{Resolución dos Si:} como viches na \autoref{sec:res}, os silicios teñen unha incerteza na determinación da enerxía. Dispersa o valor de $\Delta E$ obtido neles creando unha función que aplique a fórmula. 
+    \item \textit{Introduction to Neural Networks}, Y. Zhang \textit{et al.} University of Cornell (2021). Unhas diapositivas interasentes para ter un resumo das NN se non queres ler o libro.
+    \item \textit{Neural Networks}, D. Roth \textit{et al.}. University of Pennsylvania (2016). Os capítulos 6 e 7 explican algo máis detalladamente as CNN.
 \end{enumerate}
+
 \end{document}
