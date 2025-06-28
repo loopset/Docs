@@ -412,6 +412,28 @@ Na anterior Subsección tes os documentos base que che permitirán entender o se
 
     \item Concatenamos ambos modelos e superpoñemos máis capas densas para combinar as saídas de ambos modelos. A output é a mesma que anteriormente, coa activación \textit{softmax}. Deberías apreciar unha mellora do \qty{10}{\percent} respecto ao modelo anterior.
 \end{itemize}
+\subsection{Cuarta semana}
+O último paso é amosar unha alternativa ás redes neuronais presentadas. Esta consiste en reconstruír a enerxía cinética de cada partícula no vértice asumindo os tres posibles casos (\textit{p, d, t}) para cada evento e ver cal que hipótese é máis válida dacordo coa cinemática.
+
+Para iso:
+\begin{enumerate}
+    \item Colle só os eventos que fan punchthrough na segunda capa de silicios (os que queremos identificar). 
+    \item Sabendo o espesor dos silicios de \qty{1500}{\mm}, crea unha interpolación para cada partícula: coa función \verb|EnergyLoss.Slow()| garda a $\Delta E_1$ para cada $E_{\text{ini}}$ na entrada do silicio. Podes empregar unha \verb|scipy.CubicSpline| en lugar dunha interpolacion lineal.
+    \item Selecciona uns poucos eventos protón. Reconstrúe a súa enerxía no vértice de reacción. Para iso usa a \textit{spline} obtina antes para unha partícula:
+    \begin{itemize}
+        \item Avalíaa na $\Delta E_1$, obtendo a enerxía á entrada do Si 1.
+        \item Utiliza \verb|EnergyLoss| no \textbf{gas} para obter a enerxía de saída da partícula no silicio 0 tras percorrer a distancia \verb|tl_01|. A función \verb|EnergyLoss.EvalInitialEnergy| fai xusto o contrario de \verb|Slow|.
+        \item A enerxía á entrada do silicio 0 será a suma $\Delta E_0 + E_{\text{AfterSil0}}$ que acabas de recuperar.
+        \item  Por último, calcula a enerxía no vértice (que é onde representas ti a cinemática). Aplica \verb|EvalInitialEnergy| á enerxía anterior pero na distancia entre o silico e o vértice \verb|tl_gas0|.
+    \end{itemize}
+    \item Con isto obterás un punto $(T, \theta)$ que podes representar sobre un gráfico de cinemática. 
+    \item Fai o mesmo asumindo que o evento é \textit{d} e \textit{t}. Represéntaos sobre o mesmo gráfico de cinemática.
+    \item Deberías ver como, para un evento \textit{p}, asumir \textit{d} ou \textit{t} leva a un punto que se separa moito de calquera liña cinemática. Só o valor reconstruído como \textit{p} ten sentido.
+    \item Deste xeito tes unha identificación. O mesmo aplicará para eventos de deuterio e tritio.
+    \item Hai unha aproximación aquí: a interpolación que calculas non depende do ángulo, pero en realidade si que o debería facer, pois a perda de enerxía no silico dependerá do ángulo co que a partícula o atravese (a maior ángulo maior é a distancia que percorre, $d = \qty{1500}{\micro\m}/\cos{\theta}$). Non é necesario que fagas o cálculo tendo en contas isto pero debes sabelo.
+    \item Tamén hai unha simplificación: $E_{x} = \qty{0}{\MeV}$ en todo momento. Nun experimento real, o núcleo final \iso{10}{Li} quedará nun estado con enerxía de excitación $E_x$ que fará que a cinemática da partícula lixeira non sexa unha liña senón unha \textit{distribución} no plano. Isto pode complicar a sinxeleza deste método.
+\end{enumerate}
+
 
 \section{Referencias}
 \begin{enumerate}
