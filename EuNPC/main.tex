@@ -63,36 +63,36 @@
 \end{frame}
 
 \begin{frame}[t]{A recap on the SO splitting}
-G. Mairle \textit{et al.} ({\scriptsize PLB 304 (1993)}) found systematic trends easily parametrizable.
+    G. Mairle \textit{et al.} ({\scriptsize PLB 304 (1993)}) found systematic trends easily parametrizable.
 
-\begin{columns}[c]
-    \begin{column}{0.5\linewidth}
-        \begin{figure}
+    \begin{columns}[c]
+        \begin{column}{0.5\linewidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=1\linewidth]{figures/mairle_so.pdf}
+            \end{figure}
+        \end{column}%
+        \begin{column}{0.5\linewidth}
+            Deviations from the trend are found though:
+            \begin{enumerate}
+                \item Loosely bound orbitals
+                \item Nuclear matter deplection (\iso{35}{Si}?)
+                \item Role of \textbf{tensor force}
+            \end{enumerate}
+        \end{column}
+    \end{columns}
+
+    \begin{columns}[t]
+        \begin{column}{0.5\linewidth}
+            \mycolorbox{box1}{
+                Proton-neutron interactions drive \textbf{shell evolution}
+            }
+        \end{column}%
+        \begin{column}{0.5\linewidth}
             \centering
-            \includegraphics[width=1\linewidth]{figures/mairle_so.pdf}
-        \end{figure}
-    \end{column}%
-    \begin{column}{0.5\linewidth}
-        Deviations from the trend are found though:
-        \begin{enumerate}
-            \item Loosely bound orbitals
-            \item Nuclear matter deplection (\iso{35}{Si}?)
-            \item Role of \textbf{tensor force}
-        \end{enumerate}
-    \end{column}
-\end{columns}
-
-\begin{columns}[t]
-    \begin{column}{0.5\linewidth}
-        \mycolorbox{box1}{
-            Proton-neutron interactions drive \textbf{shell evolution}
-        }
-    \end{column}%
-    \begin{column}{0.5\linewidth}
-        \centering
-        \includegraphics[width=0.9\linewidth]{figures/tensor_preliminary.png}
-    \end{column}
-\end{columns}
+            \includegraphics[width=0.9\linewidth]{figures/tensor_preliminary.png}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{SO gap for $Z = 8$ isotopes}
@@ -113,8 +113,112 @@ G. Mairle \textit{et al.} ({\scriptsize PLB 304 (1993)}) found systematic trends
             }
         \end{column}
     \end{columns}
+\end{frame}
+
+\section{Methodology}
+\begin{frame}{Experimental setup}
+    E796 @ LISE in 2022. First transfer experiment with ACTAR TPC!
+
+    \begin{figure}
+        \hspace*{-0.25cm}
+        % \centering
+        \begin{tikzpicture}
+            \node (main) at (0,0) {\includegraphics[width=0.5\linewidth]{figures/mini_setup.pdf}};
+
+            % Silicons
+            \node (sil) at (-4, 1.) {
+                \includegraphics[width=0.25\linewidth]{figures/silicons_tese.png}
+            };
+            \node (siltext) at (-4.1, -1){
+                \mycolorbox[0.25]{box2}{
+                    \small
+                    Silicon sizes:
+                    $\num{80} \times \num{50} \times \num{0.5}\unit{\mm\cubed}$
+                }
+            };
+
+            % TPC
+            \node (tpc) at (4, 1.25){
+                \includegraphics[width=0.25\linewidth]{figures/actar.png}
+            };
+            \node (tpctext) at (4.1, -1.5){
+            \mycolorbox[0.25]{box3}{
+            \small
+            Gas setup:\\
+            \qty{90}{\percent} \ce{D_2} + \qty{10}{\percent} \ce{iC_{4}H_{10}}\\
+            @ \qty{950}{\milli bar}
+            }
+            };
+
+        \end{tikzpicture}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{A window to the analysis}
+    \textbf{Intricate} analysis to extract reactions of interest out of noisy data.
+    \begin{columns}[c]
+        \begin{column}{0.5\linewidth}
+            \vspace*{-0.25cm}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.8\linewidth]{figures/pure_3d.pdf}
+            \end{figure}
+        \end{column}%
+        \begin{column}{0.5\linewidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.95\linewidth]{figures/analysis.pdf}
+            \end{figure}
+        \end{column}
+    \end{columns}
+    Conversely, the TPC offers unique advantadges:
+    \begin{columns}[c]
+        \begin{column}{0.5\linewidth}
+            \mycolorbox[1]{box2}{
+                \boxitem{1} Precise \textbf{vertex} determination\\
+                \boxitem{2} Improved $\Delta E$ corrections
+            }
+        \end{column}%
+        \begin{column}{0.5\linewidth}
+            \mycolorbox[1]{box4}{
+                \boxitem{3} Factor 10 in target number\\
+                \boxitem{4} Implicit PID with $\Delta E_{\text{gas}}$
+            }
+        \end{column}
+    \end{columns}
+    
+    
     
 \end{frame}
+
+\begin{frame}{A window to the analysis}
+    Two steps needed after data has been processed.
+    \begin{columns}[c]
+        \begin{column}{0.5\linewidth}
+            \mycolorbox[1]{box2}{
+                \boxitem{1} Triton identification in PID
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.95\linewidth]{figures/pid_front.pdf}
+                \end{figure}
+                \vspace*{-0.25cm}
+                {\footnotesize\itshape Vetoing punch-through to 2nd front layer}
+            }
+        \end{column}%
+        \begin{column}{0.5\linewidth}
+            \mycolorbox[1]{box4}{
+                \boxitem{2} Reconstruct $\text{E}_{\text{x}}$ by \textbf{missing-mass} technique
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.95\linewidth]{figures/kin.pdf}
+                \end{figure}
+            }
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
 
 \begin{frame}[plain]{Acknowledgments}
     \begin{columns}[T]
